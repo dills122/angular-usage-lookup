@@ -2,6 +2,11 @@
 
 ## 0.1.0 — unreleased
 
+- Validate the actual skill ZIP with a fresh-context agent on a transformed
+  54-library/three-app Nx workspace, with private authored expectations and
+  component/MatDialog reconciliation. Add repeatable trial preparation, exact
+  grading checks and a manual behavioral release gate.
+
 - Fix the TypeScript language-service host contract on case-sensitive systems,
   with exact-definition/reference regressions for both host modes. The initial
   Linux CI run exposed a boolean passed where TypeScript requires a function.

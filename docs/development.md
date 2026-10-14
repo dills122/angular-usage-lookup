@@ -25,3 +25,9 @@ CI uses independent jobs for validation/bundling, normal tests, gauntlet and sca
 Artifacts preserve failures and bundle smoke evidence. Require the CI aggregate
 check on protected branches once a GitHub remote exists. Hosted runner results
 must be observed separately from local validation.
+
+Use the [fresh-agent evaluation](agent-evaluation.md) when changing skill workflow
+or release behavior. It exercises the installed ZIP with a fresh context and
+private expectations; it is separate from scripted collector qualification.
+The preparation/scoring helpers are development-only. Their regression tests run
+with `npm run test:packaging`; the agent itself is not invoked in CI.
