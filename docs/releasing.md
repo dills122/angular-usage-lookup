@@ -27,7 +27,7 @@ format](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/).
 
 ## GitHub draft release
 
-After a remote exists and the owner authorizes a release, push a version-matched
+When the owner authorizes a release, push a version-matched
 `vVERSION` tag. The release workflow verifies the tag/package match and runs the
 same reusable quality jobs as CI. Only after all pass does a contents-write job
 download the **tested artifact**, check its checksum and create a **draft** GitHub
@@ -47,3 +47,12 @@ Workflow actions are pinned to official release commit SHAs, checked on
 and [GitHub CLI release creation](https://cli.github.com/manual/gh_release_create).
 CI has read-only permissions; only the draft creation job has contents-write.
 Fork PRs do not get a release job. There is no `pull_request_target` trigger.
+
+## Repository protections
+
+The [GitHub settings record](github-settings.md) describes active protections.
+Only `dills122` can create `v*` release tags. Every existing tag is protected from
+updates and deletion, including by the owner; use a new version for corrections.
+Tag creation permission does not bypass immutability. The release workflow uses
+an existing tag and has no ruleset bypass. It must still pass the full quality
+workflow before creating a draft.

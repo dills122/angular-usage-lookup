@@ -12,7 +12,7 @@ npm test
 npm run test:gauntlet
 ```
 
-Install only in this isolated skill directory when setup is authorized. Do not run `npm install` inside the fixtures: they intentionally resolve dependencies from their parent tooling package. Node 24 is allowed by the manifest but was not exercised.
+Install only in this isolated skill directory when setup is authorized. Do not run `npm install` inside the fixtures: they intentionally resolve dependencies from their parent tooling package. The original Mac qualification used Node 22.23.3. Node 24 is allowed by the manifest and selected by the repository’s current `.nvmrc` for hosted CI; check the [CI run](https://github.com/dills122/angular-usage-lookup/actions/workflows/ci.yml) for the exact tested revision, operating system and runtime.
 
 The lockfile pins Angular core/compiler/compiler-cli/language-server/service **21.2.25**, TypeScript **5.9.3**, Nx **23.3.0**, JSON-RPC **9.0.3** and LSP protocol **3.18.4**. The fixture's Nx dependency overrides Undici to **7.29.1** because its original pin triggered npm advisories. This affects only the helper's dev tooling, not any scanned workspace. Reassess the override on dependency updates.
 
