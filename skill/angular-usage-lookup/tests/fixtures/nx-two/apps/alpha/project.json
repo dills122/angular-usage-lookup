@@ -1,0 +1,11 @@
+{
+  "name": "alpha",
+  "projectType": "application",
+  "sourceRoot": "apps/alpha/src",
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": { "command": "ngc -p apps/alpha/tsconfig.app.json --noEmit", "forwardAllArgs": false, "tsConfig": "apps/alpha/tsconfig.app.json" }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+test-output/
+dist/
+__pycache__/
+*.pyc
+*.tsbuildinfo
+local/
+skill/angular-usage-lookup/tests/fixtures/**/.nx/

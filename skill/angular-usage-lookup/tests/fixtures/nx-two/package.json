@@ -1,0 +1,6 @@
+{
+  "name": "nx-two-angular-lookup-fixture",
+  "private": true,
+  "dependencies": { "@angular/core": "21.2.25" },
+  "devDependencies": { "nx": "23.3.0" }
+}

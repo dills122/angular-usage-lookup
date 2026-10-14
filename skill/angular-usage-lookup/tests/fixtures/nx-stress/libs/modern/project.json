@@ -1,0 +1,15 @@
+{
+  "name": "modern",
+  "projectType": "library",
+  "sourceRoot": "libs/modern/src",
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ngc -p libs/modern/tsconfig.lib.json --noEmit",
+        "forwardAllArgs": false,
+        "tsConfig": "libs/modern/tsconfig.lib.json"
+      }
+    }
+  }
+}

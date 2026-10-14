@@ -1,0 +1,42 @@
+{
+  "versions": {
+    "@angular/material": "21.2.14",
+    "@angular/cdk": "21.2.14",
+    "@angular/core": "21.2.25",
+    "@angular/common": "21.2.25",
+    "@angular/forms": "21.2.25",
+    "@angular/platform-browser": "21.2.25",
+    "@angular/compiler": "21.2.25",
+    "@angular/compiler-cli": "21.2.25",
+    "typescript": "5.9.3"
+  },
+  "programmaticRules": [
+    {
+      "id": "bottom-sheet.open",
+      "family": "bottom-sheet",
+      "export": "@angular/material/bottom-sheet#MatBottomSheet",
+      "method": "open",
+      "argumentIndex": 0,
+      "templateOverload": true,
+      "source": "https://v21.material.angular.dev/components/bottom-sheet/overview"
+    },
+    {
+      "id": "dialog.open",
+      "family": "dialog",
+      "export": "@angular/material/dialog#MatDialog",
+      "method": "open",
+      "argumentIndex": 0,
+      "templateOverload": true,
+      "source": "https://v21.material.angular.dev/components/dialog/overview"
+    },
+    {
+      "id": "snack-bar.openFromComponent",
+      "family": "snack-bar",
+      "export": "@angular/material/snack-bar#MatSnackBar",
+      "method": "openFromComponent",
+      "argumentIndex": 0,
+      "templateOverload": false,
+      "source": "https://v21.material.angular.dev/components/snack-bar/overview"
+    }
+  ]
+}

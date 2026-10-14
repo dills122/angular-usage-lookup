@@ -1,0 +1,15 @@
+{
+  "name": "admin",
+  "projectType": "application",
+  "sourceRoot": "apps/admin/src",
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ngc -p apps/admin/tsconfig.lib.json --noEmit",
+        "forwardAllArgs": false,
+        "tsConfig": "apps/admin/tsconfig.lib.json"
+      }
+    }
+  }
+}

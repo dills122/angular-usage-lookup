@@ -1,0 +1,4 @@
+interface:
+  display_name: "Angular Usage Lookup"
+  short_description: "Find Angular usages with evidence and coverage gaps"
+  default_prompt: "Use $angular-usage-lookup to inventory this Angular component across the workspace, with confirmed usages and explicit coverage gaps."

@@ -1,0 +1,15 @@
+{
+  "name": "reporting",
+  "projectType": "library",
+  "sourceRoot": "libs/reporting/src",
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ngc -p libs/reporting/tsconfig.lib.json --noEmit",
+        "forwardAllArgs": false,
+        "tsConfig": "libs/reporting/tsconfig.lib.json"
+      }
+    }
+  }
+}

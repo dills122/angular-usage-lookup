@@ -1,0 +1,27 @@
+name: Lookup problem
+description: Report missing references, false matches, wrong config coverage or helper failures.
+body:
+  - type: markdown
+    attributes:
+      value: Share a minimal anonymized fixture. Do not include credentials or proprietary source.
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions and environment
+      description: Skill version/commit, Angular, TypeScript, Nx, Material/CDK, Node and operating system.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Target, scope and reproduction
+      description: Exact declaration/selector, relevant source, backend, config manifest and command or skill request.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected locations and actual result
+      description: Include file/line evidence and config contexts, report coverage/gaps and any peculiar-case investigation.
+    validations:
+      required: true

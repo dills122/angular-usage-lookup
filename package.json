@@ -1,0 +1,44 @@
+{
+  "name": "angular-usage-lookup-repository",
+  "version": "0.1.0",
+  "description": "Development, qualification and release tooling for the Angular Usage Lookup agent skill.",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "Dylan Steele",
+    "url": "https://github.com/dills122"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dills122/angular-usage-lookup.git"
+  },
+  "homepage": "https://github.com/dills122/angular-usage-lookup#readme",
+  "bugs": {
+    "url": "https://github.com/dills122/angular-usage-lookup/issues"
+  },
+  "keywords": [
+    "angular",
+    "nx",
+    "typescript",
+    "components",
+    "migration",
+    "agent-skill",
+    "codex"
+  ],
+  "type": "module",
+  "packageManager": "npm@10.9.9",
+  "engines": {
+    "node": ">=22.12.0 <23 || >=24.0.0 <25"
+  },
+  "scripts": {
+    "setup": "npm ci --prefix skill/angular-usage-lookup",
+    "validate": "python3 tools/validate_repo.py",
+    "test": "npm test --prefix skill/angular-usage-lookup",
+    "test:gauntlet": "npm run test:gauntlet --prefix skill/angular-usage-lookup",
+    "test:scale": "npm run test:scale --prefix skill/angular-usage-lookup",
+    "test:packaging": "python3 -m unittest discover -s tools/tests -v",
+    "build": "python3 tools/build_bundle.py",
+    "test:bundle": "node tools/smoke-bundle.mjs",
+    "check": "npm run validate && npm run test:packaging && npm test && npm run test:gauntlet && npm run test:scale && npm run build && npm run test:bundle"
+  }
+}

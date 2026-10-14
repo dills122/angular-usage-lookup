@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-13",
+  "timezone": "America/Toronto",
+  "host": {
+    "platform": "darwin",
+    "node": "v22.23.3"
+  },
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Dylan Steele",
+  "intendedGitHubRepository": "dills122/angular-usage-lookup",
+  "sourceComparison": {
+    "originalFiles": 139,
+    "missingFiles": [],
+    "modifiedOriginalFiles": [
+      "package-lock.json",
+      "package.json",
+      "scripts/collect-references.mjs",
+      "scripts/material-catalog.mjs"
+    ],
+    "fixturesAndOraclesUnchanged": true,
+    "dependencyGraphUnchanged": true
+  },
+  "ordinaryTests": {
+    "passed": 31,
+    "failed": 0,
+    "seconds": 50.034219958
+  },
+  "gauntlet": {
+    "passed": 1,
+    "seconds": 17.977690875,
+    "reconciledLocations": 109,
+    "templateOccurrences": 47,
+    "runtimeGaps": [
+      {
+        "id": "runtime-registry",
+        "file": "src/modern.ts",
+        "source": "this.dialog.open(REGISTRY[key])",
+        "outcome": "unresolved",
+        "reason": "Caller-provided key may select DynamicCard or OtherCard; no confirmed target execution."
+      },
+      {
+        "id": "conditional-route",
+        "file": "src/routes.ts",
+        "outcome": "unresolved",
+        "reason": "Both conditional component candidates are statically visible; random runtime choice is unknown."
+      }
+    ]
+  },
+  "scale": {
+    "passed": 1,
+    "seconds": 184.204993084,
+    "libraries": 54,
+    "apps": 3,
+    "targets": {
+      "card": {
+        "expected": 489,
+        "actual": 489,
+        "expectedContextPairs": 8015,
+        "actualContextPairs": 8015,
+        "missing": [],
+        "extra": [],
+        "contextErrors": [],
+        "verifiedConfigs": 63,
+        "allAngularProcessesExited": true
+      },
+      "dialog": {
+        "expected": 114,
+        "actual": 114,
+        "expectedContextPairs": 2184,
+        "actualContextPairs": 2184,
+        "missing": [],
+        "extra": [],
+        "contextErrors": [],
+        "verifiedConfigs": 61,
+        "allAngularProcessesExited": true
+      }
+    }
+  },
+  "packagingTests": {
+    "passed": 5,
+    "failed": 0,
+    "repeatedAfterMITMetadata": true
+  },
+  "bundle": {
+    "file": "angular-usage-lookup-0.1.0.zip",
+    "bytes": 213177,
+    "sha256": "f4be68f3ac19baad4c3caa60f55940ded2cd25b9e1d8bacea5f5eba855ecbcd7",
+    "manifestFiles": 20,
+    "includesLicense": true,
+    "smoke": {
+      "version": "0.1.0",
+      "node": "v22.23.3",
+      "productionInstall": true,
+      "evidence": [
+        {
+          "fixture": "angular-single",
+          "backend": "angular",
+          "references": 11,
+          "status": "succeeded"
+        },
+        {
+          "helper": "discovery",
+          "projects": 1
+        },
+        {
+          "fixture": "nx-stress",
+          "backend": "typescript",
+          "references": 18,
+          "status": "succeeded"
+        },
+        {
+          "helper": "material-catalog",
+          "typedEntrypoints": 74,
+          "families": 37,
+          "programmaticRules": 3
+        }
+      ]
+    }
+  },
+  "aiCentral": {
+    "source": "/Users/dsteele/repos/ai-central",
+    "revision": "e08d63e874f39264ed36f31812476f0816b9e49e",
+    "mode": "link",
+    "profiles": [
+      "base",
+      "javascript-typescript"
+    ],
+    "bundles": [
+      "core",
+      "node"
+    ],
+    "managedLinks": 21,
+    "projectFilesPreserved": true,
+    "refreshIdempotent": true,
+    "sourceClean": true,
+    "portableLookupLinksIgnored": false,
+    "remoteConfigured": false,
+    "committed": false
+  },
+  "otherChecks": [
+    "native-skill-validator",
+    "actionlint",
+    "issue-form-yaml",
+    "README-first-lookup",
+    "metadata-json-js-markdown-validation"
+  ],
+  "hostedCiRun": false,
+  "published": false,
+  "committed": false,
+  "realWorkspaceAccuracyMeasured": false
+}

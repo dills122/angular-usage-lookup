@@ -1,0 +1,6 @@
+<super-cool *ngIf="visible; else empty" [label]="rows[0]" />
+<ng-template #empty><super-cool label="empty" /></ng-template>
+<ng-container *ngFor="let row of rows; index as i"><super-cool [label]="row" /></ng-container>
+<ng-template [ngIf]="visible"><super-cool /></ng-template>
+<super-cool *ngFor="let row of rows" [label]="row"></super-cool>
+<!-- <super-cool /> is a comment. -->

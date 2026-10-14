@@ -1,0 +1,4 @@
+@if (visible) { <super-cool label="modern" /> }
+<div *ngIf="visible"><super-cool *ngFor="let row of rows" [label]="row" /></div>
+@defer { <super-cool /> }
+<legacy-page /><shared-badge />

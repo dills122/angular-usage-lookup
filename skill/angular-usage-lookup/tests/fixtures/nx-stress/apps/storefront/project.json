@@ -1,0 +1,15 @@
+{
+  "name": "storefront",
+  "projectType": "application",
+  "sourceRoot": "apps/storefront/src",
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ngc -p apps/storefront/tsconfig.lib.json --noEmit",
+        "forwardAllArgs": false,
+        "tsConfig": "apps/storefront/tsconfig.lib.json"
+      }
+    }
+  }
+}

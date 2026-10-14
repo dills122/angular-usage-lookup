@@ -1,0 +1,17 @@
+name: Skill improvement
+description: Propose a workflow, qualification case or maintained-tool integration.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and concrete example
+      description: What lookup or migration decision is hard to make today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement and evidence
+      description: Prefer existing tools. Describe success criteria and known limits.
+    validations:
+      required: true

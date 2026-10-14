@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": [],
+  "references": [
+    {
+      "path": "libs/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "libs/shared/tsconfig.lib.json"
+    },
+    {
+      "path": "libs/legacy/tsconfig.lib.json"
+    },
+    {
+      "path": "libs/modern/tsconfig.lib.json"
+    },
+    {
+      "path": "libs/dialogs/tsconfig.lib.json"
+    },
+    {
+      "path": "libs/reporting/tsconfig.lib.json"
+    },
+    {
+      "path": "apps/storefront/tsconfig.lib.json"
+    },
+    {
+      "path": "apps/admin/tsconfig.lib.json"
+    }
+  ]
+}

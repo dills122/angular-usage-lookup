@@ -1,0 +1,251 @@
+{
+  "references": [
+    {
+      "file": "libs/dialogs/src/dialog.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "declaration/self-type",
+      "contexts": [
+        "dialogs",
+        "legacy",
+        "modern",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/dialogs/src/dialog.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 1,
+      "wholeWord": true,
+      "kind": "declaration/self-type",
+      "contexts": [
+        "dialogs",
+        "legacy",
+        "modern",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/dialogs/src/launcher.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "import/alias/registry/direct-open",
+      "contexts": [
+        "dialogs",
+        "legacy",
+        "modern",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/dialogs/src/launcher.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 1,
+      "wholeWord": true,
+      "kind": "import/alias/registry/direct-open",
+      "contexts": [
+        "dialogs",
+        "legacy",
+        "modern",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/dialogs/src/launcher.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 2,
+      "wholeWord": true,
+      "kind": "import/alias/registry/direct-open",
+      "contexts": [
+        "dialogs",
+        "legacy",
+        "modern",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/dialogs/src/launcher.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 3,
+      "wholeWord": true,
+      "kind": "import/alias/registry/direct-open",
+      "contexts": [
+        "dialogs",
+        "legacy",
+        "modern",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/dialogs/src/index.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "export",
+      "contexts": [
+        "dialogs",
+        "legacy",
+        "modern",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/legacy/src/page.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "lazy-import/open",
+      "contexts": [
+        "legacy",
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/legacy/src/page.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 1,
+      "wholeWord": true,
+      "kind": "lazy-import/open",
+      "contexts": [
+        "legacy",
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/reporting/src/report.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "import",
+      "contexts": [
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/reporting/src/report.ts",
+      "text": "DetailsDialog",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "alias/open/wrapper-argument",
+      "contexts": [
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/reporting/src/report.ts",
+      "text": "DetailsDialog",
+      "occurrence": 1,
+      "wholeWord": true,
+      "kind": "alias/open/wrapper-argument",
+      "contexts": [
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/reporting/src/report.ts",
+      "text": "DetailsDialog",
+      "occurrence": 2,
+      "wholeWord": true,
+      "kind": "alias/open/wrapper-argument",
+      "contexts": [
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "apps/storefront/src/app.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "import/open",
+      "contexts": [
+        "storefront"
+      ]
+    },
+    {
+      "file": "apps/storefront/src/app.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 1,
+      "wholeWord": true,
+      "kind": "import/open",
+      "contexts": [
+        "storefront"
+      ]
+    },
+    {
+      "file": "apps/admin/src/app.ts",
+      "text": "CoolDialogComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "import",
+      "contexts": [
+        "admin"
+      ]
+    },
+    {
+      "file": "apps/admin/src/app.ts",
+      "text": "AdminDialog",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "alias/open",
+      "contexts": [
+        "admin"
+      ]
+    },
+    {
+      "file": "apps/admin/src/app.ts",
+      "text": "AdminDialog",
+      "occurrence": 1,
+      "wholeWord": true,
+      "kind": "alias/open",
+      "contexts": [
+        "admin"
+      ]
+    }
+  ],
+  "forbiddenFiles": [
+    "apps/admin/src/unrelated.ts"
+  ],
+  "templateInstances": 0,
+  "indirectConfirmed": [
+    "libs/dialogs/src/launcher.ts:openAlias",
+    "apps/admin/src/app.ts:openRegistered",
+    "libs/reporting/src/report.ts:openWrapped -> openAny",
+    "apps/storefront/src/app.ts:openViaService -> DialogLauncher.openDirect"
+  ],
+  "runtimeCandidates": [
+    "libs/dialogs/src/launcher.ts:openSelected"
+  ],
+  "notTarget": [
+    "libs/dialogs/src/launcher.ts:openOther",
+    "libs/reporting/src/report.ts:openOther",
+    "apps/admin/src/unrelated.ts"
+  ]
+}

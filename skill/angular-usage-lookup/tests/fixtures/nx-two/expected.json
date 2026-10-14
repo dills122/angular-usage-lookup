@@ -1,0 +1,16 @@
+{
+  "references": [
+    { "file": "shared/super-cool.ts", "text": "SuperCoolComponent", "occurrence": 0 },
+    { "file": "shared/index.ts", "text": "SuperCoolComponent", "occurrence": 0 },
+    { "file": "apps/alpha/src/app.ts", "text": "SuperCoolComponent", "occurrence": 0 },
+    { "file": "apps/alpha/src/app.ts", "text": "Cool", "wholeWord": true, "occurrence": 0 },
+    { "file": "apps/alpha/src/app.ts", "text": "Cool", "wholeWord": true, "occurrence": 1 },
+    { "file": "apps/alpha/src/app.ts", "text": "<super-cool />", "occurrence": 0 },
+    { "file": "apps/alpha/src/app.ts", "text": "<super-cool />", "occurrence": 1 },
+    { "file": "apps/beta/src/module.ts", "text": "SuperCoolComponent", "occurrence": 0 },
+    { "file": "apps/beta/src/module.ts", "text": "SuperCoolComponent", "occurrence": 1 },
+    { "file": "apps/beta/src/screen.html", "text": "<super-cool />", "occurrence": 0 }
+  ],
+  "forbiddenFiles": ["apps/alpha/src/unrelated.ts"],
+  "templateInstances": 3
+}

@@ -1,0 +1,11 @@
+{
+  "name": "beta",
+  "projectType": "application",
+  "sourceRoot": "apps/beta/src",
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": { "command": "ngc -p apps/beta/tsconfig.app.json --noEmit", "forwardAllArgs": false, "tsConfig": "apps/beta/tsconfig.app.json" }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "target": { "file": "src/super-cool.ts", "symbol": "SuperCoolComponent" },
+  "projects": [
+    {
+      "name": "single",
+      "tsconfig": "tsconfig.json",
+      "anchor": { "file": "src/inline.ts", "text": "<super-cool", "offset": 1 },
+      "probes": [
+        { "file": "src/inline.ts", "text": "<super-cool", "offset": 1 },
+        { "file": "src/different-name.html", "text": "super-cool", "occurrence": 0, "owner": "src/external.ts" }
+      ]
+    }
+  ]
+}

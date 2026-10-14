@@ -1,0 +1,92 @@
+{
+  "queries": [
+    {
+      "file": "libs/dialogs/src/launcher.ts",
+      "text": "DialogAlias",
+      "references": [
+        {
+          "file": "libs/dialogs/src/launcher.ts",
+          "text": "DialogAlias",
+          "occurrence": 0,
+          "wholeWord": true
+        },
+        {
+          "file": "libs/dialogs/src/launcher.ts",
+          "text": "DialogAlias",
+          "occurrence": 1,
+          "wholeWord": true
+        },
+        {
+          "file": "libs/dialogs/src/index.ts",
+          "text": "DialogAlias",
+          "occurrence": 0,
+          "wholeWord": true
+        }
+      ],
+      "tsconfig": "apps/admin/tsconfig.lib.json"
+    },
+    {
+      "file": "libs/dialogs/src/launcher.ts",
+      "text": "cool:",
+      "references": [
+        {
+          "file": "libs/dialogs/src/launcher.ts",
+          "text": "cool",
+          "occurrence": 0,
+          "wholeWord": true
+        },
+        {
+          "file": "apps/admin/src/app.ts",
+          "text": "cool",
+          "occurrence": 0,
+          "wholeWord": true
+        }
+      ],
+      "tsconfig": "apps/admin/tsconfig.lib.json"
+    },
+    {
+      "file": "libs/dialogs/src/launcher.ts",
+      "text": "openDirect",
+      "references": [
+        {
+          "file": "libs/dialogs/src/launcher.ts",
+          "text": "openDirect",
+          "occurrence": 0,
+          "wholeWord": true
+        },
+        {
+          "file": "apps/storefront/src/app.ts",
+          "text": "openDirect",
+          "occurrence": 0,
+          "wholeWord": true
+        }
+      ],
+      "tsconfig": "apps/storefront/tsconfig.lib.json"
+    },
+    {
+      "file": "libs/reporting/src/report.ts",
+      "text": "openAny",
+      "references": [
+        {
+          "file": "libs/reporting/src/report.ts",
+          "text": "openAny",
+          "occurrence": 0,
+          "wholeWord": true
+        },
+        {
+          "file": "libs/reporting/src/report.ts",
+          "text": "openAny",
+          "occurrence": 1,
+          "wholeWord": true
+        },
+        {
+          "file": "libs/reporting/src/report.ts",
+          "text": "openAny",
+          "occurrence": 2,
+          "wholeWord": true
+        }
+      ],
+      "tsconfig": "apps/admin/tsconfig.lib.json"
+    }
+  ]
+}

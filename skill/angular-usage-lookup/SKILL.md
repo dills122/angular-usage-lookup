@@ -1,0 +1,69 @@
+---
+name: angular-usage-lookup
+description: Find and classify usages of Angular components, selectors, directives, pipes, and input/output APIs across Angular CLI workspaces or Nx monorepos. Use for migration inventories and impact analysis, with semantic evidence and explicit coverage gaps. Produces lookup reports; does not perform migrations.
+---
+
+# Angular usage lookup
+
+Produce a reviewable inventory anchored to an exact declaration. Prefer the workspace's existing Angular Language Service and TypeScript tooling. This skill includes small local discovery/LSP collection helpers; Angular supplies the semantic engine.
+
+Read [tool routing](references/tool-routing.md) to select and qualify a backend. Use [the report contract](references/report-contract.md) for results. Consult [acceptance cases](references/acceptance-cases.md) when qualifying an integration or diagnosing missing usages.
+
+For large Nx repositories, use [the large-workspace runbook](references/large-workspaces.md) to account for all configs, batch collection, investigate repeated peculiar cases and distinguish measured accuracy from unresolved coverage.
+
+For lazy routes, nested/recursive fragments, portals, dynamic components and legacy/modern control flow, use [rendering paths](references/rendering-paths.md). It includes qualified traps involving renamed lazy bindings and `ngNonBindable`, plus the separate rendering gauntlet command.
+
+For the runnable Angular **21.2.25** integration, read [local collection](references/local-collection.md). Fixtures include mixed legacy/standalone templates and Material dialogs, a generated 54-library/three-app workspace, and bounded directive/pipe/member checks. The helper accepts a declaration file/class, optional explicitly declared member and explicit project manifests. Angular handles templates; an explicit TypeScript backend handles TS-only targets. The skill plans follow-up queries, classification and final reconciliation; the acceptance matrix states remaining limits.
+
+For Angular Material targets, read [Material catalog](references/material-catalog.md). Its optional generator reuses installed TypeScript/Angular metadata readers to produce versioned lookup indexes and family configs. It includes selectors, declared bindings, exports, inheritance/module/host relationships and reviewed programmatic opener rules. Use these to plan and disambiguate queries; catalog entries are not application usages.
+
+## Establish target and scope
+
+1. Resolve the supplied declaration, class name, selector, pipe name, or member to a declaration path and symbol position. Do not derive a selector by converting the class name to kebab case. Selectors can identify several directives; class names can identify unrelated declarations. Resolve ambiguity before combining results.
+2. Read metadata and record all selector alternatives, `exportAs`, relevant input/output public aliases, inheritance and host-directive exposure. Bind member queries to their declaring class and public template name. Resolve barrels and import aliases. Keep unproven source-to-package-`.d.ts` mappings visible as identity gaps.
+3. Record resolved Angular/core/compiler/language-service, TypeScript, Node and Nx versions where available, plus lockfile and checkout state. Initial qualification target is Angular 21, the newest LTS on 2026-10-13; recheck the official release table when asked for current LTS. Other versions need their own capability check.
+4. Enumerate apps, libraries, build/test/story configurations and leaf tsconfigs. Include application code, tests, stories and other consumers by default; label them separately. Record exclusions. Never silently restrict a monorepo scan to affected projects, an open editor project or Nx reverse dependencies. Read target implementation for identity; omit its declaration from consumer counts, but retain recursive self-usage unless excluded by the user.
+
+Lookup is read-only with respect to application sources and dependency/configuration files. Save reports when requested or customary. Use already installed tools; install the isolated helper dependencies only when setup is authorized. Do not upgrade the scanned workspace's packages, enable compiler options in source, run migrations or rename symbols merely to discover usages.
+
+## Qualify the available tools
+
+- Discover actual capabilities. A tool named `find_references` may use only TypeScript or a text index. Require evidence of Angular template support before treating template hits as semantic references.
+- Prefer official Angular Language Service through an existing editor/LSP connection. Open a component TS file belonging to each leaf project, wait for analysis, and prove a known template token resolves to the correct class. Check inline/external templates where present. A running process or empty diagnostics list is not a successful coverage check.
+- Record configurations actually analyzed. A server can select one default project for a file shared by several configs. If it cannot select or verify the others, mark them unresolved. One successful query does not establish all-project coverage.
+- Require every definition returned for a qualifying probe to identify the exact target. Two directives can expose the same public binding on one element; a reference query at that ambiguous token can union unrelated members. Find a uniquely resolved consumer or retain an identity gap before collecting. Later references to a shared binding still need ownership-aware migration classification.
+- Use normal TypeScript references for TS paths the Angular connection does not cover. An existing ts-morph wrapper is acceptable for this part, but does not establish template coverage.
+- For a dialog used only from code, qualify a real TS reference with the workspace's TypeScript service; do not invent a template occurrence. Preserve the config and `typescript-references` capability with a template-coverage gap. Follow verified barrel aliases through definition lookup. A destructured lazy import may need a reference query at its local binding in every relevant project, in addition to the class declaration query.
+- If no Angular-aware backend is available, gather candidates and inspect source evidence. Label the overall report `partial`, identify the missing capability and describe the smallest integration needed. Do not create a custom compiler adapter as an incidental fallback.
+
+## Collect and reconcile evidence
+
+1. Establish identity through definition lookup at a real consumer, then query references in a **verified consumer configuration**. With ngserver, prefer that config's uniquely owned consumer token: a shared class-declaration query can silently use another default project. A loaded-config log alone is insufficient. Preserve query-to-config evidence; unresolved ownership stays a coverage gap. A decorator's selector string is not a TS identifier. For API queries, query the member and public binding as supported; account for two-way input/output pairs.
+2. Repeat in every covered consumer project/configuration. For libraries consumed via built declarations or package entrypoints, resolve the target as seen by that consumer and retain the mapping. Preserve raw locations, backend/version, queried position, context, errors and evidence IDs. Filter declarations even if a provider ignores `includeDeclaration: false`.
+3. Classify TS references: imports/re-exports, standalone imports, NgModule declarations/exports, routes (`component`, `loadComponent`), factories/programmatic rendering, queries/DI, inheritance, tests, stories and other dependencies. Imports/registrations are dependencies, not rendered instances; inspect nearby code to distinguish them.
+4. Follow statically inspectable aliases/registries into `createComponent`, `NgComponentOutlet`, dialogs/portals, route factories and wrappers. Preserve the evidence chain. A class in a registry is a confirmed registry dependency; every runtime consumer of that registry is not automatically a confirmed rendering of this target. Record unresolved flow, reflection, remote modules and runtime strings as gaps. For Material dialogs, inspect the actual `MatDialog.open` call and argument. Use ordinary TS reference queries on a constant alias, registry property or wrapper method to locate callers, then inspect assignments/arguments. `openAny(Target)` is a target-specific path; its generic body is not always the target. A variable registry key stays a candidate unless its possible value is established. These are skill-directed follow-ups, not automatic dataflow analysis by the collector.
+5. Sweep declared source roots for actual class/export aliases, selector tokens, pipe names and relevant public API aliases. Search TS inline templates as well as HTML; include style, test, story, harness, snapshot and documentation references as collateral. Use an Angular parser for syntax when already available. Parsing/selector matching without scope resolution yields candidates, not confirmed identity.
+6. Reconcile additional candidates with semantic/source evidence. Explain false positives such as comments, unrelated symbols, selectors owned by another scoped component, literal HTML strings and descendants beneath `ngNonBindable`. Check provider hits too: an Angular reference can describe an inactive tag. Preserve the host/descendant distinction and raw evidence; see [rendering paths](references/rendering-paths.md). Queue anything not fully understood as `peculiar` for the review pass below, including suspicious absences, contradictory results and uncertain Material mappings. A custom element or runtime DOM string does not automatically instantiate the Angular component.
+7. For confirmed template occurrences, capture owner/project and observed inputs, outputs, two-way bindings, template-reference/export usage and projection when relevant to migration guidance. Resolve binding ownership on elements with multiple directives. Separate direct target usage from host-directive/wrapper impact; wrapper callers are not automatically direct target instances.
+
+Use selector semantics: element/attribute/class combinations, comma alternatives and `:not(...)` can matter. Modern control flow, deferred templates, structural shorthand, NgModule scope and standalone imports belong in coverage checks. Verify support for syntax outside the qualified version.
+
+## Investigate peculiar items before reporting
+
+Maintain an explicit working `peculiar` queue as uncertainty appears. Give each item a stable ID, target/location and project/config context, the precise question or expected-versus-observed mismatch, available evidence and the next useful check. Group repeated symptoms only when the affected locations/contexts remain recorded. This is a review flag, not another occurrence classification or an extra usage count; use the [report contract](references/report-contract.md#peculiar-review-ledger).
+
+After the main collection and candidate sweep, investigate **every queued item** before finalizing. Check the actual source and version/scope, then use focused Angular/TypeScript definition/reference queries or follow aliases, callers, base/host mappings and overloads as the question requires. Prefer a check that can distinguish competing explanations over repeating the same query. Add newly exposed questions to the queue and inspect them too. Use existing tools; a peculiar item does not authorize source edits or a new analyzer.
+
+Record each investigation as `recovered-miss`, `already-accounted-for`, `explained` or `unresolved`, with evidence and report updates. A recovered miss needs verified target identity and a shown omission; label its cause only as far as the evidence supports. Merge corrected occurrences/contexts without double counting and reconsider other cases affected by the same cause. Preserve the original observation so a later successful query does not hide the miss.
+
+Every item needs an investigation record, even when it remains unresolved. If a useful check cannot run or static evidence cannot decide the question, record what was checked, the exact blocker/limit and the next discriminating step. Keep the relevant candidate/gap and report `partial` while an in-scope uncertainty affects identity, usage or coverage. Exhausting retries or calling something peculiar is not resolution. Summarize the ledger's outcomes and remaining items at the end of the final report.
+
+## Report and stop honestly
+
+Return confirmed occurrences, unresolved candidates, collateral, excluded scope and coverage by configuration using the report contract. Include source locations and evidence, not invented confidence scores.
+
+Deduplicate physical occurrences across queries while retaining all owner/project contexts. Preserve distinct uses on the same line. A provider can return an opening-element span rather than only a tag; retain that range as evidence, not an edit instruction. Convert coordinates using the backend's encoding; never present generated type-check-file positions as source edit locations.
+
+Give migration implications supported by observed usage patterns. Without a target API/recipe, recommend investigation categories rather than inventing replacements. Lookup does not authorize edits.
+
+Only label coverage `complete-for-declared-static-scope` when every declared configuration has verified semantic coverage, the candidate sweep is reconciled, and relevant unsupported/dynamic cases are absent or explicitly outside that agreed scope. State that scope beside the claim. Otherwise use `partial` or `blocked` and name the gaps. Zero results require the same checks; they do not mean safe to delete.

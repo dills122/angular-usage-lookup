@@ -1,0 +1,85 @@
+name: Quality gates
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: Validate and test shipped bundle
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: skill/angular-usage-lookup/package-lock.json
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - run: npm run setup
+      - run: npm run validate
+      - run: npm run test:packaging
+      - run: npm run build
+      - run: npm run test:bundle
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: skill-bundle
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: bundle-evidence
+          path: test-output/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  angular:
+    name: Angular ${{ matrix.suite }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [test, 'test:gauntlet', 'test:scale']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: skill/angular-usage-lookup/package-lock.json
+      - run: npm run setup
+      - run: npm run "${SUITE}"
+        env:
+          SUITE: ${{ matrix.suite }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: angular-evidence-${{ strategy.job-index }}
+          path: skill/angular-usage-lookup/test-output/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  passed:
+    name: All quality gates passed
+    if: always()
+    needs: [package, angular]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Require every job to succeed
+        env:
+          PACKAGE_RESULT: ${{ needs.package.result }}
+          ANGULAR_RESULT: ${{ needs.angular.result }}
+        run: test "$PACKAGE_RESULT" = success && test "$ANGULAR_RESULT" = success

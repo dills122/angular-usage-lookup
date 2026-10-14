@@ -1,0 +1,118 @@
+{
+  "target": {
+    "file": "libs/dialogs/src/dialog.ts",
+    "symbol": "CoolDialogComponent"
+  },
+  "projects": [
+    {
+      "name": "dialogs",
+      "tsconfig": "libs/dialogs/tsconfig.lib.json",
+      "backend": "typescript",
+      "anchor": {
+        "file": "libs/dialogs/src/dialog.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/dialogs/src/launcher.ts",
+          "text": "CoolDialogComponent",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "name": "legacy",
+      "tsconfig": "libs/legacy/tsconfig.lib.json",
+      "backend": "typescript",
+      "anchor": {
+        "file": "libs/legacy/src/page.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/legacy/src/page.ts",
+          "text": "CoolDialogComponent",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "name": "modern",
+      "tsconfig": "libs/modern/tsconfig.lib.json",
+      "backend": "typescript",
+      "anchor": {
+        "file": "libs/modern/src/panel.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/legacy/src/page.ts",
+          "text": "CoolDialogComponent",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "name": "reporting",
+      "tsconfig": "libs/reporting/tsconfig.lib.json",
+      "backend": "typescript",
+      "anchor": {
+        "file": "libs/reporting/src/report.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/reporting/src/report.ts",
+          "text": "DetailsDialog",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "name": "storefront",
+      "tsconfig": "apps/storefront/tsconfig.lib.json",
+      "backend": "typescript",
+      "anchor": {
+        "file": "apps/storefront/src/app.ts"
+      },
+      "probes": [
+        {
+          "file": "apps/storefront/src/app.ts",
+          "text": "CoolDialogComponent",
+          "occurrence": 0
+        },
+        {
+          "file": "libs/legacy/src/page.ts",
+          "text": "CoolDialogComponent",
+          "occurrence": 0
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "tsconfig": "apps/admin/tsconfig.lib.json",
+      "backend": "typescript",
+      "anchor": {
+        "file": "apps/admin/src/app.ts"
+      },
+      "probes": [
+        {
+          "file": "apps/admin/src/app.ts",
+          "text": "AdminDialog",
+          "occurrence": 0
+        },
+        {
+          "file": "libs/legacy/src/page.ts",
+          "text": "CoolDialogComponent",
+          "occurrence": 0
+        }
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "project": "ui",
+      "reason": "No dialog dependency in the declared program; ui/shared are covered by card lookup, not declared dialog consumers."
+    },
+    {
+      "project": "shared",
+      "reason": "No dialog dependency in the declared program; ui/shared are covered by card lookup, not declared dialog consumers."
+    }
+  ]
+}

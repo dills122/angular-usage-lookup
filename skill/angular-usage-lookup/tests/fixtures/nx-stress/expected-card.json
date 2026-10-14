@@ -1,0 +1,367 @@
+{
+  "references": [
+    {
+      "file": "libs/ui/src/card.ts",
+      "text": "SuperCoolComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "declaration",
+      "contexts": [
+        "ui",
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/ui/src/ui.module.ts",
+      "text": "SuperCoolComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "registration/import",
+      "contexts": [
+        "ui",
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/ui/src/ui.module.ts",
+      "text": "SuperCoolComponent",
+      "occurrence": 1,
+      "wholeWord": true,
+      "kind": "registration/import",
+      "contexts": [
+        "ui",
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/ui/src/ui.module.ts",
+      "text": "SuperCoolComponent",
+      "occurrence": 2,
+      "wholeWord": true,
+      "kind": "registration/import",
+      "contexts": [
+        "ui",
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/ui/src/index.ts",
+      "text": "SuperCoolComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "export",
+      "contexts": [
+        "ui",
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/ui/src/demo.ts",
+      "text": "<super-cool *ngIf=\"visible\" label=\"demo\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "ui"
+      ]
+    },
+    {
+      "file": "libs/shared/src/shared.ts",
+      "text": "<super-cool *ngSwitchCase=\"1\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/shared/src/shared.ts",
+      "text": "<super-cool *ngSwitchDefault />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/shared/src/shared.ts",
+      "text": "<super-cool label=\"badge\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/shared/src/index.ts",
+      "text": "SuperCoolComponent",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "export",
+      "contexts": [
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/shared/src/index.ts",
+      "text": "ExportedCool",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "export",
+      "contexts": [
+        "shared",
+        "legacy",
+        "modern",
+        "dialogs",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/legacy/src/legacy-screen.html",
+      "text": "<super-cool *ngIf=\"visible; else empty\" [label]=\"rows[0]\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "legacy",
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/legacy/src/legacy-screen.html",
+      "text": "<super-cool label=\"empty\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "legacy",
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/legacy/src/legacy-screen.html",
+      "text": "<super-cool [label]=\"row\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "legacy",
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/legacy/src/legacy-screen.html",
+      "text": "<super-cool />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "legacy",
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/legacy/src/legacy-screen.html",
+      "text": "<super-cool *ngFor=\"let row of rows\" [label]=\"row\">",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "legacy",
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/modern/src/panel.ts",
+      "text": "ExportedCool",
+      "occurrence": 0,
+      "wholeWord": true,
+      "kind": "query/import",
+      "contexts": [
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/modern/src/panel.ts",
+      "text": "ExportedCool",
+      "occurrence": 1,
+      "wholeWord": true,
+      "kind": "query/import",
+      "contexts": [
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/modern/src/panel.ts",
+      "text": "ExportedCool",
+      "occurrence": 2,
+      "wholeWord": true,
+      "kind": "query/import",
+      "contexts": [
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/modern/src/modern.html",
+      "text": "<super-cool label=\"modern\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/modern/src/modern.html",
+      "text": "<super-cool *ngFor=\"let row of rows\" [label]=\"row\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/modern/src/modern.html",
+      "text": "<super-cool />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "modern",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/dialogs/src/dialog.ts",
+      "text": "<super-cool [label]=\"data.title\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "dialogs",
+        "legacy",
+        "modern",
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "libs/reporting/src/report.ts",
+      "text": "<super-cool *ngIf=\"ready\" label=\"report\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "reporting",
+        "storefront",
+        "admin"
+      ]
+    },
+    {
+      "file": "apps/storefront/src/app.ts",
+      "text": "<super-cool *ngIf=\"ready\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "storefront"
+      ]
+    },
+    {
+      "file": "apps/admin/src/dashboard.html",
+      "text": "<super-cool *ngIf=\"visible\" label=\"admin\" />",
+      "occurrence": 0,
+      "wholeWord": false,
+      "kind": "template",
+      "contexts": [
+        "admin"
+      ]
+    }
+  ],
+  "forbiddenFiles": [
+    "apps/admin/src/unrelated.ts"
+  ],
+  "templateInstances": 16
+}

@@ -1,0 +1,17 @@
+{
+  "target": { "file": "shared/super-cool.ts", "symbol": "SuperCoolComponent" },
+  "projects": [
+    {
+      "name": "alpha",
+      "tsconfig": "apps/alpha/tsconfig.app.json",
+      "anchor": { "file": "apps/alpha/src/app.ts", "text": "<super-cool", "offset": 1 },
+      "probes": [{ "file": "apps/alpha/src/app.ts", "text": "<super-cool", "offset": 1 }]
+    },
+    {
+      "name": "beta",
+      "tsconfig": "apps/beta/tsconfig.app.json",
+      "anchor": { "file": "apps/beta/src/app.ts" },
+      "probes": [{ "file": "apps/beta/src/screen.html", "text": "super-cool", "owner": "apps/beta/src/app.ts" }]
+    }
+  ]
+}

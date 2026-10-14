@@ -1,0 +1,123 @@
+{
+  "target": {
+    "file": "libs/ui/src/card.ts",
+    "symbol": "SuperCoolComponent"
+  },
+  "projects": [
+    {
+      "name": "ui",
+      "tsconfig": "libs/ui/tsconfig.lib.json",
+      "anchor": {
+        "file": "libs/ui/src/demo.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/ui/src/demo.ts",
+          "text": "<super-cool",
+          "offset": 1
+        }
+      ]
+    },
+    {
+      "name": "shared",
+      "tsconfig": "libs/shared/tsconfig.lib.json",
+      "anchor": {
+        "file": "libs/shared/src/shared.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/shared/src/shared.ts",
+          "text": "<super-cool",
+          "offset": 1
+        }
+      ]
+    },
+    {
+      "name": "legacy",
+      "tsconfig": "libs/legacy/tsconfig.lib.json",
+      "anchor": {
+        "file": "libs/legacy/src/page.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/legacy/src/legacy-screen.html",
+          "text": "<super-cool",
+          "offset": 1,
+          "owner": "libs/legacy/src/page.ts"
+        }
+      ]
+    },
+    {
+      "name": "modern",
+      "tsconfig": "libs/modern/tsconfig.lib.json",
+      "anchor": {
+        "file": "libs/modern/src/panel.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/modern/src/modern.html",
+          "text": "<super-cool",
+          "offset": 1,
+          "owner": "libs/modern/src/panel.ts"
+        }
+      ]
+    },
+    {
+      "name": "dialogs",
+      "tsconfig": "libs/dialogs/tsconfig.lib.json",
+      "anchor": {
+        "file": "libs/dialogs/src/dialog.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/dialogs/src/dialog.ts",
+          "text": "<super-cool",
+          "offset": 1
+        }
+      ]
+    },
+    {
+      "name": "reporting",
+      "tsconfig": "libs/reporting/tsconfig.lib.json",
+      "anchor": {
+        "file": "libs/reporting/src/report.ts"
+      },
+      "probes": [
+        {
+          "file": "libs/reporting/src/report.ts",
+          "text": "<super-cool",
+          "offset": 1
+        }
+      ]
+    },
+    {
+      "name": "storefront",
+      "tsconfig": "apps/storefront/tsconfig.lib.json",
+      "anchor": {
+        "file": "apps/storefront/src/app.ts"
+      },
+      "probes": [
+        {
+          "file": "apps/storefront/src/app.ts",
+          "text": "<super-cool",
+          "offset": 1
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "tsconfig": "apps/admin/tsconfig.lib.json",
+      "anchor": {
+        "file": "apps/admin/src/app.ts"
+      },
+      "probes": [
+        {
+          "file": "apps/admin/src/dashboard.html",
+          "text": "<super-cool",
+          "offset": 1,
+          "owner": "apps/admin/src/app.ts"
+        }
+      ]
+    }
+  ]
+}

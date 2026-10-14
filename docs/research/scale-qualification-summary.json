@@ -1,0 +1,144 @@
+{
+  "scope": {
+    "libraries": 54,
+    "apps": 3,
+    "features": 48,
+    "chains": 3,
+    "chainLength": 16,
+    "auxPerFeature": 8
+  },
+  "files": 774,
+  "commands": {
+    "discovery": {
+      "seconds": 17.049094583,
+      "exitCode": 0
+    },
+    "typecheck": {
+      "seconds": 41.949225041999995,
+      "exitCode": 0
+    },
+    "lookup-card": {
+      "seconds": 131.545321834,
+      "exitCode": 0
+    },
+    "lookup-dialog": {
+      "seconds": 15.672922167000012,
+      "exitCode": 0
+    }
+  },
+  "scaleSeconds": 206.73956525000003,
+  "regressionTests": 29,
+  "targets": {
+    "card": {
+      "expected": 489,
+      "actual": 489,
+      "precision": 1,
+      "recall": 1,
+      "expectedContextPairs": 8015,
+      "actualContextPairs": 8015,
+      "verifiedConfigs": 63,
+      "configs": 63,
+      "failedConfigs": [],
+      "missing": [],
+      "extra": [],
+      "contextErrors": [],
+      "categories": {
+        "baseline-symbol": {
+          "expected": 10,
+          "found": 10
+        },
+        "baseline-mixed-template": {
+          "expected": 16,
+          "found": 16
+        },
+        "legacy-if/standalone-inline": {
+          "expected": 12,
+          "found": 12
+        },
+        "auxiliary-template": {
+          "expected": 384,
+          "found": 384
+        },
+        "legacy-for/module-external": {
+          "expected": 6,
+          "found": 6
+        },
+        "modern-control-flow/standalone-inline": {
+          "expected": 12,
+          "found": 12
+        },
+        "defer/module-external": {
+          "expected": 6,
+          "found": 6
+        },
+        "template-outlet/standalone-inline": {
+          "expected": 6,
+          "found": 6
+        },
+        "legacy-switch/module-external": {
+          "expected": 12,
+          "found": 12
+        },
+        "projection/standalone-inline": {
+          "expected": 6,
+          "found": 6
+        },
+        "utf16-crlf/module-external": {
+          "expected": 12,
+          "found": 12
+        },
+        "spec-only": {
+          "expected": 3,
+          "found": 3
+        },
+        "story-only": {
+          "expected": 3,
+          "found": 3
+        },
+        "third-app": {
+          "expected": 1,
+          "found": 1
+        }
+      },
+      "reportBytes": 5180224,
+      "angularProcesses": 63,
+      "allAngularProcessesExited": true
+    },
+    "dialog": {
+      "expected": 114,
+      "actual": 114,
+      "precision": 1,
+      "recall": 1,
+      "expectedContextPairs": 2184,
+      "actualContextPairs": 2184,
+      "verifiedConfigs": 61,
+      "configs": 61,
+      "failedConfigs": [],
+      "missing": [],
+      "extra": [],
+      "contextErrors": [],
+      "categories": {
+        "baseline-symbol": {
+          "expected": 18,
+          "found": 18
+        },
+        "dialog-import": {
+          "expected": 48,
+          "found": 48
+        },
+        "direct-MatDialog-open": {
+          "expected": 48,
+          "found": 48
+        }
+      },
+      "reportBytes": 3235171,
+      "angularProcesses": 0,
+      "allAngularProcessesExited": true
+    }
+  },
+  "limits": [
+    "Generated static/typecheck fixtures only; no universal production 95% accuracy or human-helpfulness score.",
+    "Peak process-tree memory unavailable under sandbox restrictions.",
+    "Scope and dynamic-flow reconciliation remain skill work."
+  ]
+}

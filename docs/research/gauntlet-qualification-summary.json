@@ -1,0 +1,356 @@
+{
+  "schemaVersion": "angular-usage-lookup/gauntlet-qualification-v1",
+  "date": "2026-10-13",
+  "versions": {
+    "node": "v22.23.3",
+    "angular": "21.2.25",
+    "router": "21.2.25",
+    "typescript": "5.9.3",
+    "material": "21.2.14",
+    "cdk": "21.2.14"
+  },
+  "scope": {
+    "programs": 1,
+    "sourceAndConfigAndOracleFiles": 18,
+    "nestingDepth": 48,
+    "templateOccurrences": 47,
+    "reconciledReferenceLocations": 109
+  },
+  "summaries": [
+    {
+      "target": "card",
+      "status": "succeeded",
+      "expected": 56,
+      "actual": 56,
+      "templateOccurrences": 44,
+      "initialMissing": [],
+      "recovered": 0,
+      "rejected": [
+        {
+          "file": "src/modern.html",
+          "range": {
+            "start": {
+              "line": 34,
+              "column": 20
+            },
+            "end": {
+              "line": 34,
+              "column": 69
+            }
+          },
+          "reason": "Descendant of ngNonBindable; verified with Angular template AST and emitted disabled-binding instructions. Host remains eligible."
+        }
+      ],
+      "rawReferences": 57,
+      "missing": [],
+      "extras": [],
+      "failures": []
+    },
+    {
+      "target": "legacy",
+      "status": "succeeded",
+      "expected": 8,
+      "actual": 8,
+      "templateOccurrences": 3,
+      "initialMissing": [],
+      "recovered": 0,
+      "rejected": [],
+      "rawReferences": 8,
+      "missing": [],
+      "extras": [],
+      "failures": []
+    },
+    {
+      "target": "dynamic",
+      "status": "succeeded",
+      "expected": 45,
+      "actual": 45,
+      "templateOccurrences": 0,
+      "initialMissing": [
+        "lazy-destructure-alias",
+        "lazy-destructure-return",
+        "code-alias",
+        "code-dialog",
+        "code-create",
+        "default-alias",
+        "default-dialog"
+      ],
+      "recovered": 7,
+      "rejected": [],
+      "rawReferences": 38,
+      "missing": [],
+      "extras": [],
+      "failures": []
+    }
+  ],
+  "flows": {
+    "checks": 7,
+    "references": 18,
+    "gaps": [
+      {
+        "id": "runtime-registry",
+        "file": "src/modern.ts",
+        "source": "this.dialog.open(REGISTRY[key])",
+        "outcome": "unresolved",
+        "reason": "Caller-provided key may select DynamicCard or OtherCard; no confirmed target execution."
+      },
+      {
+        "id": "conditional-route",
+        "file": "src/routes.ts",
+        "outcome": "unresolved",
+        "reason": "Both conditional component candidates are statically visible; random runtime choice is unknown."
+      }
+    ]
+  },
+  "members": [
+    {
+      "symbol": "GauntletCard",
+      "file": "src/cards.ts",
+      "member": "label",
+      "probe": "caption]",
+      "count": 3,
+      "status": "succeeded",
+      "actual": 3,
+      "exactLocations": true,
+      "errors": []
+    },
+    {
+      "symbol": "GauntletCard",
+      "file": "src/cards.ts",
+      "member": "closed",
+      "probe": "dismissed)",
+      "count": 2,
+      "status": "succeeded",
+      "actual": 2,
+      "exactLocations": true,
+      "errors": []
+    },
+    {
+      "symbol": "GauntletCard",
+      "file": "src/cards.ts",
+      "member": "count",
+      "probe": "count)]",
+      "count": 2,
+      "status": "succeeded",
+      "actual": 2,
+      "exactLocations": true,
+      "errors": []
+    },
+    {
+      "symbol": "ModernPage",
+      "file": "src/modern.ts",
+      "member": "direct",
+      "probe": "direct; inputs",
+      "count": 2,
+      "status": "succeeded",
+      "actual": 2,
+      "exactLocations": true,
+      "errors": []
+    },
+    {
+      "symbol": "ModernPage",
+      "file": "src/modern.ts",
+      "member": "selected",
+      "probe": "selected]",
+      "count": 2,
+      "status": "succeeded",
+      "actual": 2,
+      "exactLocations": true,
+      "errors": []
+    },
+    {
+      "symbol": "ModernPage",
+      "file": "src/modern.ts",
+      "member": "templatePortal",
+      "probe": "templatePortal]",
+      "count": 3,
+      "status": "succeeded",
+      "actual": 3,
+      "exactLocations": true,
+      "errors": []
+    },
+    {
+      "symbol": "ModernPage",
+      "file": "src/modern.ts",
+      "member": "legacyType",
+      "probe": "legacyType\"",
+      "count": 2,
+      "status": "succeeded",
+      "actual": 2,
+      "exactLocations": true,
+      "errors": []
+    }
+  ],
+  "openers": {
+    "checked": 11,
+    "rejectedLookalikes": 1
+  },
+  "sourceEdges": {
+    "checked": 12,
+    "runtimeExecution": "not-established"
+  },
+  "regressionRuns": {
+    "gauntlet": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 20.626673750000002
+    },
+    "normal": {
+      "passed": 29,
+      "failed": 0,
+      "seconds": 55.911598708
+    },
+    "scale": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 213.642627
+    }
+  },
+  "scaleRerun": {
+    "generatedAt": "2026-10-14T00:31:39.540Z",
+    "node": "v22.23.3",
+    "platform": "darwin",
+    "blueprint": {
+      "libraries": 54,
+      "apps": 3,
+      "features": 48,
+      "chains": 3,
+      "chainLength": 16,
+      "auxPerFeature": 8
+    },
+    "sourceAndConfigFiles": 774,
+    "commands": {
+      "discovery": {
+        "seconds": 16.351274791,
+        "exitCode": 0
+      },
+      "typecheck": {
+        "seconds": 41.951854792,
+        "exitCode": 0
+      },
+      "lookup-card": {
+        "seconds": 138.125461083,
+        "exitCode": 0
+      },
+      "lookup-dialog": {
+        "seconds": 16.729122291999985,
+        "exitCode": 0
+      }
+    },
+    "targets": {
+      "card": {
+        "expected": 489,
+        "actual": 489,
+        "truePositives": 489,
+        "precision": 1,
+        "recall": 1,
+        "expectedContextPairs": 8015,
+        "actualContextPairs": 8015,
+        "missing": [],
+        "extra": [],
+        "contextErrors": [],
+        "categories": {
+          "baseline-symbol": {
+            "expected": 10,
+            "found": 10
+          },
+          "baseline-mixed-template": {
+            "expected": 16,
+            "found": 16
+          },
+          "legacy-if/standalone-inline": {
+            "expected": 12,
+            "found": 12
+          },
+          "auxiliary-template": {
+            "expected": 384,
+            "found": 384
+          },
+          "legacy-for/module-external": {
+            "expected": 6,
+            "found": 6
+          },
+          "modern-control-flow/standalone-inline": {
+            "expected": 12,
+            "found": 12
+          },
+          "defer/module-external": {
+            "expected": 6,
+            "found": 6
+          },
+          "template-outlet/standalone-inline": {
+            "expected": 6,
+            "found": 6
+          },
+          "legacy-switch/module-external": {
+            "expected": 12,
+            "found": 12
+          },
+          "projection/standalone-inline": {
+            "expected": 6,
+            "found": 6
+          },
+          "utf16-crlf/module-external": {
+            "expected": 12,
+            "found": 12
+          },
+          "spec-only": {
+            "expected": 3,
+            "found": 3
+          },
+          "story-only": {
+            "expected": 3,
+            "found": 3
+          },
+          "third-app": {
+            "expected": 1,
+            "found": 1
+          }
+        },
+        "reportBytes": 5180350,
+        "verifiedConfigs": 63,
+        "configs": 63,
+        "failedConfigs": [],
+        "angularProcesses": 63,
+        "allAngularProcessesExited": true
+      },
+      "dialog": {
+        "expected": 114,
+        "actual": 114,
+        "truePositives": 114,
+        "precision": 1,
+        "recall": 1,
+        "expectedContextPairs": 2184,
+        "actualContextPairs": 2184,
+        "missing": [],
+        "extra": [],
+        "contextErrors": [],
+        "categories": {
+          "baseline-symbol": {
+            "expected": 18,
+            "found": 18
+          },
+          "dialog-import": {
+            "expected": 48,
+            "found": 48
+          },
+          "direct-MatDialog-open": {
+            "expected": 48,
+            "found": 48
+          }
+        },
+        "reportBytes": 3235171,
+        "verifiedConfigs": 61,
+        "configs": 61,
+        "failedConfigs": [],
+        "angularProcesses": 0,
+        "allAngularProcessesExited": true
+      }
+    }
+  },
+  "limits": [
+    "Static lookup and compiler evidence; no runtime branch, navigation or overlay execution proof.",
+    "Hand-authored fixture follow-ups and source relationships; no blind agent or production accuracy evaluation.",
+    "Other Angular versions, built-package identities, shared-template owner routing, remote consumers and arbitrary runtime dataflow remain unqualified."
+  ]
+}

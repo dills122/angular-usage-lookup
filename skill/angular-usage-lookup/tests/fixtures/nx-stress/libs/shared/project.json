@@ -1,0 +1,15 @@
+{
+  "name": "shared",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/src",
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ngc -p libs/shared/tsconfig.lib.json --noEmit",
+        "forwardAllArgs": false,
+        "tsConfig": "libs/shared/tsconfig.lib.json"
+      }
+    }
+  }
+}

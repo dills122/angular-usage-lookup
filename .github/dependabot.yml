@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+  - package-ecosystem: npm
+    directory: /skill/angular-usage-lookup
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    groups:
+      angular-profile:
+        patterns: ['@angular/*', typescript]

@@ -1,0 +1,22 @@
+{
+  "target": {
+    "file": "src/super-cool.ts",
+    "symbol": "SuperCoolComponent"
+  },
+  "projects": [
+    {
+      "name": "test",
+      "tsconfig": "tsconfig.spec.json",
+      "anchor": {
+        "file": "src/spec.ts"
+      },
+      "probes": [
+        {
+          "file": "src/spec.ts",
+          "text": "<super-cool",
+          "offset": 1
+        }
+      ]
+    }
+  ]
+}

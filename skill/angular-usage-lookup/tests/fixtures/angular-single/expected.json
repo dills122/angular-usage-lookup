@@ -1,0 +1,17 @@
+{
+  "references": [
+    { "file": "src/super-cool.ts", "text": "SuperCoolComponent", "occurrence": 0 },
+    { "file": "src/inline.ts", "text": "SuperCoolComponent", "occurrence": 0 },
+    { "file": "src/inline.ts", "text": "SuperCoolComponent", "occurrence": 1 },
+    { "file": "src/inline.ts", "text": "<super-cool />", "occurrence": 0 },
+    { "file": "src/inline.ts", "text": "<super-cool>", "occurrence": 0 },
+    { "file": "src/external.ts", "text": "SuperCoolComponent", "occurrence": 0 },
+    { "file": "src/external.ts", "text": "Cool", "occurrence": 0, "wholeWord": true },
+    { "file": "src/external.ts", "text": "Cool", "occurrence": 1, "wholeWord": true },
+    { "file": "src/different-name.html", "text": "<super-cool />", "occurrence": 0 },
+    { "file": "src/dynamic.ts", "text": "SuperCoolComponent", "occurrence": 0 },
+    { "file": "src/dynamic.ts", "text": "SuperCoolComponent", "occurrence": 1 }
+  ],
+  "forbiddenFiles": ["src/unrelated.ts"],
+  "templateInstances": 3
+}

@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "experimentalDecorators": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@stress/ui": [
+        "libs/ui/src/index.ts"
+      ],
+      "@stress/shared": [
+        "libs/shared/src/index.ts"
+      ],
+      "@stress/legacy": [
+        "libs/legacy/src/index.ts"
+      ],
+      "@stress/modern": [
+        "libs/modern/src/index.ts"
+      ],
+      "@stress/dialogs": [
+        "libs/dialogs/src/index.ts"
+      ],
+      "@stress/reporting": [
+        "libs/reporting/src/index.ts"
+      ]
+    },
+    "noEmit": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  }
+}

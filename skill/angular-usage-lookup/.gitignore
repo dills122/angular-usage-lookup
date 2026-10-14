@@ -1,0 +1,5 @@
+node_modules/
+test-output/
+tests/fixtures/**/.nx/
+tests/fixtures/**/dist/
+*.tsbuildinfo
