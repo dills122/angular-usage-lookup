@@ -1,7 +1,9 @@
 # Known limits
 
-- The collector accepts three exact Angular/TypeScript profiles: 20.3.33/5.9.3,
-  21.2.25/5.9.3 and 22.2.2/6.0.3. Other patch versions remain unqualified.
+- The collector admits stable Angular/TypeScript minor lines 20.3/5.9, 21.2/5.9
+  and 22.2/6.0. Exact baselines are 20.3.33/5.9.3, 21.2.25/5.9.3 and
+  22.2.2/6.0.3; 20.3.31 is additionally exercised. Patch compatibility does not
+  establish that every patch passed regression tests.
   The full Material matrix/catalog and compiler candidate fallback use Angular
   21.2.25 / Material 21.2.14; their private/internal Angular APIs remain guarded.
 - Config manifests and known identity probes are explicit. A loaded server or
@@ -18,7 +20,8 @@
   pipes or indirect host applications. Candidate text alone is never confirmation.
 - Runtime registry keys, conditional route choices, remote/federated consumers
   and arbitrary reflection/dataflow are not generally decidable statically.
-- Built package/source identity, shared-template per-owner routing, actual
+- Cross-library NgModule source aliases and ngc declarations with/without maps
+  are tested. Arbitrary built package/source identity, shared-template per-owner routing, actual
   Jest/Storybook integrations and API shapes beyond the fixtures need further
   qualification. Peak memory and production usefulness are not yet measured.
 - Generated compiler/reference tests do not exercise browser route navigation,

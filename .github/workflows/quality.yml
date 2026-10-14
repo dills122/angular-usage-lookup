@@ -26,6 +26,7 @@ jobs:
       - run: npm run setup
       - run: npm run validate
       - run: npm run test:packaging
+      - run: npm run setup:versions
       - run: npm run build
       - run: npm run test:bundle
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

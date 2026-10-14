@@ -48,7 +48,7 @@ function containsPosition(range, point) {
 
 export async function collect(workspace, manifest, timeoutMs = 15000) {
   if (!Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 300000) throw new Error('Timeout must be an integer from 1 to 300000 milliseconds');
-  const { requireWorkspace, ts, core, serverFile, server, serviceFile, service } = qualifiedToolchain(workspace);
+  const { requireWorkspace, ts, core, qualification } = qualifiedToolchain(workspace, { angular: false });
   const targetFile = path.resolve(workspace, manifest.target.file);
   const source = await readFile(targetFile, 'utf8');
   const ast = ts.createSourceFile(targetFile, source, ts.ScriptTarget.Latest, true);
@@ -68,8 +68,8 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
   if (!Array.isArray(manifest.projects) || !manifest.projects.length) throw new Error('At least one explicit project is required');
   const report = {
     schemaVersion: 'angular-usage-lookup/v1', stage: 'semantic-reference-collection', status: 'partial', collectionStatus: 'succeeded',
-    run: { timestamp: new Date().toISOString(), workspace, node: process.version, positionEncoding: 'utf-16',
-      versions: { angular: core.version, typescript: ts.version, languageServer: server.version, languageService: service.version } },
+    run: { timestamp: new Date().toISOString(), workspace, node: process.version, positionEncoding: 'utf-16', toolchainQualification: qualification,
+      versions: { angular: core.version, typescript: ts.version, languageServer: null, languageService: null } },
     target: { ...manifest.target, range: normalized({ start: targetStart, end: targetEnd }), fileHash: hash(source) },
     scope: { projects: manifest.projects.map(p => ({ name: p.name, tsconfig: p.tsconfig })),
       exclusions: manifest.exclusions ?? [],
@@ -80,7 +80,7 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
   for (const project of manifest.projects) {
     const row = { project: project.name, tsconfig: project.tsconfig, result: 'failed', probes: [] };
     report.coverage.push(row);
-    let client, tsClient, identityClient, compilerCandidate;
+    let client, tsClient, identityClient, compilerCandidate, service;
     try {
       const configFile = path.resolve(workspace, project.tsconfig);
       const parsed = ts.getParsedCommandLineOfConfigFile(configFile, {}, { ...ts.sys,
@@ -96,6 +96,12 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
         row.configLoadEvidence = { configFile, configHash: hash(await readFile(configFile)), rootFiles: parsed.fileNames, targetInProgram: true };
         report.gaps.push({ code: 'templates-not-analyzed', project: project.name, message: 'TypeScript backend does not analyze Angular templates; this row covers TypeScript references only.' });
       } else {
+        const angularTools = qualifiedToolchain(workspace);
+        const { serverFile, server, serviceFile } = angularTools;
+        service = angularTools.service;
+        report.run.toolchainQualification = angularTools.qualification;
+        report.run.versions.languageServer = server.version;
+        report.run.versions.languageService = service.version;
         row.capabilities = ['typescript-references', 'angular-template-references'];
         client = await startAngular({ workspace, timeoutMs,
           executable: path.resolve(path.dirname(serverFile), server.bin.ngserver),
@@ -137,7 +143,12 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
           result.definitionChain = identity.chain;
         }
         row.probes.push(result);
-        if (!result.resolvesToTarget) throw new Error(`Known reference does not resolve to target: ${probe.file} (ambiguous or wrong identity)`);
+        if (!result.resolvesToTarget) {
+          const domOnly = client && Array.isArray(definitions) && definitions.length > 0 &&
+            definitions.every(d => /\/typescript\/lib\/lib\.dom\.d\.ts$/.test(d.targetUri ?? d.uri ?? ''));
+          const hint = domOnly ? '; template token resolves only to DOM declarations. Check the consumer NgModule imports/exports, resolved library entrypoint and Angular declaration metadata in this config' : '';
+          throw new Error(`Known reference does not resolve to target: ${probe.file} (ambiguous or wrong identity)${hint}`);
+        }
         referenceQueries.push(request);
       }
       const qualified = client && await qualifyQuery({ ts, client, configFile, parsed, probes: row.probes, workspace });

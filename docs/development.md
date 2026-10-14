@@ -3,8 +3,8 @@
 Install baseline test dependencies with `npm run setup` at repo root; it delegates to
 the portable package's `npm ci`. The root has no dependency graph of its own.
 Baseline fixtures resolve Angular/TS/Nx from that package's node_modules.
-`npm run setup:versions` installs the separate locked Angular 20 and 22 profiles
-under `tests/versions/`. Run it before the complete `npm run check` gate.
+`npm run setup:versions` installs the separate locked Angular 20, 20.3.31 pilot-patch and 22 profiles
+under `tests/versions/`. Run it before the complete `npm run check` gate or `npm run test:bundle`.
 `npm run test:versions` uses those isolated installations and real Nx typechecks;
 it does not modify the baseline or an application dependency tree.
 
@@ -50,3 +50,10 @@ with `npm run test:packaging` and `npm run test:blind`; the agent itself is not
 invoked in CI. The latter verifies authored transformation invariants, compiles
 both layouts through Nx, checks native Angular associations and exercises grading
 false-pass controls. This deterministic suite is not a blind agent run.
+
+The cross-library NgModule regressions run on Angular 21 in `npm test` and on
+20.3.31, 20.3.33 and 22 in `npm run test:versions`. They preserve compiler and
+lookup evidence under the skill’s `test-output/cross-lib/`. The extracted-bundle
+test verifies per-major servers with workspace language servers absent, the pilot
+workspace service, and Nx discovery with a runtime-only skill installed inside
+the host. Never copy development fixtures into a scanned host workspace.

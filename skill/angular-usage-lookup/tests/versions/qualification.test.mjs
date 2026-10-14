@@ -25,7 +25,7 @@ const modern = [
   { symbol: 'SignalCard', member: 'count', uses: ['count)]="count"'] },
 ];
 
-for (const major of [20, 22]) test(`Angular ${major}: Nx, API shapes, signal APIs and control flow`, { timeout: 240000 }, async () => {
+for (const major of [20, '20-patch', 22]) test(`Angular ${major}: Nx, API shapes, signal APIs and control flow`, { timeout: 240000 }, async () => {
   const profile = path.join(root, `tests/versions/angular${major}`);
   const require = createRequire(path.join(profile, 'package.json'));
   const workspace = path.join(profile, 'test-output/workspace');

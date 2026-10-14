@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- Admit stable patches within supported Angular/TypeScript/server minor lines,
+  retaining exact regression baselines and private compiler/catalog guards.
+  Record compatible patches separately in reports; add real 20.3.31 qualification.
+- Decouple TypeScript collection from Angular server/service resolution. Mixed
+  manifests retain successful TS evidence when Angular qualification fails.
+- Align Node support and CI to >=22.22.3 <23 (tested 22.23.3), the common
+  declared engine range of the bundled servers, and test engine-strict installs.
+- Ship pinned Angular 20/22 server aliases alongside 21 and verify all lines in
+  extracted production-only bundles, including the pilot workspace service.
+- Add cross-library NgModule source/declaration regressions with spread
+  declarations, mapped/unmapped identities and missing-import negative controls.
+  Explain DOM-only probe failures without weakening exact identity checks.
+- Correct source-install guidance to use the runtime ZIP inside Nx workspaces;
+  verify in-workspace release installation does not introduce fixture projects.
+
 - Add paired blind discovery fixtures with independent authored expectations,
   renamed/re-exported symbols, moved external templates, CRLF/UTF-16 ranges and
   transitive app/test/story contexts. Grade native evidence and coverage separately

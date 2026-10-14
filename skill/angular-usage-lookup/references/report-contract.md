@@ -21,6 +21,13 @@ reference spans with definition origins or count both as separate instances.
 Unresolved candidates add gaps even when raw collection succeeds. The overall
 report remains partial until the skill reconciles scope and every relevant gap.
 
+`run.toolchainQualification` records `policy: stable-minor-lines`, the exact
+`baseline` tuple and `status: baseline-profile` or `compatible-patch`. This status
+compares selected versions to a regression baseline; it does not certify every
+patch or establish semantic coverage. TypeScript-only runs leave
+`run.versions.languageServer` and `languageService` null because those tools are
+not resolved. Mixed manifests retain failed Angular rows and successful TS rows.
+
 ## Run and target
 
 - `schemaVersion`: `angular-usage-lookup/v1`.

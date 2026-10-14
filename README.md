@@ -9,7 +9,7 @@ Give it `SuperCoolComponent`, a selector or an API to investigate. The skill
 resolves the declaration, inventories the workspace, collects references, follows
 relevant aliases and rendering paths, and explains what remains unknown.
 
-**Status:** Exact Angular 20–22 profiles, the complete pinned Material
+**Status:** Angular 20–22 regression profiles, the complete pinned Material
 component/directive inventory, and generated Nx fixtures with up to **102 libraries
 and three apps** are qualified. See [acceptance cases](skill/angular-usage-lookup/references/acceptance-cases.md) for measured coverage and limits. [Version 0.1.0](https://github.com/dills122/angular-usage-lookup/releases/tag/v0.1.0)
 is the initial pilot release. Source and CI are hosted on GitHub;
@@ -44,10 +44,12 @@ runtime dependencies:
 npm ci --omit=dev --prefix skill/angular-usage-lookup
 ```
 
-Point your agent at `skill/angular-usage-lookup/SKILL.md`, or place that complete
-folder in the skill directory supported by your agent. Preserve its relative
-layout. A release ZIP already contains the top-level `angular-usage-lookup/`
-folder; follow its [installation notes](skill/angular-usage-lookup/INSTALL.md).
+Point your agent at `skill/angular-usage-lookup/SKILL.md` in a checkout outside
+the scanned workspace. To install inside a workspace, use the release ZIP or run
+`npm run build` and extract the generated ZIP into your agent’s skill directory.
+Do not copy the raw checkout’s skill folder: its development fixtures contain Nx
+projects that can collide with the host. Preserve the extracted folder’s layout
+and follow its [installation notes](skill/angular-usage-lookup/INSTALL.md).
 The instructions are readable without installing dependencies.
 
 ### 2. Supply a workspace and a target
@@ -108,22 +110,28 @@ the scanned workspace.
 
 ## Compatibility and limits
 
-| Tool | Qualified version |
+| Tool | Regression baseline |
 | --- | --- |
 | Angular core / TypeScript / language server | 20.3.33 / 5.9.3 / 20.3.0; 21.2.25 / 5.9.3 / 21.2.25; 22.2.2 / 6.0.3 / 22.2.2 |
 | Angular Material / CDK catalog | 21.2.14 |
 | Nx | 23.3.0 |
 | Node / npm (original local qualification) | 22.23.3 / 10.9.9 |
 
-The original local qualification used Node 22. The published `.nvmrc` selects
-Node 24 LTS for hosted CI; see [current CI results](https://github.com/dills122/angular-usage-lookup/actions/workflows/ci.yml)
+The supported runtime is Node >=22.22.3 <23, the shared declared engine range of
+the three bundled servers. The `.nvmrc` selects the tested Node 22.23.3; see [current CI results](https://github.com/dills122/angular-usage-lookup/actions/workflows/ci.yml)
 for the tested revision and runtime. Python 3.11+
 is needed for repository validation and packaging, not for normal skill use.
-The collector and catalog have different version guards; other profiles need
-requalification. The full Material inventory and optional compiler candidate
+The collector admits stable patches within Angular 20.3 / TS 5.9, Angular 21.2 /
+TS 5.9 and Angular 22.2 / TS 6.0. Reports distinguish the exact baseline from
+compatible patches; Angular 20.3.31 is also exercised. Wrong minor lines and
+prereleases are rejected. The helper ships pinned servers for all three lines;
+workspace servers/services take precedence and are checked when using Angular.
+The catalog and private compiler backend retain separate exact-version guards. The full Material inventory and optional compiler candidate
 backend are qualified on Angular 21.2.25 only. Angular 20/22 currently cover the
 shared selector/API, signal and control-flow fixture through real Nx typechecks.
-The language-service version must exactly match Angular core. Legacy `ngIf`/NgModules are tested on Angular 21, not old releases.
+The language service must match Angular core’s stable major/minor line.
+Cross-library NgModules are exercised on all profiles, including source aliases
+and built declarations with and without maps. Legacy `ngIf` is tested on Angular 21.
 
 The tests include standalone/NgModule mixtures, `*ngIf` and modern control flow,
 lazy routes, 48 nested views, recursive/unused templates, portals and dynamic
