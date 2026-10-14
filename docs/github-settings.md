@@ -56,8 +56,9 @@ The false value on the original Mac host masked the mistake. An explicit
 function adapter fixes the contract; regressions exercise both host modes with
 the real TypeScript language service and exact source locations.
 
-The published `.nvmrc` selects Node 24 LTS. That owner-selected setting is retained;
-the earlier Node 22/macOS results remain archived as historical qualification.
+The `.nvmrc` selects Node 22.23.3. Shipping the Angular 20 server narrows the
+shared supported engine range to >=22.22.3 <23; Node 24 is outside that server’s
+declared engines. The bundle gate uses an engine-strict production install.
 Current hosted check runs provide Linux/runtime verification for each revision.
 
 GitHub behavior follows its [ruleset reference](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)

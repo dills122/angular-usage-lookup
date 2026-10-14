@@ -1,4 +1,4 @@
-# Runnable Angular 21 lookup
+# Runnable Angular 20–22 lookup
 
 Angular owns references, template scopes and source mapping. TypeScript handles TS-only references and checks query-file membership in loaded programs. Local helpers own configuration inventory, backend lifecycle, query qualification and evidence serialization. Microsoft `vscode-jsonrpc` and `vscode-languageserver-protocol` handle protocol transport/types. Reference collection does not use a custom compiler analyzer. The separate optional [Material catalog generator](material-catalog.md) uses a pinned Angular internal metadata reader for package identities and family configs.
 
@@ -8,7 +8,7 @@ cache files remain untouched; discovery does not populate `.nx` in the applicati
 
 ## Reproduce the fixtures
 
-From this skill's root directory, with Node 22.12+ in the 22.x line (tested: 22.23.3) and npm:
+From this skill's root directory, with Node 22.22.3+ in the 22.x line (tested: 22.23.3) and npm:
 
 ```sh
 npm ci
@@ -16,7 +16,7 @@ npm test
 npm run test:gauntlet
 ```
 
-Install only in this isolated skill directory when setup is authorized. Do not run `npm install` inside the fixtures: they intentionally resolve dependencies from their parent tooling package. The original Mac qualification used Node 22.23.3. Node 24 is allowed by the manifest and selected by the repository’s current `.nvmrc` for hosted CI; check the [CI run](https://github.com/dills122/angular-usage-lookup/actions/workflows/ci.yml) for the exact tested revision, operating system and runtime.
+Install only in this isolated skill directory when setup is authorized. Do not run `npm install` inside the fixtures: they intentionally resolve dependencies from their parent tooling package. The original Mac qualification used Node 22.23.3, now also selected by `.nvmrc`. The supported range >=22.22.3 <23 is shared by all bundled servers; check the [CI run](https://github.com/dills122/angular-usage-lookup/actions/workflows/ci.yml) for the exact tested revision, operating system and runtime.
 
 The lockfile pins Angular core/compiler/compiler-cli/language-server/service **21.2.25**, TypeScript **5.9.3**, Nx **23.3.0**, JSON-RPC **9.0.3** and LSP protocol **3.18.4**. The fixture's Nx dependency overrides Undici to **7.29.1** because its original pin triggered npm advisories. This affects only the helper's dev tooling, not any scanned workspace. Reassess the override on dependency updates.
 
@@ -63,9 +63,26 @@ The anchor is a TS root file of the declared leaf config. Each Angular-backend c
 
 For an API, add `"member": "strength"` to the target and use a real public binding probe. The member must be exactly one explicitly declared identifier in that class; resolve inherited declarations and overloads separately. Angular resolves a pipe template token to its `transform` method: query `{ "file": "src/types.ts", "symbol": "FormatPipe", "member": "transform" }` for template uses, and query the class with `backend: "typescript"` through a verified TS consumer for imports/registrations. Preserve both as distinct dependency/API queries. A public alias does not change the declaring TS member name. The API fixture exercises aliased inputs/outputs re-exposed by a host directive; it does not qualify every inherited/model/two-way API.
 
-4. Run collection. The helper resolves TypeScript/core from the scanned workspace and prefers workspace server/service packages, falling back to the helper installation only when absent. Exact qualified profiles are Angular/TypeScript/server 20.3.33/5.9.3/20.3.0, 21.2.25/5.9.3/21.2.25, and 22.2.2/6.0.3/22.2.2, each with service matching core. It checks actual server startup version logs. It refuses other combinations rather than upgrading the workspace. Each Angular-backend config gets a fresh server, synchronized root files, identity probes, a qualified consumer reference query and shutdown. Probe owners must be root files of the declared config. An external query needs exactly one owner returned by Angular. The selected query owner must belong to exactly one enabled Angular program, verified with TypeScript's program APIs including transitive imports; membership is rechecked after the reference request. Otherwise the row fails with an ownership gap. Both the qualified servers’ enabled-config log and Angular's template-owner request are version-specific integration assumptions; requalify on server changes. This conservative check may reject a valid shared probe; supply a config-specific consumer or investigate separately.
+4. Run collection. The helper resolves TypeScript/core from the scanned workspace and prefers workspace server/service packages, falling back to the helper installation only when absent. Admitted stable minor lines are Angular/TypeScript/server 20.3.x/5.9.x/20.3.x, 21.2.x/5.9.x/21.2.x, and 22.2.x/6.0.x/22.2.x, with service on the same minor line as core. Exact regression baselines remain 20.3.33/5.9.3/20.3.0, 21.2.25/5.9.3/21.2.25 and 22.2.2/6.0.3/22.2.2; 20.3.31 is also exercised. The helper includes pinned servers for all three lines and resolves a missing service from the corresponding bundled server. It checks actual server startup version logs. It refuses other combinations rather than upgrading the workspace. Each Angular-backend config gets a fresh server, synchronized root files, identity probes, a qualified consumer reference query and shutdown. Probe owners must be root files of the declared config. An external query needs exactly one owner returned by Angular. The selected query owner must belong to exactly one enabled Angular program, verified with TypeScript's program APIs including transitive imports; membership is rechecked after the reference request. Otherwise the row fails with an ownership gap. Both the qualified servers’ enabled-config log and Angular's template-owner request are version-specific integration assumptions; requalify on server changes. This conservative check may reject a valid shared probe; supply a config-specific consumer or investigate separately.
 5. Compare discovery against the manifest and returned coverage. They are deliberately separate stages; the helper does **not** automatically include every discovered project/config. Unlisted scope stays a gap unless explicitly excluded. `result: verified` means the collection checks passed, not that all Angular syntax/dynamic paths were tested.
 6. Read nearby source, classify imports/registrations/template instances/dynamic references and run the skill's candidate sweep with actual class, selector and alias names. Preserve collateral, rejected matches and unresolved cases. Add migration guidance only when supported by source/API evidence.
+
+## Cross-library NgModules and declaration identity
+
+Regressions exercise `standalone: false` components declared and exported by one
+library's NgModule, imported by another library whose declarations use a spread
+array. Source aliases and official `ngc` partial declarations both work in these
+fixtures on Angular 20.3.31, 20.3.33, 21.2.25 and 22.2.2. With declaration maps,
+Angular resolves the probe to source; without maps it resolves to the consumed
+`.d.ts`. Query that exact identity and retain the native mapping. The helper does
+not equate same-named source and declaration classes automatically.
+
+A missing NgModule import reproduces a DOM-only definition, but that symptom
+alone does not identify the cause in another workspace. Check the consumer's
+actual leaf config, NgModule imports/exports, resolved alias/entrypoint and Ivy
+metadata. Preserve the failed report and investigate compiler diagnostics. Merely
+opening more library files is not established as a fix and can change ownership.
+The pilot's private workspace has not been independently reproduced.
 
 ## Verify template candidates and recover reference omissions
 
@@ -160,7 +177,7 @@ For example, the dialogs library uses this project entry with target `libs/dialo
 
 Definition lookup follows TypeScript-reported alias hops (bounded to 32 queries with cycle detection), retaining the chain until the exact class is reached. Collection queries both the class declaration and verified probes. This matters for destructured `await import(...)`: the class query can return the binding while omitting later local-variable uses. The stress manifest adds that binding as a probe in each program containing it. A **renamed** destructured binding can instead resolve to a distinct local variable; verify the imported property against the target and query that variable separately, preserving its source relationship. Never relax exact-target qualification. The helper does not automatically find or follow every alias/dataflow path.
 
-The TS backend emits native TypeScript evidence and `capabilities: ["typescript-references"]`. It always adds a template gap. No Angular server is started for that row. Calls are synchronous in the collector process; `--timeout-ms` applies to LSP, not TS work. Set a command/process timeout when running against a large workspace.
+The TS backend emits native TypeScript evidence and `capabilities: ["typescript-references"]`. It always adds a template gap. No Angular server/service is resolved or required for that row. An incompatible Angular tool fails only Angular rows, preserving successful TypeScript evidence in mixed manifests. Calls are synchronous in the collector process; `--timeout-ms` applies to LSP, not TS work. Set a command/process timeout when running against a large workspace.
 
 Then use the skill to inspect actual `MatDialog.open` arguments. `tests/stress.test.mjs` demonstrates separate ordinary TypeScript reference queries for `DialogAlias`, the `cool` property, `openDirect`, and `openAny`. These reveal caller locations, not an automatic proof of runtime selection. A wrapper also called with `OtherDialog` must retain that distinction; `DIALOGS[key]` remains a candidate. The fixtures' source/expected files and generated flow evidence make these manual chains reviewable.
 

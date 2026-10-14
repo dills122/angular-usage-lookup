@@ -29,18 +29,20 @@
   "type": "module",
   "packageManager": "npm@10.9.9",
   "engines": {
-    "node": ">=22.12.0 <23 || >=24.0.0 <25"
+    "node": ">=22.22.3 <23"
   },
   "scripts": {
     "test": "node --test --test-concurrency=1 tests/*.test.mjs",
     "test:scale": "node --test tests/scale/qualification.test.mjs",
     "test:gauntlet": "node --test tests/gauntlet/qualification.test.mjs",
     "test:material": "node --test tests/material/qualification.test.mjs",
-    "test:versions": "node --test tests/versions/qualification.test.mjs",
+    "test:versions": "node --test tests/versions/qualification.test.mjs && LOOKUP_CROSS_LIB_MAJORS=20,20-patch,22 node --test tests/cross-lib-ngmodule.test.mjs",
     "test:scale:large": "LOOKUP_SCALE=large node --test tests/scale/qualification.test.mjs",
     "test:blind": "node --test --test-concurrency=1 tests/blind/*.test.mjs"
   },
   "dependencies": {
+    "@angular/language-server-20": "npm:@angular/language-server@20.3.0",
+    "@angular/language-server-22": "npm:@angular/language-server@22.2.2",
     "@angular/language-server": "21.2.25",
     "vscode-jsonrpc": "9.0.3",
     "vscode-languageserver-protocol": "3.18.4"

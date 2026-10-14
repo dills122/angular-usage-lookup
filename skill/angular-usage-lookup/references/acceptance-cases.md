@@ -43,7 +43,7 @@ At that stage, selectors beyond elements, pipes/members, `@for`, shared-template
 
 ## Config routing and bounded APIs — 2026-10-13
 
-The current normal suite passes **29 tests**. A disjoint app/spec regression compares all 14 exact spans: app-only references cannot replace spec-only references under an equal count. A shared probe, foreign-project probe, missing positive probe and multiply owned external template fail with coverage gaps. Fresh servers alone did not prevent the original default-project bug; the collector now uses a uniquely owned consumer query and retains membership evidence from the enabled Angular programs.
+The normal suite includes exact-identity and config-ownership regressions. A disjoint app/spec regression compares all 14 exact spans: app-only references cannot replace spec-only references under an equal count. A shared probe, foreign-project probe, missing positive probe and multiply owned external template fail with coverage gaps. Fresh servers alone did not prevent the original default-project bug; the collector now uses a uniquely owned consumer query and retains membership evidence from the enabled Angular programs.
 
 The `api-shapes` fixture compiles with Angular and runs six queries covering attribute selectors, element/attribute combinations, comma alternatives, `:not([disabled])`, host directives, a pipe's `transform` method, and aliased input/output members re-exposed by a host directive. All **11 expected template/API associations** are recovered and the known disabled-selector negative is rejected. These assertions use token containment in native spans, not the exact-range/complete-reference-set oracle used by the component scale test; do not combine the denominators. A pipe template token resolves to the method, so a class/import query and a transform/template query serve different parts of its inventory. Missing/ambiguous declared members fail instead of falling back to the class.
 
@@ -96,15 +96,27 @@ ordinary strings, invalid owners and unsupported member/backend cases.
 
 `npm run setup:versions` installs isolated exact locks; `npm run test:versions`
 compiles actual Nx library/app targets and checks ten class/member queries per
-profile. Angular **20.3.33** uses TS **5.9.3**, server **20.3.0** and service
-**20.3.33**; Angular **22.2.2** uses TS **6.0.3** and matching server/service.
-Both pass compound/alternative selector, input/output alias, host-composition,
+profile. Angular **20.3.31** and **20.3.33** use TS **5.9.3**, server **20.3.0** and service
+matching core; Angular **22.2.2** uses TS **6.0.3** and matching server/service.
+These profiles exercise compound/alternative selector, input/output alias, host-composition,
 pipe-transform, signal input/output/model and modern control-flow cases. Sources
 remain unchanged, child servers exit, and actual startup versions are verified.
-Exact version guards reject unqualified or mismatched installations.
+Stable patch variants are admitted within the supported minor lines; wrong minor
+lines and prereleases fail. Reports distinguish baseline versions from compatible
+patches. TypeScript-only rows do not depend on Angular server/service availability.
 
 This is a smaller API fixture than the Angular 21 qualification. The full Material
 inventory and internal compiler-candidate enablement remain qualified on 21 only.
+
+## Cross-library NgModule regression
+
+The normal and version suites exercise source aliases, `ngc` partial declarations
+with source maps, and declarations without maps, using `standalone: false`, an
+exported NgModule and spread consumer declarations. Template references and
+candidate confirmation pass on 20.3.31, 20.3.33, 21.2.25 and 22.2.2. Missing imports
+produce DOM-only definitions and remain failed; incorrect source/declaration
+identities remain rejected. Source/config bytes and server cleanup are checked.
+These fixtures do not reproduce the private pilot workspace's root cause.
 
 ## Larger Nx qualification
 

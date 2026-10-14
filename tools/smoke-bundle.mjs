@@ -17,10 +17,26 @@ const checksum = (await readFile(`${zip}.sha256`, 'utf8')).split(/\s+/)[0];
 assert.equal(createHash('sha256').update(await readFile(zip)).digest('hex'), checksum);
 const temporary = await realpath(await mkdtemp(path.join(tmpdir(), 'angular-usage-bundle-')));
 const evidence = [];
+
+async function exposeDependencies(dependencyRoot, workspace, { service = false } = {}) {
+  const workspaceModules = path.join(workspace, 'node_modules');
+  await mkdir(workspaceModules);
+  for (const entry of await readdir(dependencyRoot)) {
+    if (entry.startsWith('.')) continue;
+    if (entry.startsWith('@')) {
+      await mkdir(path.join(workspaceModules, entry));
+      for (const name of await readdir(path.join(dependencyRoot, entry))) {
+        if (entry === '@angular' && (/^language-server(?:-|$)/.test(name) || (!service && name === 'language-service'))) continue;
+        await symlink(path.join(dependencyRoot, entry, name), path.join(workspaceModules, entry, name), 'dir');
+      }
+    } else await symlink(path.join(dependencyRoot, entry), path.join(workspaceModules, entry), 'dir');
+  }
+}
+
 try {
   await exec('python3', ['-c', 'import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])', zip, temporary]);
   const installed = path.join(temporary, 'angular-usage-lookup');
-  await exec('npm', ['ci', '--omit=dev', '--ignore-scripts', '--no-audit', '--no-fund'], { cwd: installed, timeout: 180000, maxBuffer: 2 ** 22 });
+  await exec('npm', ['ci', '--omit=dev', '--engine-strict', '--ignore-scripts', '--no-audit', '--no-fund'], { cwd: installed, timeout: 180000, maxBuffer: 2 ** 22 });
   // Prove dev packages do not accidentally supply the bundled helper's runtime.
   await assert.rejects(readFile(path.join(installed, 'node_modules/@angular/material/package.json')), { code: 'ENOENT' });
   for (const [fixture, manifestFile, expectedFile] of [
@@ -32,19 +48,7 @@ try {
       filter: source => !source.split(path.sep).some(p => ['node_modules', '.nx', 'dist'].includes(p)) });
     // Expose application dependencies without the checkout's language tools.
     // A whole-node_modules link would bypass the extracted helper fallback.
-    const dependencyRoot = path.join(skill, 'node_modules');
-    const workspaceModules = path.join(workspace, 'node_modules');
-    await mkdir(workspaceModules);
-    for (const entry of await readdir(dependencyRoot)) {
-      if (entry.startsWith('.')) continue;
-      if (entry.startsWith('@')) {
-        await mkdir(path.join(workspaceModules, entry));
-        for (const name of await readdir(path.join(dependencyRoot, entry))) {
-          if (entry === '@angular' && ['language-server', 'language-service'].includes(name)) continue;
-          await symlink(path.join(dependencyRoot, entry, name), path.join(workspaceModules, entry, name), 'dir');
-        }
-      } else await symlink(path.join(dependencyRoot, entry), path.join(workspaceModules, entry), 'dir');
-    }
+    await exposeDependencies(path.join(skill, 'node_modules'), workspace);
     const { qualifiedToolchain } = await import(pathToFileURL(path.join(installed, 'scripts/qualified-toolchain.mjs')));
     const selected = qualifiedToolchain(workspace);
     assert.equal(selected.serverFile, path.join(installed, 'node_modules/@angular/language-server/package.json'));
@@ -90,6 +94,50 @@ try {
       evidence.push({ helper: 'material-catalog', typedEntrypoints: 74, families: 37, programmaticRules: 3 });
     }
   }
+  // Exercise every shipped server in an isolated workspace lacking a server.
+  // The pilot shape retains its workspace service; the other cases must load
+  // the service belonging to the bundled server as well.
+  for (const profile of ['20', '20-patch', '22']) {
+    const workspace = path.join(temporary, `angular-${profile}`);
+    await mkdir(path.join(workspace, 'src'), { recursive: true });
+    await exposeDependencies(path.join(skill, `tests/versions/angular${profile}/node_modules`), workspace, { service: profile === '20-patch' });
+    const files = {
+      'package.json': '{}',
+      'tsconfig.json': JSON.stringify({ compilerOptions: { target: 'ES2022', module: 'ESNext', moduleResolution: 'bundler', experimentalDecorators: true, strict: true, skipLibCheck: true }, angularCompilerOptions: { strictTemplates: true }, include: ['src/**/*.ts'] }),
+      'src/card.ts': "import { Component } from '@angular/core';\n@Component({selector:'bundle-card', standalone:false, template:''})\nexport class Card {}\n",
+      'src/module.ts': "import { NgModule } from '@angular/core';\nimport { Card } from './card';\n@NgModule({declarations:[Card],exports:[Card]})\nexport class CardModule {}\n",
+      'src/consumer.ts': "import { Component, NgModule } from '@angular/core';\nimport { CardModule } from './module';\n@Component({standalone:false,templateUrl:'./screen.html'})\nexport class Consumer {}\nconst PAGES=[Consumer];\n@NgModule({imports:[CardModule],declarations:[...PAGES]})\nexport class ConsumerModule {}\n",
+      'src/screen.html': '<bundle-card></bundle-card>\n',
+    };
+    for (const [name, text] of Object.entries(files)) await writeFile(path.join(workspace, name), text);
+    const manifest = path.join(temporary, `angular-${profile}-manifest.json`);
+    await writeFile(manifest, JSON.stringify({ target: { file: 'src/card.ts', symbol: 'Card' }, projects: [{ name: 'consumer', tsconfig: 'tsconfig.json', anchor: { file: 'src/consumer.ts' }, probes: [{ file: 'src/screen.html', owner: 'src/consumer.ts', text: 'bundle-card' }] }] }));
+    const output = path.join(temporary, `angular-${profile}-report.json`);
+    await exec(process.execPath, [path.join(installed, 'scripts/collect-references.mjs'), '--workspace', workspace, '--manifest', manifest, '--output', output], { timeout: 120000, maxBuffer: 2 ** 22 });
+    const report = JSON.parse(await readFile(output, 'utf8'));
+    const { qualifiedToolchain } = await import(pathToFileURL(path.join(installed, 'scripts/qualified-toolchain.mjs')));
+    const selected = qualifiedToolchain(workspace);
+    const major = profile.split('-')[0];
+    assert.equal(selected.serverFile, path.join(installed, `node_modules/@angular/language-server-${major}/package.json`));
+    assert.equal(report.collectionStatus, 'succeeded');
+    assert.ok(report.references.some(r => r.file === 'src/screen.html' && r.range.start.line === 1 && r.range.start.column <= 2 && r.range.end.column > 2));
+    assert.equal(report.run.versions.angular, profile === '20-patch' ? '20.3.31' : major === '20' ? '20.3.33' : '22.2.2');
+    const row = report.coverage[0];
+    assert.ok(row.toolchainEvidence.some(message => message.startsWith(`Using @angular/language-service v${selected.service.version} from ${path.dirname(selected.serviceFile)}/`)));
+    if (profile !== '20-patch') assert.ok(selected.serviceFile.startsWith(`${installed}/node_modules/`));
+    assert.equal(row.process.exited, true);
+    assert.throws(() => process.kill(row.process.pid, 0), { code: 'ESRCH' });
+    for (const [name, text] of Object.entries(files)) assert.equal(await readFile(path.join(workspace, name), 'utf8'), text);
+    evidence.push({ fixture: `angular-${profile}`, versions: report.run.versions, server: selected.server.version, status: report.collectionStatus });
+  }
+  // A release payload installed inside an Nx host must not introduce fixture
+  // project.json files. Keep the real host projects in discovery's result.
+  const host = path.join(temporary, 'nx-stress');
+  await cp(installed, path.join(host, '.kiro/skills/angular-usage-lookup'), { recursive: true, filter: source => !source.split(path.sep).includes('node_modules') });
+  const discovery = await exec(process.execPath, [path.join(installed, 'scripts/discover.mjs'), '--workspace', host], { timeout: 60000, maxBuffer: 2 ** 22 });
+  const inventory = JSON.parse(discovery.stdout);
+  assert.equal(inventory.projects.length, 8);
+  evidence.push({ helper: 'in-workspace-nx-discovery', projects: inventory.projects.length });
   await mkdir(path.join(root, 'test-output'), { recursive: true });
   await writeFile(path.join(root, 'test-output/bundle-smoke.json'), JSON.stringify({ version: pkg.version, node: process.version, productionInstall: true, evidence }, null, 2));
   console.log(JSON.stringify(evidence));
