@@ -1,10 +1,10 @@
 // Exercise the extracted, production-only bundle; framework deps belong to the fixture workspace.
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, cp, symlink, rm, mkdir, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, cp, symlink, rm, mkdir, writeFile, readdir, realpath } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 
@@ -15,7 +15,7 @@ const pkg = JSON.parse(await readFile(path.join(skill, 'package.json'), 'utf8'))
 const zip = path.join(root, `dist/angular-usage-lookup-${pkg.version}.zip`);
 const checksum = (await readFile(`${zip}.sha256`, 'utf8')).split(/\s+/)[0];
 assert.equal(createHash('sha256').update(await readFile(zip)).digest('hex'), checksum);
-const temporary = await mkdtemp(path.join(tmpdir(), 'angular-usage-bundle-'));
+const temporary = await realpath(await mkdtemp(path.join(tmpdir(), 'angular-usage-bundle-')));
 const evidence = [];
 try {
   await exec('python3', ['-c', 'import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])', zip, temporary]);
@@ -30,7 +30,25 @@ try {
     const workspace = path.join(temporary, fixture);
     await cp(path.join(skill, 'tests/fixtures', fixture), workspace, { recursive: true,
       filter: source => !source.split(path.sep).some(p => ['node_modules', '.nx', 'dist'].includes(p)) });
-    await symlink(path.join(skill, 'node_modules'), path.join(workspace, 'node_modules'), 'dir');
+    // Expose application dependencies without the checkout's language tools.
+    // A whole-node_modules link would bypass the extracted helper fallback.
+    const dependencyRoot = path.join(skill, 'node_modules');
+    const workspaceModules = path.join(workspace, 'node_modules');
+    await mkdir(workspaceModules);
+    for (const entry of await readdir(dependencyRoot)) {
+      if (entry.startsWith('.')) continue;
+      if (entry.startsWith('@')) {
+        await mkdir(path.join(workspaceModules, entry));
+        for (const name of await readdir(path.join(dependencyRoot, entry))) {
+          if (entry === '@angular' && ['language-server', 'language-service'].includes(name)) continue;
+          await symlink(path.join(dependencyRoot, entry, name), path.join(workspaceModules, entry, name), 'dir');
+        }
+      } else await symlink(path.join(dependencyRoot, entry), path.join(workspaceModules, entry), 'dir');
+    }
+    const { qualifiedToolchain } = await import(pathToFileURL(path.join(installed, 'scripts/qualified-toolchain.mjs')));
+    const selected = qualifiedToolchain(workspace);
+    assert.equal(selected.serverFile, path.join(installed, 'node_modules/@angular/language-server/package.json'));
+    assert.equal(selected.serviceFile, path.join(installed, 'node_modules/@angular/language-service/package.json'));
     const output = path.join(temporary, `${fixture}-report.json`);
     await exec(process.execPath, [path.join(installed, 'scripts/collect-references.mjs'), '--workspace', workspace,
       '--manifest', manifestFile, '--output', output], { timeout: 120000, maxBuffer: 2 ** 22 });
@@ -53,6 +71,7 @@ try {
     const config = JSON.parse(await readFile(path.join(workspace, manifestFile), 'utf8'));
     assert.deepEqual(report.coverage.map(r => r.project).sort(), config.projects.map(p => p.name).sort());
     for (const row of report.coverage) if (row.process) {
+      assert.ok(row.toolchainEvidence.some(message => message.startsWith(`Using @angular/language-service v${selected.service.version} from ${installed}/node_modules/`)), 'Actual server must load the extracted production service');
       assert.equal(row.process.exited, true);
       assert.throws(() => process.kill(row.process.pid, 0), { code: 'ESRCH' });
     }

@@ -9,8 +9,9 @@ Give it `SuperCoolComponent`, a selector or an API to investigate. The skill
 resolves the declaration, inventories the workspace, collects references, follows
 relevant aliases and rendering paths, and explains what remains unknown.
 
-**Status:** Angular 21 pilot, qualified on generated fixtures including **54
-libraries and three apps**. [Version 0.1.0](https://github.com/dills122/angular-usage-lookup/releases/tag/v0.1.0)
+**Status:** Exact Angular 20–22 profiles, the complete pinned Material
+component/directive inventory, and generated Nx fixtures with up to **102 libraries
+and three apps** are qualified. See [acceptance cases](skill/angular-usage-lookup/references/acceptance-cases.md) for measured coverage and limits. [Version 0.1.0](https://github.com/dills122/angular-usage-lookup/releases/tag/v0.1.0)
 is the initial pilot release. Source and CI are hosted on GitHub;
 [repository rules](docs/github-settings.md) protect the default branch
 and tags. The skill does not modify application code.
@@ -109,8 +110,7 @@ the scanned workspace.
 
 | Tool | Qualified version |
 | --- | --- |
-| Angular core/compiler/language server | 21.2.25 |
-| TypeScript | 5.9.3 |
+| Angular core / TypeScript / language server | 20.3.33 / 5.9.3 / 20.3.0; 21.2.25 / 5.9.3 / 21.2.25; 22.2.2 / 6.0.3 / 22.2.2 |
 | Angular Material / CDK catalog | 21.2.14 |
 | Nx | 23.3.0 |
 | Node / npm (original local qualification) | 22.23.3 / 10.9.9 |
@@ -120,13 +120,18 @@ Node 24 LTS for hosted CI; see [current CI results](https://github.com/dills122/
 for the tested revision and runtime. Python 3.11+
 is needed for repository validation and packaging, not for normal skill use.
 The collector and catalog have different version guards; other profiles need
-requalification. Legacy `ngIf`/NgModules are tested on Angular 21, not old releases.
+requalification. The full Material inventory and optional compiler candidate
+backend are qualified on Angular 21.2.25 only. Angular 20/22 currently cover the
+shared selector/API, signal and control-flow fixture through real Nx typechecks.
+The language-service version must exactly match Angular core. Legacy `ngIf`/NgModules are tested on Angular 21, not old releases.
 
 The tests include standalone/NgModule mixtures, `*ngIf` and modern control flow,
 lazy routes, 48 nested views, recursive/unused templates, portals and dynamic
 Material openers. They do not prove arbitrary runtime registry choices, all
 package/test/story configurations or production accuracy. A fresh-context agent also completed a ZIP-only component/dialog trial; see the
 [agent evaluation](docs/agent-evaluation-results.md) for exact results and limits.
+The [paired blind discovery trials](docs/blind-discovery-results.md) additionally
+exercise independent discovery across renamed and relocated fixtures.
 The generated workload does **not** establish a universal 95% score. See [known limits](docs/known-limits.md)
 and the [qualification evidence](docs/research/README.md).
 
@@ -134,13 +139,19 @@ and the [qualification evidence](docs/research/README.md).
 
 ```sh
 npm run setup
+npm run setup:versions
 npm run check
 ```
 
 The complete gate runs metadata/docs/syntax validation, packaging regressions,
-33 ordinary tests, the rendering gauntlet, the large Nx fixture and an extracted
-bundle installation test. Allow several minutes. Run `npm test`,
-`npm run test:gauntlet` or `npm run test:scale` individually during development.
+ordinary regressions, the rendering gauntlet, 54- and 102-library Nx fixtures,
+the complete pinned Material component/directive matrix, isolated Angular 20/22
+profiles, paired discovery-fixture transformations and an extracted bundle
+installation test. Allow several minutes per
+large suite. Run `npm test`, `npm run test:gauntlet`, `npm run test:scale`,
+`npm run test:scale:large`, `npm run test:material`, `npm run test:versions` or
+`npm run test:blind`
+individually during development.
 
 `npm run build` creates a deterministic skill ZIP, SHA-256 checksum and file
 manifest under `dist/`. `npm run test:bundle` installs and runs that ZIP. Tests,

@@ -1,0 +1,2022 @@
+[
+  {
+    "symbol": "MatAutocomplete",
+    "entrypoint": "@angular/material/autocomplete",
+    "selectors": [
+      "mat-autocomplete"
+    ],
+    "templates": [
+      "<mat-autocomplete></mat-autocomplete>"
+    ]
+  },
+  {
+    "symbol": "MatAutocompleteOrigin",
+    "entrypoint": "@angular/material/autocomplete",
+    "selectors": [
+      "[matAutocompleteOrigin]"
+    ],
+    "templates": [
+      "<div matAutocompleteOrigin></div>"
+    ]
+  },
+  {
+    "symbol": "MatAutocompleteTrigger",
+    "entrypoint": "@angular/material/autocomplete",
+    "selectors": [
+      "input[matAutocomplete]",
+      "textarea[matAutocomplete]"
+    ],
+    "templates": [
+      "<input [matAutocomplete]=\"linked\">",
+      "<textarea [matAutocomplete]=\"linked\"></textarea>"
+    ],
+    "typeImport": {
+      "name": "MatAutocomplete",
+      "entrypoint": "@angular/material/autocomplete"
+    },
+    "fields": "declare linked: MatAutocomplete;"
+  },
+  {
+    "symbol": "MatOptgroup",
+    "entrypoint": "@angular/material/autocomplete",
+    "selectors": [
+      "mat-optgroup"
+    ],
+    "templates": [
+      "<mat-optgroup></mat-optgroup>"
+    ]
+  },
+  {
+    "symbol": "MatOption",
+    "entrypoint": "@angular/material/autocomplete",
+    "selectors": [
+      "mat-option"
+    ],
+    "templates": [
+      "<mat-option></mat-option>"
+    ]
+  },
+  {
+    "symbol": "MatBadge",
+    "entrypoint": "@angular/material/badge",
+    "selectors": [
+      "[matBadge]"
+    ],
+    "templates": [
+      "<div matBadge></div>"
+    ]
+  },
+  {
+    "symbol": "MatBottomSheetContainer",
+    "entrypoint": "@angular/material/bottom-sheet",
+    "selectors": [
+      "mat-bottom-sheet-container"
+    ],
+    "templates": [
+      "<mat-bottom-sheet-container></mat-bottom-sheet-container>"
+    ]
+  },
+  {
+    "symbol": "MatButton",
+    "entrypoint": "@angular/material/button",
+    "selectors": [
+      "button[matButton]",
+      "a[matButton]",
+      "button[mat-button]",
+      "button[mat-raised-button]",
+      "button[mat-flat-button]",
+      "button[mat-stroked-button]",
+      "a[mat-button]",
+      "a[mat-raised-button]",
+      "a[mat-flat-button]",
+      "a[mat-stroked-button]"
+    ],
+    "templates": [
+      "<button matButton></button>",
+      "<a matButton></a>",
+      "<button mat-button></button>",
+      "<button mat-raised-button></button>",
+      "<button mat-flat-button></button>",
+      "<button mat-stroked-button></button>",
+      "<a mat-button></a>",
+      "<a mat-raised-button></a>",
+      "<a mat-flat-button></a>",
+      "<a mat-stroked-button></a>"
+    ]
+  },
+  {
+    "symbol": "MatFabButton",
+    "entrypoint": "@angular/material/button",
+    "selectors": [
+      "button[mat-fab]",
+      "a[mat-fab]",
+      "button[matFab]",
+      "a[matFab]"
+    ],
+    "templates": [
+      "<button mat-fab></button>",
+      "<a mat-fab></a>",
+      "<button matFab></button>",
+      "<a matFab></a>"
+    ]
+  },
+  {
+    "symbol": "MatIconButton",
+    "entrypoint": "@angular/material/button",
+    "selectors": [
+      "button[mat-icon-button]",
+      "a[mat-icon-button]",
+      "button[matIconButton]",
+      "a[matIconButton]"
+    ],
+    "templates": [
+      "<button mat-icon-button></button>",
+      "<a mat-icon-button></a>",
+      "<button matIconButton></button>",
+      "<a matIconButton></a>"
+    ]
+  },
+  {
+    "symbol": "MatMiniFabButton",
+    "entrypoint": "@angular/material/button",
+    "selectors": [
+      "button[mat-mini-fab]",
+      "a[mat-mini-fab]",
+      "button[matMiniFab]",
+      "a[matMiniFab]"
+    ],
+    "templates": [
+      "<button mat-mini-fab></button>",
+      "<a mat-mini-fab></a>",
+      "<button matMiniFab></button>",
+      "<a matMiniFab></a>"
+    ]
+  },
+  {
+    "symbol": "MatButtonToggle",
+    "entrypoint": "@angular/material/button-toggle",
+    "selectors": [
+      "mat-button-toggle"
+    ],
+    "templates": [
+      "<mat-button-toggle></mat-button-toggle>"
+    ]
+  },
+  {
+    "symbol": "MatButtonToggleGroup",
+    "entrypoint": "@angular/material/button-toggle",
+    "selectors": [
+      "mat-button-toggle-group"
+    ],
+    "templates": [
+      "<mat-button-toggle-group></mat-button-toggle-group>"
+    ]
+  },
+  {
+    "symbol": "MatCard",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "mat-card"
+    ],
+    "templates": [
+      "<mat-card></mat-card>"
+    ]
+  },
+  {
+    "symbol": "MatCardActions",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "mat-card-actions"
+    ],
+    "templates": [
+      "<mat-card-actions></mat-card-actions>"
+    ]
+  },
+  {
+    "symbol": "MatCardAvatar",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "[mat-card-avatar]",
+      "[matCardAvatar]"
+    ],
+    "templates": [
+      "<div mat-card-avatar></div>",
+      "<div matCardAvatar></div>"
+    ]
+  },
+  {
+    "symbol": "MatCardContent",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "mat-card-content"
+    ],
+    "templates": [
+      "<mat-card-content></mat-card-content>"
+    ]
+  },
+  {
+    "symbol": "MatCardFooter",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "mat-card-footer"
+    ],
+    "templates": [
+      "<mat-card-footer></mat-card-footer>"
+    ]
+  },
+  {
+    "symbol": "MatCardHeader",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "mat-card-header"
+    ],
+    "templates": [
+      "<mat-card-header></mat-card-header>"
+    ]
+  },
+  {
+    "symbol": "MatCardImage",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "[mat-card-image]",
+      "[matCardImage]"
+    ],
+    "templates": [
+      "<div mat-card-image></div>",
+      "<div matCardImage></div>"
+    ]
+  },
+  {
+    "symbol": "MatCardLgImage",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "[mat-card-lg-image]",
+      "[matCardImageLarge]"
+    ],
+    "templates": [
+      "<div mat-card-lg-image></div>",
+      "<div matCardImageLarge></div>"
+    ]
+  },
+  {
+    "symbol": "MatCardMdImage",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "[mat-card-md-image]",
+      "[matCardImageMedium]"
+    ],
+    "templates": [
+      "<div mat-card-md-image></div>",
+      "<div matCardImageMedium></div>"
+    ]
+  },
+  {
+    "symbol": "MatCardSmImage",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "[mat-card-sm-image]",
+      "[matCardImageSmall]"
+    ],
+    "templates": [
+      "<div mat-card-sm-image></div>",
+      "<div matCardImageSmall></div>"
+    ]
+  },
+  {
+    "symbol": "MatCardSubtitle",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "mat-card-subtitle",
+      "[mat-card-subtitle]",
+      "[matCardSubtitle]"
+    ],
+    "templates": [
+      "<mat-card-subtitle></mat-card-subtitle>",
+      "<div mat-card-subtitle></div>",
+      "<div matCardSubtitle></div>"
+    ]
+  },
+  {
+    "symbol": "MatCardTitle",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "mat-card-title",
+      "[mat-card-title]",
+      "[matCardTitle]"
+    ],
+    "templates": [
+      "<mat-card-title></mat-card-title>",
+      "<div mat-card-title></div>",
+      "<div matCardTitle></div>"
+    ]
+  },
+  {
+    "symbol": "MatCardTitleGroup",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "mat-card-title-group"
+    ],
+    "templates": [
+      "<mat-card-title-group></mat-card-title-group>"
+    ]
+  },
+  {
+    "symbol": "MatCardXlImage",
+    "entrypoint": "@angular/material/card",
+    "selectors": [
+      "[mat-card-xl-image]",
+      "[matCardImageXLarge]"
+    ],
+    "templates": [
+      "<div mat-card-xl-image></div>",
+      "<div matCardImageXLarge></div>"
+    ]
+  },
+  {
+    "symbol": "MatCheckbox",
+    "entrypoint": "@angular/material/checkbox",
+    "selectors": [
+      "mat-checkbox"
+    ],
+    "templates": [
+      "<mat-checkbox></mat-checkbox>"
+    ]
+  },
+  {
+    "symbol": "MatChip",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "mat-basic-chip",
+      "[mat-basic-chip]",
+      "mat-chip",
+      "[mat-chip]"
+    ],
+    "templates": [
+      "<mat-basic-chip></mat-basic-chip>",
+      "<div mat-basic-chip></div>",
+      "<mat-chip></mat-chip>",
+      "<div mat-chip></div>"
+    ]
+  },
+  {
+    "symbol": "MatChipAvatar",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "mat-chip-avatar",
+      "[matChipAvatar]"
+    ],
+    "templates": [
+      "<mat-chip-avatar></mat-chip-avatar>",
+      "<div matChipAvatar></div>"
+    ]
+  },
+  {
+    "symbol": "MatChipEdit",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "[matChipEdit]"
+    ],
+    "templates": [
+      "<div matChipEdit></div>"
+    ]
+  },
+  {
+    "symbol": "MatChipEditInput",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "span[matChipEditInput]"
+    ],
+    "templates": [
+      "<span matChipEditInput></span>"
+    ]
+  },
+  {
+    "symbol": "MatChipGrid",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "mat-chip-grid"
+    ],
+    "templates": [
+      "<mat-chip-grid></mat-chip-grid>"
+    ]
+  },
+  {
+    "symbol": "MatChipInput",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "input[matChipInputFor]"
+    ],
+    "templates": [
+      "<input [matChipInputFor]=\"linked\">"
+    ],
+    "typeImport": {
+      "name": "MatChipGrid",
+      "entrypoint": "@angular/material/chips"
+    },
+    "fields": "declare linked: MatChipGrid;"
+  },
+  {
+    "symbol": "MatChipListbox",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "mat-chip-listbox"
+    ],
+    "templates": [
+      "<mat-chip-listbox></mat-chip-listbox>"
+    ]
+  },
+  {
+    "symbol": "MatChipOption",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "mat-basic-chip-option",
+      "[mat-basic-chip-option]",
+      "mat-chip-option",
+      "[mat-chip-option]"
+    ],
+    "templates": [
+      "<mat-basic-chip-option></mat-basic-chip-option>",
+      "<div mat-basic-chip-option></div>",
+      "<mat-chip-option></mat-chip-option>",
+      "<div mat-chip-option></div>"
+    ]
+  },
+  {
+    "symbol": "MatChipRemove",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "[matChipRemove]"
+    ],
+    "templates": [
+      "<div matChipRemove></div>"
+    ]
+  },
+  {
+    "symbol": "MatChipRow",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "mat-chip-row",
+      "[mat-chip-row]",
+      "mat-basic-chip-row",
+      "[mat-basic-chip-row]"
+    ],
+    "templates": [
+      "<mat-chip-row></mat-chip-row>",
+      "<div mat-chip-row></div>",
+      "<mat-basic-chip-row></mat-basic-chip-row>",
+      "<div mat-basic-chip-row></div>"
+    ]
+  },
+  {
+    "symbol": "MatChipSet",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "mat-chip-set"
+    ],
+    "templates": [
+      "<mat-chip-set></mat-chip-set>"
+    ]
+  },
+  {
+    "symbol": "MatChipTrailingIcon",
+    "entrypoint": "@angular/material/chips",
+    "selectors": [
+      "mat-chip-trailing-icon",
+      "[matChipTrailingIcon]"
+    ],
+    "templates": [
+      "<mat-chip-trailing-icon></mat-chip-trailing-icon>",
+      "<div matChipTrailingIcon></div>"
+    ]
+  },
+  {
+    "symbol": "MatLine",
+    "entrypoint": "@angular/material/core",
+    "selectors": [
+      "[mat-line]",
+      "[matLine]"
+    ],
+    "templates": [
+      "<div mat-line></div>",
+      "<div matLine></div>"
+    ]
+  },
+  {
+    "symbol": "MatRipple",
+    "entrypoint": "@angular/material/core",
+    "selectors": [
+      "[mat-ripple]",
+      "[matRipple]"
+    ],
+    "templates": [
+      "<div mat-ripple></div>",
+      "<div matRipple></div>"
+    ]
+  },
+  {
+    "symbol": "MatPseudoCheckbox",
+    "entrypoint": "@angular/material/core",
+    "selectors": [
+      "mat-pseudo-checkbox"
+    ],
+    "templates": [
+      "<mat-pseudo-checkbox></mat-pseudo-checkbox>"
+    ]
+  },
+  {
+    "symbol": "MatCalendar",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-calendar"
+    ],
+    "templates": [
+      "<mat-calendar></mat-calendar>"
+    ]
+  },
+  {
+    "symbol": "MatCalendarBody",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "[mat-calendar-body]"
+    ],
+    "templates": [
+      "<div mat-calendar-body></div>"
+    ]
+  },
+  {
+    "symbol": "MatCalendarHeader",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-calendar-header"
+    ],
+    "templates": [
+      "<mat-calendar-header></mat-calendar-header>"
+    ]
+  },
+  {
+    "symbol": "MatDateRangeInput",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-date-range-input"
+    ],
+    "templates": [
+      "<mat-date-range-input></mat-date-range-input>"
+    ]
+  },
+  {
+    "symbol": "MatDateRangePicker",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-date-range-picker"
+    ],
+    "templates": [
+      "<mat-date-range-picker></mat-date-range-picker>"
+    ]
+  },
+  {
+    "symbol": "MatDatepicker",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-datepicker"
+    ],
+    "templates": [
+      "<mat-datepicker></mat-datepicker>"
+    ]
+  },
+  {
+    "symbol": "MatDatepickerActions",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-datepicker-actions",
+      "mat-date-range-picker-actions"
+    ],
+    "templates": [
+      "<mat-datepicker-actions></mat-datepicker-actions>",
+      "<mat-date-range-picker-actions></mat-date-range-picker-actions>"
+    ]
+  },
+  {
+    "symbol": "MatDatepickerApply",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "[matDatepickerApply]",
+      "[matDateRangePickerApply]"
+    ],
+    "templates": [
+      "<div matDatepickerApply></div>",
+      "<div matDateRangePickerApply></div>"
+    ]
+  },
+  {
+    "symbol": "MatDatepickerCancel",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "[matDatepickerCancel]",
+      "[matDateRangePickerCancel]"
+    ],
+    "templates": [
+      "<div matDatepickerCancel></div>",
+      "<div matDateRangePickerCancel></div>"
+    ]
+  },
+  {
+    "symbol": "MatDatepickerContent",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-datepicker-content"
+    ],
+    "templates": [
+      "<mat-datepicker-content></mat-datepicker-content>"
+    ]
+  },
+  {
+    "symbol": "MatDatepickerInput",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "input[matDatepicker]"
+    ],
+    "templates": [
+      "<input [matDatepicker]=\"linked\">"
+    ],
+    "typeImport": {
+      "name": "MatDatepicker",
+      "entrypoint": "@angular/material/datepicker"
+    },
+    "fields": "declare linked: MatDatepicker<Date>;"
+  },
+  {
+    "symbol": "MatDatepickerToggle",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-datepicker-toggle"
+    ],
+    "templates": [
+      "<mat-datepicker-toggle></mat-datepicker-toggle>"
+    ]
+  },
+  {
+    "symbol": "MatDatepickerToggleIcon",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "[matDatepickerToggleIcon]"
+    ],
+    "templates": [
+      "<div matDatepickerToggleIcon></div>"
+    ]
+  },
+  {
+    "symbol": "MatEndDate",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "input[matEndDate]"
+    ],
+    "templates": [
+      "<input matEndDate>"
+    ]
+  },
+  {
+    "symbol": "MatMonthView",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-month-view"
+    ],
+    "templates": [
+      "<mat-month-view></mat-month-view>"
+    ]
+  },
+  {
+    "symbol": "MatMultiYearView",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-multi-year-view"
+    ],
+    "templates": [
+      "<mat-multi-year-view></mat-multi-year-view>"
+    ]
+  },
+  {
+    "symbol": "MatStartDate",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "input[matStartDate]"
+    ],
+    "templates": [
+      "<input matStartDate>"
+    ]
+  },
+  {
+    "symbol": "MatYearView",
+    "entrypoint": "@angular/material/datepicker",
+    "selectors": [
+      "mat-year-view"
+    ],
+    "templates": [
+      "<mat-year-view></mat-year-view>"
+    ]
+  },
+  {
+    "symbol": "MatDialogActions",
+    "entrypoint": "@angular/material/dialog",
+    "selectors": [
+      "[mat-dialog-actions]",
+      "mat-dialog-actions",
+      "[matDialogActions]"
+    ],
+    "templates": [
+      "<div mat-dialog-actions></div>",
+      "<mat-dialog-actions></mat-dialog-actions>",
+      "<div matDialogActions></div>"
+    ]
+  },
+  {
+    "symbol": "MatDialogClose",
+    "entrypoint": "@angular/material/dialog",
+    "selectors": [
+      "[mat-dialog-close]",
+      "[matDialogClose]"
+    ],
+    "templates": [
+      "<div mat-dialog-close></div>",
+      "<div matDialogClose></div>"
+    ]
+  },
+  {
+    "symbol": "MatDialogContainer",
+    "entrypoint": "@angular/material/dialog",
+    "selectors": [
+      "mat-dialog-container"
+    ],
+    "templates": [
+      "<mat-dialog-container></mat-dialog-container>"
+    ]
+  },
+  {
+    "symbol": "MatDialogContent",
+    "entrypoint": "@angular/material/dialog",
+    "selectors": [
+      "[mat-dialog-content]",
+      "mat-dialog-content",
+      "[matDialogContent]"
+    ],
+    "templates": [
+      "<div mat-dialog-content></div>",
+      "<mat-dialog-content></mat-dialog-content>",
+      "<div matDialogContent></div>"
+    ]
+  },
+  {
+    "symbol": "MatDialogTitle",
+    "entrypoint": "@angular/material/dialog",
+    "selectors": [
+      "[mat-dialog-title]",
+      "[matDialogTitle]"
+    ],
+    "templates": [
+      "<div mat-dialog-title></div>",
+      "<div matDialogTitle></div>"
+    ]
+  },
+  {
+    "symbol": "MatDivider",
+    "entrypoint": "@angular/material/divider",
+    "selectors": [
+      "mat-divider"
+    ],
+    "templates": [
+      "<mat-divider></mat-divider>"
+    ]
+  },
+  {
+    "symbol": "MatAccordion",
+    "entrypoint": "@angular/material/expansion",
+    "selectors": [
+      "mat-accordion"
+    ],
+    "templates": [
+      "<mat-accordion></mat-accordion>"
+    ]
+  },
+  {
+    "symbol": "MatExpansionPanel",
+    "entrypoint": "@angular/material/expansion",
+    "selectors": [
+      "mat-expansion-panel"
+    ],
+    "templates": [
+      "<mat-expansion-panel></mat-expansion-panel>"
+    ]
+  },
+  {
+    "symbol": "MatExpansionPanelActionRow",
+    "entrypoint": "@angular/material/expansion",
+    "selectors": [
+      "mat-action-row"
+    ],
+    "templates": [
+      "<mat-action-row></mat-action-row>"
+    ]
+  },
+  {
+    "symbol": "MatExpansionPanelContent",
+    "entrypoint": "@angular/material/expansion",
+    "selectors": [
+      "ng-template[matExpansionPanelContent]"
+    ],
+    "templates": [
+      "<ng-template matExpansionPanelContent></ng-template>"
+    ]
+  },
+  {
+    "symbol": "MatExpansionPanelDescription",
+    "entrypoint": "@angular/material/expansion",
+    "selectors": [
+      "mat-panel-description"
+    ],
+    "templates": [
+      "<mat-panel-description></mat-panel-description>"
+    ]
+  },
+  {
+    "symbol": "MatExpansionPanelHeader",
+    "entrypoint": "@angular/material/expansion",
+    "selectors": [
+      "mat-expansion-panel-header"
+    ],
+    "templates": [
+      "<mat-expansion-panel-header></mat-expansion-panel-header>"
+    ]
+  },
+  {
+    "symbol": "MatExpansionPanelTitle",
+    "entrypoint": "@angular/material/expansion",
+    "selectors": [
+      "mat-panel-title"
+    ],
+    "templates": [
+      "<mat-panel-title></mat-panel-title>"
+    ]
+  },
+  {
+    "symbol": "MatLabel",
+    "entrypoint": "@angular/material/form-field",
+    "selectors": [
+      "mat-label"
+    ],
+    "templates": [
+      "<mat-label></mat-label>"
+    ]
+  },
+  {
+    "symbol": "MatError",
+    "entrypoint": "@angular/material/form-field",
+    "selectors": [
+      "mat-error",
+      "[matError]"
+    ],
+    "templates": [
+      "<mat-error></mat-error>",
+      "<div matError></div>"
+    ]
+  },
+  {
+    "symbol": "MatFormField",
+    "entrypoint": "@angular/material/form-field",
+    "selectors": [
+      "mat-form-field"
+    ],
+    "templates": [
+      "<mat-form-field></mat-form-field>"
+    ]
+  },
+  {
+    "symbol": "MatHint",
+    "entrypoint": "@angular/material/form-field",
+    "selectors": [
+      "mat-hint"
+    ],
+    "templates": [
+      "<mat-hint></mat-hint>"
+    ]
+  },
+  {
+    "symbol": "MatPrefix",
+    "entrypoint": "@angular/material/form-field",
+    "selectors": [
+      "[matPrefix]",
+      "[matIconPrefix]",
+      "[matTextPrefix]"
+    ],
+    "templates": [
+      "<div matPrefix></div>",
+      "<div matIconPrefix></div>",
+      "<div matTextPrefix></div>"
+    ]
+  },
+  {
+    "symbol": "MatSuffix",
+    "entrypoint": "@angular/material/form-field",
+    "selectors": [
+      "[matSuffix]",
+      "[matIconSuffix]",
+      "[matTextSuffix]"
+    ],
+    "templates": [
+      "<div matSuffix></div>",
+      "<div matIconSuffix></div>",
+      "<div matTextSuffix></div>"
+    ]
+  },
+  {
+    "symbol": "MatFormFieldControl",
+    "entrypoint": "@angular/material/form-field",
+    "selectors": [],
+    "templates": [],
+    "reason": "Abstract directive has no selector; TypeScript identity only.",
+    "typeArguments": "<unknown>"
+  },
+  {
+    "symbol": "MatGridAvatarCssMatStyler",
+    "entrypoint": "@angular/material/grid-list",
+    "selectors": [
+      "[mat-grid-avatar]",
+      "[matGridAvatar]"
+    ],
+    "templates": [
+      "<div mat-grid-avatar></div>",
+      "<div matGridAvatar></div>"
+    ]
+  },
+  {
+    "symbol": "MatGridList",
+    "entrypoint": "@angular/material/grid-list",
+    "selectors": [
+      "mat-grid-list"
+    ],
+    "templates": [
+      "<mat-grid-list></mat-grid-list>"
+    ]
+  },
+  {
+    "symbol": "MatGridTile",
+    "entrypoint": "@angular/material/grid-list",
+    "selectors": [
+      "mat-grid-tile"
+    ],
+    "templates": [
+      "<mat-grid-tile></mat-grid-tile>"
+    ]
+  },
+  {
+    "symbol": "MatGridTileFooterCssMatStyler",
+    "entrypoint": "@angular/material/grid-list",
+    "selectors": [
+      "mat-grid-tile-footer"
+    ],
+    "templates": [
+      "<mat-grid-tile-footer></mat-grid-tile-footer>"
+    ]
+  },
+  {
+    "symbol": "MatGridTileHeaderCssMatStyler",
+    "entrypoint": "@angular/material/grid-list",
+    "selectors": [
+      "mat-grid-tile-header"
+    ],
+    "templates": [
+      "<mat-grid-tile-header></mat-grid-tile-header>"
+    ]
+  },
+  {
+    "symbol": "MatGridTileText",
+    "entrypoint": "@angular/material/grid-list",
+    "selectors": [
+      "mat-grid-tile-header",
+      "mat-grid-tile-footer"
+    ],
+    "templates": [
+      "<mat-grid-tile-header></mat-grid-tile-header>",
+      "<mat-grid-tile-footer></mat-grid-tile-footer>"
+    ]
+  },
+  {
+    "symbol": "MatIcon",
+    "entrypoint": "@angular/material/icon",
+    "selectors": [
+      "mat-icon"
+    ],
+    "templates": [
+      "<mat-icon></mat-icon>"
+    ]
+  },
+  {
+    "symbol": "MatInput",
+    "entrypoint": "@angular/material/input",
+    "selectors": [
+      "input[matInput]",
+      "textarea[matInput]",
+      "select[matNativeControl]",
+      "input[matNativeControl]",
+      "textarea[matNativeControl]"
+    ],
+    "templates": [
+      "<input matInput>",
+      "<textarea matInput></textarea>",
+      "<select matNativeControl></select>",
+      "<input matNativeControl>",
+      "<textarea matNativeControl></textarea>"
+    ]
+  },
+  {
+    "symbol": "MatActionList",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "mat-action-list"
+    ],
+    "templates": [
+      "<mat-action-list></mat-action-list>"
+    ]
+  },
+  {
+    "symbol": "MatList",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "mat-list"
+    ],
+    "templates": [
+      "<mat-list></mat-list>"
+    ]
+  },
+  {
+    "symbol": "MatListItem",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "mat-list-item",
+      "a[mat-list-item]",
+      "button[mat-list-item]"
+    ],
+    "templates": [
+      "<mat-list-item></mat-list-item>",
+      "<a mat-list-item></a>",
+      "<button mat-list-item></button>"
+    ]
+  },
+  {
+    "symbol": "MatListItemAvatar",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "[matListItemAvatar]"
+    ],
+    "templates": [
+      "<div matListItemAvatar></div>"
+    ]
+  },
+  {
+    "symbol": "MatListItemIcon",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "[matListItemIcon]"
+    ],
+    "templates": [
+      "<div matListItemIcon></div>"
+    ]
+  },
+  {
+    "symbol": "MatListItemLine",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "[matListItemLine]"
+    ],
+    "templates": [
+      "<div matListItemLine></div>"
+    ]
+  },
+  {
+    "symbol": "MatListItemMeta",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "[matListItemMeta]"
+    ],
+    "templates": [
+      "<div matListItemMeta></div>"
+    ]
+  },
+  {
+    "symbol": "MatListItemTitle",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "[matListItemTitle]"
+    ],
+    "templates": [
+      "<div matListItemTitle></div>"
+    ]
+  },
+  {
+    "symbol": "MatListOption",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "mat-list-option"
+    ],
+    "templates": [
+      "<mat-list-option></mat-list-option>"
+    ]
+  },
+  {
+    "symbol": "MatListSubheaderCssMatStyler",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "[mat-subheader]",
+      "[matSubheader]"
+    ],
+    "templates": [
+      "<div mat-subheader></div>",
+      "<div matSubheader></div>"
+    ]
+  },
+  {
+    "symbol": "MatNavList",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "mat-nav-list"
+    ],
+    "templates": [
+      "<mat-nav-list></mat-nav-list>"
+    ]
+  },
+  {
+    "symbol": "MatSelectionList",
+    "entrypoint": "@angular/material/list",
+    "selectors": [
+      "mat-selection-list"
+    ],
+    "templates": [
+      "<mat-selection-list></mat-selection-list>"
+    ]
+  },
+  {
+    "symbol": "MatContextMenuTrigger",
+    "entrypoint": "@angular/material/menu",
+    "selectors": [
+      "[matContextMenuTriggerFor]"
+    ],
+    "templates": [
+      "<div [matContextMenuTriggerFor]=\"linked\"></div>"
+    ],
+    "typeImport": {
+      "name": "MatMenu",
+      "entrypoint": "@angular/material/menu"
+    },
+    "fields": "declare linked: MatMenu;"
+  },
+  {
+    "symbol": "MatMenu",
+    "entrypoint": "@angular/material/menu",
+    "selectors": [
+      "mat-menu"
+    ],
+    "templates": [
+      "<mat-menu></mat-menu>"
+    ]
+  },
+  {
+    "symbol": "MatMenuContent",
+    "entrypoint": "@angular/material/menu",
+    "selectors": [
+      "ng-template[matMenuContent]"
+    ],
+    "templates": [
+      "<ng-template matMenuContent></ng-template>"
+    ]
+  },
+  {
+    "symbol": "MatMenuItem",
+    "entrypoint": "@angular/material/menu",
+    "selectors": [
+      "[mat-menu-item]"
+    ],
+    "templates": [
+      "<div mat-menu-item></div>"
+    ]
+  },
+  {
+    "symbol": "MatMenuTrigger",
+    "entrypoint": "@angular/material/menu",
+    "selectors": [
+      "[mat-menu-trigger-for]",
+      "[matMenuTriggerFor]"
+    ],
+    "templates": [
+      "<div [mat-menu-trigger-for]=\"linked\"></div>",
+      "<div [matMenuTriggerFor]=\"linked\"></div>"
+    ],
+    "typeImport": {
+      "name": "MatMenu",
+      "entrypoint": "@angular/material/menu"
+    },
+    "fields": "declare linked: MatMenu;"
+  },
+  {
+    "symbol": "MatPaginator",
+    "entrypoint": "@angular/material/paginator",
+    "selectors": [
+      "mat-paginator"
+    ],
+    "templates": [
+      "<mat-paginator></mat-paginator>"
+    ]
+  },
+  {
+    "symbol": "MatProgressBar",
+    "entrypoint": "@angular/material/progress-bar",
+    "selectors": [
+      "mat-progress-bar"
+    ],
+    "templates": [
+      "<mat-progress-bar></mat-progress-bar>"
+    ]
+  },
+  {
+    "symbol": "MatProgressSpinner",
+    "entrypoint": "@angular/material/progress-spinner",
+    "selectors": [
+      "mat-progress-spinner",
+      "mat-spinner"
+    ],
+    "templates": [
+      "<mat-progress-spinner></mat-progress-spinner>",
+      "<mat-spinner></mat-spinner>"
+    ]
+  },
+  {
+    "symbol": "MatRadioButton",
+    "entrypoint": "@angular/material/radio",
+    "selectors": [
+      "mat-radio-button"
+    ],
+    "templates": [
+      "<mat-radio-button></mat-radio-button>"
+    ]
+  },
+  {
+    "symbol": "MatRadioGroup",
+    "entrypoint": "@angular/material/radio",
+    "selectors": [
+      "mat-radio-group"
+    ],
+    "templates": [
+      "<mat-radio-group></mat-radio-group>"
+    ]
+  },
+  {
+    "symbol": "MatSelect",
+    "entrypoint": "@angular/material/select",
+    "selectors": [
+      "mat-select"
+    ],
+    "templates": [
+      "<mat-select></mat-select>"
+    ]
+  },
+  {
+    "symbol": "MatSelectTrigger",
+    "entrypoint": "@angular/material/select",
+    "selectors": [
+      "mat-select-trigger"
+    ],
+    "templates": [
+      "<mat-select-trigger></mat-select-trigger>"
+    ]
+  },
+  {
+    "symbol": "MatDrawer",
+    "entrypoint": "@angular/material/sidenav",
+    "selectors": [
+      "mat-drawer"
+    ],
+    "templates": [
+      "<mat-drawer></mat-drawer>"
+    ]
+  },
+  {
+    "symbol": "MatDrawerContainer",
+    "entrypoint": "@angular/material/sidenav",
+    "selectors": [
+      "mat-drawer-container"
+    ],
+    "templates": [
+      "<mat-drawer-container></mat-drawer-container>"
+    ]
+  },
+  {
+    "symbol": "MatDrawerContent",
+    "entrypoint": "@angular/material/sidenav",
+    "selectors": [
+      "mat-drawer-content"
+    ],
+    "templates": [
+      "<mat-drawer-content></mat-drawer-content>"
+    ]
+  },
+  {
+    "symbol": "MatSidenav",
+    "entrypoint": "@angular/material/sidenav",
+    "selectors": [
+      "mat-sidenav"
+    ],
+    "templates": [
+      "<mat-sidenav></mat-sidenav>"
+    ]
+  },
+  {
+    "symbol": "MatSidenavContainer",
+    "entrypoint": "@angular/material/sidenav",
+    "selectors": [
+      "mat-sidenav-container"
+    ],
+    "templates": [
+      "<mat-sidenav-container></mat-sidenav-container>"
+    ]
+  },
+  {
+    "symbol": "MatSidenavContent",
+    "entrypoint": "@angular/material/sidenav",
+    "selectors": [
+      "mat-sidenav-content"
+    ],
+    "templates": [
+      "<mat-sidenav-content></mat-sidenav-content>"
+    ]
+  },
+  {
+    "symbol": "MatSlideToggle",
+    "entrypoint": "@angular/material/slide-toggle",
+    "selectors": [
+      "mat-slide-toggle"
+    ],
+    "templates": [
+      "<mat-slide-toggle></mat-slide-toggle>"
+    ]
+  },
+  {
+    "symbol": "MatSlider",
+    "entrypoint": "@angular/material/slider",
+    "selectors": [
+      "mat-slider"
+    ],
+    "templates": [
+      "<mat-slider></mat-slider>"
+    ]
+  },
+  {
+    "symbol": "MatSliderRangeThumb",
+    "entrypoint": "@angular/material/slider",
+    "selectors": [
+      "input[matSliderStartThumb]",
+      "input[matSliderEndThumb]"
+    ],
+    "templates": [
+      "<input matSliderStartThumb>",
+      "<input matSliderEndThumb>"
+    ]
+  },
+  {
+    "symbol": "MatSliderThumb",
+    "entrypoint": "@angular/material/slider",
+    "selectors": [
+      "input[matSliderThumb]"
+    ],
+    "templates": [
+      "<input matSliderThumb>"
+    ]
+  },
+  {
+    "symbol": "MatSliderVisualThumb",
+    "entrypoint": "@angular/material/slider",
+    "selectors": [
+      "mat-slider-visual-thumb"
+    ],
+    "templates": [
+      "<mat-slider-visual-thumb></mat-slider-visual-thumb>"
+    ]
+  },
+  {
+    "symbol": "MatSnackBarAction",
+    "entrypoint": "@angular/material/snack-bar",
+    "selectors": [
+      "[matSnackBarAction]"
+    ],
+    "templates": [
+      "<div matSnackBarAction></div>"
+    ]
+  },
+  {
+    "symbol": "MatSnackBarActions",
+    "entrypoint": "@angular/material/snack-bar",
+    "selectors": [
+      "[matSnackBarActions]"
+    ],
+    "templates": [
+      "<div matSnackBarActions></div>"
+    ]
+  },
+  {
+    "symbol": "MatSnackBarContainer",
+    "entrypoint": "@angular/material/snack-bar",
+    "selectors": [
+      "mat-snack-bar-container"
+    ],
+    "templates": [
+      "<mat-snack-bar-container></mat-snack-bar-container>"
+    ]
+  },
+  {
+    "symbol": "MatSnackBarLabel",
+    "entrypoint": "@angular/material/snack-bar",
+    "selectors": [
+      "[matSnackBarLabel]"
+    ],
+    "templates": [
+      "<div matSnackBarLabel></div>"
+    ]
+  },
+  {
+    "symbol": "SimpleSnackBar",
+    "entrypoint": "@angular/material/snack-bar",
+    "selectors": [
+      "simple-snack-bar"
+    ],
+    "templates": [
+      "<simple-snack-bar></simple-snack-bar>"
+    ]
+  },
+  {
+    "symbol": "MatSort",
+    "entrypoint": "@angular/material/sort",
+    "selectors": [
+      "[matSort]"
+    ],
+    "templates": [
+      "<div matSort></div>"
+    ]
+  },
+  {
+    "symbol": "MatSortHeader",
+    "entrypoint": "@angular/material/sort",
+    "selectors": [
+      "[mat-sort-header]"
+    ],
+    "templates": [
+      "<div mat-sort-header></div>"
+    ]
+  },
+  {
+    "symbol": "MatStep",
+    "entrypoint": "@angular/material/stepper",
+    "selectors": [
+      "mat-step"
+    ],
+    "templates": [
+      "<mat-step></mat-step>"
+    ]
+  },
+  {
+    "symbol": "MatStepContent",
+    "entrypoint": "@angular/material/stepper",
+    "selectors": [
+      "ng-template[matStepContent]"
+    ],
+    "templates": [
+      "<ng-template matStepContent></ng-template>"
+    ]
+  },
+  {
+    "symbol": "MatStepHeader",
+    "entrypoint": "@angular/material/stepper",
+    "selectors": [
+      "mat-step-header"
+    ],
+    "templates": [
+      "<mat-step-header></mat-step-header>"
+    ]
+  },
+  {
+    "symbol": "MatStepLabel",
+    "entrypoint": "@angular/material/stepper",
+    "selectors": [
+      "[matStepLabel]"
+    ],
+    "templates": [
+      "<div matStepLabel></div>"
+    ]
+  },
+  {
+    "symbol": "MatStepper",
+    "entrypoint": "@angular/material/stepper",
+    "selectors": [
+      "mat-stepper",
+      "mat-vertical-stepper",
+      "mat-horizontal-stepper",
+      "[matStepper]"
+    ],
+    "templates": [
+      "<mat-stepper></mat-stepper>",
+      "<mat-vertical-stepper></mat-vertical-stepper>",
+      "<mat-horizontal-stepper></mat-horizontal-stepper>",
+      "<div matStepper></div>"
+    ]
+  },
+  {
+    "symbol": "MatStepperIcon",
+    "entrypoint": "@angular/material/stepper",
+    "selectors": [
+      "ng-template[matStepperIcon]"
+    ],
+    "templates": [
+      "<ng-template matStepperIcon></ng-template>"
+    ]
+  },
+  {
+    "symbol": "MatStepperNext",
+    "entrypoint": "@angular/material/stepper",
+    "selectors": [
+      "button[matStepperNext]"
+    ],
+    "templates": [
+      "<button matStepperNext></button>"
+    ]
+  },
+  {
+    "symbol": "MatStepperPrevious",
+    "entrypoint": "@angular/material/stepper",
+    "selectors": [
+      "button[matStepperPrevious]"
+    ],
+    "templates": [
+      "<button matStepperPrevious></button>"
+    ]
+  },
+  {
+    "symbol": "MatCell",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-cell",
+      "td[mat-cell]"
+    ],
+    "templates": [
+      "<mat-cell></mat-cell>",
+      "<td mat-cell></td>"
+    ]
+  },
+  {
+    "symbol": "MatCellDef",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "[matCellDef]"
+    ],
+    "templates": [
+      "<div matCellDef></div>"
+    ]
+  },
+  {
+    "symbol": "MatColumnDef",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "[matColumnDef]"
+    ],
+    "templates": [
+      "<div matColumnDef></div>"
+    ]
+  },
+  {
+    "symbol": "MatFooterCell",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-footer-cell",
+      "td[mat-footer-cell]"
+    ],
+    "templates": [
+      "<mat-footer-cell></mat-footer-cell>",
+      "<td mat-footer-cell></td>"
+    ]
+  },
+  {
+    "symbol": "MatFooterCellDef",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "[matFooterCellDef]"
+    ],
+    "templates": [
+      "<div matFooterCellDef></div>"
+    ]
+  },
+  {
+    "symbol": "MatFooterRow",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-footer-row",
+      "tr[mat-footer-row]"
+    ],
+    "templates": [
+      "<mat-footer-row></mat-footer-row>",
+      "<tr mat-footer-row></tr>"
+    ]
+  },
+  {
+    "symbol": "MatFooterRowDef",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "[matFooterRowDef]"
+    ],
+    "templates": [
+      "<div matFooterRowDef></div>"
+    ]
+  },
+  {
+    "symbol": "MatHeaderCell",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-header-cell",
+      "th[mat-header-cell]"
+    ],
+    "templates": [
+      "<mat-header-cell></mat-header-cell>",
+      "<th mat-header-cell></th>"
+    ]
+  },
+  {
+    "symbol": "MatHeaderCellDef",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "[matHeaderCellDef]"
+    ],
+    "templates": [
+      "<div matHeaderCellDef></div>"
+    ]
+  },
+  {
+    "symbol": "MatHeaderRow",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-header-row",
+      "tr[mat-header-row]"
+    ],
+    "templates": [
+      "<mat-header-row></mat-header-row>",
+      "<tr mat-header-row></tr>"
+    ]
+  },
+  {
+    "symbol": "MatHeaderRowDef",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "[matHeaderRowDef]"
+    ],
+    "templates": [
+      "<div matHeaderRowDef></div>"
+    ]
+  },
+  {
+    "symbol": "MatNoDataRow",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "ng-template[matNoDataRow]"
+    ],
+    "templates": [
+      "<ng-template matNoDataRow></ng-template>"
+    ]
+  },
+  {
+    "symbol": "MatRecycleRows",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-table[recycleRows]",
+      "table[mat-table][recycleRows]"
+    ],
+    "templates": [
+      "<mat-table recycleRows></mat-table>",
+      "<table mat-table recycleRows></table>"
+    ],
+    "extraImport": {
+      "name": "MatTable",
+      "entrypoint": "@angular/material/table"
+    },
+    "candidateTokens": [
+      "recycleRows",
+      "recycleRows"
+    ]
+  },
+  {
+    "symbol": "MatRow",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-row",
+      "tr[mat-row]"
+    ],
+    "templates": [
+      "<mat-row></mat-row>",
+      "<tr mat-row></tr>"
+    ]
+  },
+  {
+    "symbol": "MatRowDef",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "[matRowDef]"
+    ],
+    "templates": [
+      "<div matRowDef></div>"
+    ]
+  },
+  {
+    "symbol": "MatTable",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-table",
+      "table[mat-table]"
+    ],
+    "templates": [
+      "<mat-table></mat-table>",
+      "<table mat-table></table>"
+    ]
+  },
+  {
+    "symbol": "MatTextColumn",
+    "entrypoint": "@angular/material/table",
+    "selectors": [
+      "mat-text-column"
+    ],
+    "templates": [
+      "<mat-text-column></mat-text-column>"
+    ]
+  },
+  {
+    "symbol": "MatPaginatedTabHeader",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [],
+    "templates": [],
+    "reason": "Abstract directive has no selector; TypeScript identity only."
+  },
+  {
+    "symbol": "MatTab",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "mat-tab"
+    ],
+    "templates": [
+      "<mat-tab></mat-tab>"
+    ]
+  },
+  {
+    "symbol": "MatTabBody",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "mat-tab-body"
+    ],
+    "templates": [
+      "<mat-tab-body></mat-tab-body>"
+    ]
+  },
+  {
+    "symbol": "MatTabBodyPortal",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "[matTabBodyHost]"
+    ],
+    "templates": [
+      "<div matTabBodyHost></div>"
+    ]
+  },
+  {
+    "symbol": "MatTabContent",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "[matTabContent]"
+    ],
+    "templates": [
+      "<div matTabContent></div>"
+    ]
+  },
+  {
+    "symbol": "MatTabGroup",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "mat-tab-group"
+    ],
+    "templates": [
+      "<mat-tab-group></mat-tab-group>"
+    ]
+  },
+  {
+    "symbol": "MatTabHeader",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "mat-tab-header"
+    ],
+    "templates": [
+      "<mat-tab-header></mat-tab-header>"
+    ]
+  },
+  {
+    "symbol": "MatTabLabel",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "[mat-tab-label]",
+      "[matTabLabel]"
+    ],
+    "templates": [
+      "<div mat-tab-label></div>",
+      "<div matTabLabel></div>"
+    ]
+  },
+  {
+    "symbol": "MatTabLabelWrapper",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "[matTabLabelWrapper]"
+    ],
+    "templates": [
+      "<div matTabLabelWrapper></div>"
+    ]
+  },
+  {
+    "symbol": "MatTabLink",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "[mat-tab-link]",
+      "[matTabLink]"
+    ],
+    "templates": [
+      "<div mat-tab-link></div>",
+      "<div matTabLink></div>"
+    ]
+  },
+  {
+    "symbol": "MatTabNav",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "[mat-tab-nav-bar]"
+    ],
+    "templates": [
+      "<div mat-tab-nav-bar></div>"
+    ]
+  },
+  {
+    "symbol": "MatTabNavPanel",
+    "entrypoint": "@angular/material/tabs",
+    "selectors": [
+      "mat-tab-nav-panel"
+    ],
+    "templates": [
+      "<mat-tab-nav-panel></mat-tab-nav-panel>"
+    ]
+  },
+  {
+    "symbol": "MatTimepicker",
+    "entrypoint": "@angular/material/timepicker",
+    "selectors": [
+      "mat-timepicker"
+    ],
+    "templates": [
+      "<mat-timepicker></mat-timepicker>"
+    ]
+  },
+  {
+    "symbol": "MatTimepickerInput",
+    "entrypoint": "@angular/material/timepicker",
+    "selectors": [
+      "input[matTimepicker]"
+    ],
+    "templates": [
+      "<input [matTimepicker]=\"linked\">"
+    ],
+    "typeImport": {
+      "name": "MatTimepicker",
+      "entrypoint": "@angular/material/timepicker"
+    },
+    "fields": "declare linked: MatTimepicker<Date>;"
+  },
+  {
+    "symbol": "MatTimepickerToggle",
+    "entrypoint": "@angular/material/timepicker",
+    "selectors": [
+      "mat-timepicker-toggle"
+    ],
+    "templates": [
+      "<mat-timepicker-toggle [for]=\"linked\"></mat-timepicker-toggle>"
+    ],
+    "typeImport": {
+      "name": "MatTimepicker",
+      "entrypoint": "@angular/material/timepicker"
+    },
+    "fields": "declare linked: MatTimepicker<Date>;"
+  },
+  {
+    "symbol": "MatToolbar",
+    "entrypoint": "@angular/material/toolbar",
+    "selectors": [
+      "mat-toolbar"
+    ],
+    "templates": [
+      "<mat-toolbar></mat-toolbar>"
+    ]
+  },
+  {
+    "symbol": "MatToolbarRow",
+    "entrypoint": "@angular/material/toolbar",
+    "selectors": [
+      "mat-toolbar-row"
+    ],
+    "templates": [
+      "<mat-toolbar-row></mat-toolbar-row>"
+    ]
+  },
+  {
+    "symbol": "MatTooltip",
+    "entrypoint": "@angular/material/tooltip",
+    "selectors": [
+      "[matTooltip]"
+    ],
+    "templates": [
+      "<div matTooltip></div>"
+    ]
+  },
+  {
+    "symbol": "TooltipComponent",
+    "entrypoint": "@angular/material/tooltip",
+    "selectors": [
+      "mat-tooltip-component"
+    ],
+    "templates": [
+      "<mat-tooltip-component></mat-tooltip-component>"
+    ]
+  },
+  {
+    "symbol": "MatNestedTreeNode",
+    "entrypoint": "@angular/material/tree",
+    "selectors": [
+      "mat-nested-tree-node"
+    ],
+    "templates": [
+      "<mat-nested-tree-node></mat-nested-tree-node>"
+    ]
+  },
+  {
+    "symbol": "MatTree",
+    "entrypoint": "@angular/material/tree",
+    "selectors": [
+      "mat-tree"
+    ],
+    "templates": [
+      "<mat-tree></mat-tree>"
+    ]
+  },
+  {
+    "symbol": "MatTreeNode",
+    "entrypoint": "@angular/material/tree",
+    "selectors": [
+      "mat-tree-node"
+    ],
+    "templates": [
+      "<mat-tree-node></mat-tree-node>"
+    ]
+  },
+  {
+    "symbol": "MatTreeNodeDef",
+    "entrypoint": "@angular/material/tree",
+    "selectors": [
+      "[matTreeNodeDef]"
+    ],
+    "templates": [
+      "<div matTreeNodeDef></div>"
+    ]
+  },
+  {
+    "symbol": "MatTreeNodeOutlet",
+    "entrypoint": "@angular/material/tree",
+    "selectors": [
+      "[matTreeNodeOutlet]"
+    ],
+    "templates": [
+      "<div matTreeNodeOutlet></div>"
+    ]
+  },
+  {
+    "symbol": "MatTreeNodePadding",
+    "entrypoint": "@angular/material/tree",
+    "selectors": [
+      "[matTreeNodePadding]"
+    ],
+    "templates": [
+      "<div matTreeNodePadding></div>"
+    ]
+  },
+  {
+    "symbol": "MatTreeNodeToggle",
+    "entrypoint": "@angular/material/tree",
+    "selectors": [
+      "[matTreeNodeToggle]"
+    ],
+    "templates": [
+      "<div matTreeNodeToggle></div>"
+    ]
+  }
+]

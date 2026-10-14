@@ -70,3 +70,52 @@ Final reconciled inventory: **109 exact locations including 47 template occurren
 Seven Angular member queries check 16 exact locations including signal input/output aliases, one `model()` two-way binding and outlet fields. Seven TS follow-ups check 18 locations; 11 resolved method signatures distinguish Material calls from a local lookalike; 12 authored source relationships cover paths lacking class tokens and fragment display sites. Those denominators are different and must not be summed into a usage count.
 
 Runtime registry keys and conditional route choices remain unresolved. The [rendering runbook](rendering-paths.md) records the required skill follow-ups. Source hashes, exact config contexts and process cleanup pass. The fixture author supplies the follow-up strategy; this is not a blind evaluation of an agent's investigation accuracy.
+
+## Complete pinned Material consumer matrix
+
+`npm run test:material` freezes an independently authored inventory of all **182**
+public component/directive classes in Material **21.2.14**, then compiles each
+consumer against Angular **21.2.25**. The 180 concrete classes cover **261** selector
+alternatives across **1,305** inline, external, `@if`, `@for` and `@defer` template
+occurrences; two abstract exports are checked as TypeScript references.
+
+All 182 class cases plus inventory validation pass. Native references omit **145**
+expected template occurrences. The same unchanged anchors recover **125** through
+exact native definitions and **20** through the explicit compiler association
+backend (TimepickerInput, NestedTreeNode, TreeNode and TreeNodePadding). The suite
+reports zero remaining omissions and zero extra consumer references after that
+separate reconciliation. Raw reference recall is not reported as 100%. Native
+reports, candidate reports, source hashes and process cleanup remain checked.
+
+The matrix covers static selectors, not every Material input/output combination,
+provider graph, browser interaction or actual rendered view. Negative regressions
+include unrelated same-selector declarations, indirect host directives, comments,
+ordinary strings, invalid owners and unsupported member/backend cases.
+
+## Angular 20 and 22 profiles
+
+`npm run setup:versions` installs isolated exact locks; `npm run test:versions`
+compiles actual Nx library/app targets and checks ten class/member queries per
+profile. Angular **20.3.33** uses TS **5.9.3**, server **20.3.0** and service
+**20.3.33**; Angular **22.2.2** uses TS **6.0.3** and matching server/service.
+Both pass compound/alternative selector, input/output alias, host-composition,
+pipe-transform, signal input/output/model and modern control-flow cases. Sources
+remain unchanged, child servers exit, and actual startup versions are verified.
+Exact version guards reject unqualified or mismatched installations.
+
+This is a smaller API fixture than the Angular 21 qualification. The full Material
+inventory and internal compiler-candidate enablement remain qualified on 21 only.
+
+## Larger Nx qualification
+
+`npm run test:scale:large` doubles all three feature dependency chains from 16 to
+32 libraries: **102 libraries, three apps, 111 nonempty configs**, eight auxiliary
+templates per feature, and the same authored negative/overlapping-config cases.
+The exact source/config oracle is frozen before backend queries. Both targets
+pass: **945** component locations and **210** dialog locations, with zero missing
+or extra locations and zero config-membership mismatches. All Angular child
+processes exit and the 1,470 source/config files remain unchanged. Reports and
+per-pattern metrics are under ignored `test-output/scale-large/`.
+
+Local elapsed time was about 469 seconds on Node22.23.3 with other suites running;
+this is an observed fixture run, not a performance guarantee or peak-memory bound.

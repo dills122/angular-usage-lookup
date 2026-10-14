@@ -36,9 +36,14 @@
     "test": "npm test --prefix skill/angular-usage-lookup",
     "test:gauntlet": "npm run test:gauntlet --prefix skill/angular-usage-lookup",
     "test:scale": "npm run test:scale --prefix skill/angular-usage-lookup",
+    "test:material": "npm run test:material --prefix skill/angular-usage-lookup",
     "test:packaging": "python3 -m unittest discover -s tools/tests -v",
     "build": "python3 tools/build_bundle.py",
     "test:bundle": "node tools/smoke-bundle.mjs",
-    "check": "npm run validate && npm run test:packaging && npm test && npm run test:gauntlet && npm run test:scale && npm run build && npm run test:bundle"
+    "check": "npm run validate && npm run test:packaging && npm test && npm run test:gauntlet && npm run test:scale && npm run test:material && npm run test:versions && npm run test:scale:large && npm run test:blind && npm run build && npm run test:bundle",
+    "setup:versions": "npm ci --prefix skill/angular-usage-lookup/tests/versions/angular20 && npm ci --prefix skill/angular-usage-lookup/tests/versions/angular22",
+    "test:versions": "npm run test:versions --prefix skill/angular-usage-lookup",
+    "test:scale:large": "npm run test:scale:large --prefix skill/angular-usage-lookup",
+    "test:blind": "npm run test:blind --prefix skill/angular-usage-lookup && node --test tools/tests/blind-preparation.test.mjs"
   }
 }

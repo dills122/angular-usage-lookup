@@ -4,7 +4,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const root = fileURLToPath(new URL('../../', import.meta.url));
-export const output = path.join(root, 'test-output/scale');
+export const large = process.env.LOOKUP_SCALE === 'large';
+if (process.env.LOOKUP_SCALE && !['normal', 'large'].includes(process.env.LOOKUP_SCALE)) throw new Error('Unknown LOOKUP_SCALE profile');
+export const chainLength = large ? 32 : 16;
+const featureCount = chainLength * 3;
+export const output = path.join(root, large ? 'test-output/scale-large' : 'test-output/scale');
 export const workspace = path.join(output, 'workspace');
 const baseline = path.join(root, 'tests/fixtures/nx-stress');
 const json = async file => JSON.parse(await readFile(file, 'utf8'));
@@ -28,8 +32,8 @@ export async function generate() {
   const apps = ['storefront', 'admin', 'operations'];
   const appGroups = { storefront: [0, 1], admin: [1, 2], operations: [0, 2] };
   const laterContexts = i => {
-    const group = Math.floor(i / 16);
-    return [...Array.from({ length: (group + 1) * 16 - i }, (_, n) => feature(i + n)),
+    const group = Math.floor(i / chainLength);
+    return [...Array.from({ length: (group + 1) * chainLength - i }, (_, n) => feature(i + n)),
       ...apps.filter(app => appGroups[app].includes(group))];
   };
   // Known source closure of all new features is the original storefront's six
@@ -37,7 +41,7 @@ export async function generate() {
   // the UI demo root which is never exported/imported.
   for (const refs of Object.values(expected)) for (const ref of refs) {
     if (!ref.file.startsWith('apps/') && ref.contexts.includes('storefront')) {
-      ref.contexts.push(...Array.from({ length: 48 }, (_, i) => feature(i)), 'operations');
+      ref.contexts.push(...Array.from({ length: featureCount }, (_, i) => feature(i)), 'operations');
     }
     ref.category = ref.kind === 'template' ? 'baseline-mixed-template' : 'baseline-symbol';
   }
@@ -65,13 +69,13 @@ export async function generate() {
     ['projection', '<super-cool label="projection"><span>child</span></super-cool>'],
     ['utf16-crlf', '😀 <super-cool label="unicode" />\r\n<super-cool label="second" />'],
   ];
-  for (let i = 0; i < 48; i++) {
+  for (let i = 0; i < featureCount; i++) {
     const name = feature(i), contexts = laterContexts(i), folder = await project(name, 'library', ['lib']);
     base.compilerOptions.paths[`@scale/${name}`] = [`${folder}/src/index.ts`];
     const [category, template] = templates[i % templates.length];
     const standalone = i % 2 === 0;
     const imports = 'CommonModule, SharedModule, ModernPanel, ReportPanel';
-    const previous = i % 16 ? `import {Feature${i - 1}Module} from '@scale/${feature(i - 1)}';\n` : '';
+    const previous = i % chainLength ? `import {Feature${i - 1}Module} from '@scale/${feature(i - 1)}';\n` : '';
     const auxImports = Array.from({ length: 8 }, (_, j) => `import {Aux${j}} from './aux${j}';`).join('\n');
     const auxNames = Array.from({ length: 8 }, (_, j) => `Aux${j}`).join(',');
     const templateFile = `${folder}/src/screen.html`;
@@ -86,7 +90,7 @@ import {CoolDialogComponent} from '@stress/dialogs';
 ${previous}${auxImports}
 @Component({selector:'scale-${name}', standalone:${standalone}, ${standalone ? `imports:[${imports}],` : ''} ${templateOption}})
 export class Feature${i} { visible=true; rows=['a','b']; mode=1; dialog=inject(MatDialog); open(){ return this.dialog.open(CoolDialogComponent); } }
-@NgModule({${standalone ? '' : `declarations:[Feature${i}],`} imports:[${imports},${auxNames},${standalone ? `Feature${i},` : ''}${i % 16 ? `Feature${i - 1}Module` : ''}], exports:[Feature${i}]})
+@NgModule({${standalone ? '' : `declarations:[Feature${i}],`} imports:[${imports},${auxNames},${standalone ? `Feature${i},` : ''}${i % chainLength ? `Feature${i - 1}Module` : ''}], exports:[Feature${i}]})
 export class Feature${i}Module {}
 `;
     // Use a literal template so exact Angular offsets also exercise CRLF/UTF-16.
@@ -121,7 +125,7 @@ export class Feature${i}Module {}
         probes: [{ file: 'libs/legacy/src/page.ts', text: 'CoolDialogComponent', occurrence: 0 }] });
       add('card', appFile, tag, [app], 'third-app');
     }
-    const chains = appGroups[app].map(g => (g + 1) * 16 - 1);
+    const chains = appGroups[app].map(g => (g + 1) * chainLength - 1);
     await write(`${folder}/src/feature-registry.ts`, chains.map(i => `import {Feature${i}Module} from '@scale/${feature(i)}';`).join('\n') + `\nexport const features=[${chains.map(i => `Feature${i}Module`).join(',')}];\n`);
     configByContext[app] = `${folder}/tsconfig.lib.json`;
     for (const kind of ['spec', 'story']) {
@@ -144,7 +148,7 @@ export class Feature${i}Module {}
     for (const app of apps) if (ref.contexts.includes(app)) ref.contexts.push(`${app}:spec`, `${app}:story`);
   }
   await writeJson('lookup-dialog.json', dialog);
-  const oracle = { blueprint: { libraries: 54, apps: 3, features: 48, chains: 3, chainLength: 16, auxPerFeature: 8 }, targets: {} };
+  const oracle = { blueprint: { libraries: featureCount + 6, apps: 3, features: featureCount, chains: 3, chainLength, auxPerFeature: 8 }, targets: {} };
   for (const [target, refs] of Object.entries(expected)) {
     oracle.targets[target] = await Promise.all(refs.map(async ref => {
       const source = await readFile(path.join(workspace, ref.file), 'utf8');
