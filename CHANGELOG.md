@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.0 — 2026-10-14
 
 - Validate the actual skill ZIP with a fresh-context agent on a transformed
   54-library/three-app Nx workspace, with private authored expectations and
@@ -24,4 +24,4 @@
   GitHub project, and add user onboarding and contribution guidance.
 
 This is a qualified Angular 21 pilot. See `docs/known-limits.md` before making
-coverage or runtime claims. No release has been published by this extraction.
+coverage or runtime claims.

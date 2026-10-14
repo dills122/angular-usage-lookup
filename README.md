@@ -10,8 +10,9 @@ resolves the declaration, inventories the workspace, collects references, follow
 relevant aliases and rendering paths, and explains what remains unknown.
 
 **Status:** Angular 21 pilot, qualified on generated fixtures including **54
-libraries and three apps**. Version 0.1.0 is unreleased. Source and CI are hosted
-on GitHub; [repository rules](docs/github-settings.md) protect the default branch
+libraries and three apps**. [Version 0.1.0](https://github.com/dills122/angular-usage-lookup/releases/tag/v0.1.0)
+is the initial pilot release. Source and CI are hosted on GitHub;
+[repository rules](docs/github-settings.md) protect the default branch
 and tags. The skill does not modify application code.
 
 ## What you get
@@ -34,8 +35,8 @@ the collector alone does not produce the final migration report.
 ### 1. Get the skill
 
 Clone [this repository](https://github.com/dills122/angular-usage-lookup),
-or download a ZIP from [Releases](https://github.com/dills122/angular-usage-lookup/releases)
-when a release is available. From an existing checkout, install only the helper's
+or download the [v0.1.0 skill ZIP](https://github.com/dills122/angular-usage-lookup/releases/download/v0.1.0/angular-usage-lookup-0.1.0.zip).
+From an existing checkout, install only the helper's
 runtime dependencies:
 
 ```sh
