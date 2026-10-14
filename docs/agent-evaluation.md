@@ -5,6 +5,67 @@ investigated migration inventory. Scripted collector and ZIP smoke tests alone
 do not establish that behavior. This is a manual release qualification, not an
 LLM run hidden inside CI.
 
+## Paired blind discovery and transformations
+
+Run `npm run test:blind` for deterministic fixture/grading qualification, then
+`npm run build`. Prepare **both** variants with separate new input/private paths:
+
+```sh
+node tools/prepare-blind-trial.mjs \
+  --input /private/tmp/lookup-baseline \
+  --private /private/tmp/lookup-baseline-key --variant baseline
+node tools/prepare-blind-trial.mjs \
+  --input /private/tmp/lookup-transformed \
+  --private /private/tmp/lookup-transformed-key --variant transformed
+```
+
+Each input contains an extracted ZIP, physical workspace dependencies and a
+`request.md` with public target identities and the output contract. Install only
+the isolated helper dependencies with `npm ci --omit=dev --ignore-scripts
+--no-audit --no-fund --prefix INPUT/installed/angular-usage-lookup` before the
+trial. Compile all eight Nx `check-*` targets, preserving logs privately. Remove
+generated `.nx` cache before handing off; it is not an answer key, but keeping
+inputs minimal avoids accidental cache/graph reads.
+The shipped discovery helper now isolates and removes its own temporary caches.
+The trial permits those internal OS temporary files while keeping application
+inputs and installed helper files read-only.
+
+Use one fresh agent with **no conversation history per input**, given only that
+input's `request.md`. No prepared manifests, probes, candidate locations, expected
+counts or parent-checkout access. Each agent discovers its configs and evidence.
+Do not send corrective hints. Preserve its first submission and failed attempts.
+These access limits are instruction-level unless the host enforces them too.
+
+Private expectations come from source-authored markers and config roles before
+any backend query. The pair preserves 36 active sites and 84 site/config pairs
+across three targets, while changing symbols/selectors, aliases/barrels, project
+paths, inline/external templates, line endings and UTF-16 offsets. Negative cases
+include same-selector scopes, comments, strings and non-bindable descendants.
+The two target-free library configs are still part of the coverage assessment.
+Do not include these expectations in the agent request.
+
+After each submission finishes:
+
+```sh
+node tools/score-blind-trial.mjs --input /private/tmp/lookup-baseline \
+  --private /private/tmp/lookup-baseline-key \
+  --output /private/tmp/lookup-baseline-key/score.json
+```
+
+The grader separates exact locations/contexts, linked native evidence and source
+integrity. It independently resolves target declarations through TypeScript,
+checks config/program membership and hashes, and validates native destinations
+and spans. Success flags alone are insufficient. Unsupported or partial coverage
+does not earn a full pass even if every expected positive site is present.
+Review classification, scope gaps and installed ZIP integrity separately; this
+is evidence validation, not cryptographic attestation of backend responses.
+
+Compare stable logical IDs across private oracles, not renamed physical paths.
+Never shrink expectations after a miss. Reproduce observed workflow defects in
+regression tests, fix them, rebuild the ZIP and repeat with new inputs and fresh
+agents. Keep first-attempt results alongside reruns. The fixture suite in CI
+checks transformations and grading controls; it does not establish agent behavior.
+
 ## Repeat the trial
 
 1. Run `npm run test:scale` and `npm run build` from the repository root. The scale

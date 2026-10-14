@@ -10,7 +10,7 @@ Each reference retains `isDeclaration`, a generic `kind: semantic-reference`, me
 
 Optional `candidateEvidence` is separate from `references`. An explicit
 `definitionBackend: angular-compiler` record additionally retains native
-`compilerEvidence` (owner, opening-node source span, exact directive references
+`compilerEvidence` (owner, config path/hash and program membership, opening-node source span, exact directive references
 and match sources). Its confirmation means direct selector association on the
 node, not member binding, host impact or runtime rendering. Each explicit
 candidate retains its file hash, query, native definition/source-origin ranges,

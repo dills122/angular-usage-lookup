@@ -190,12 +190,27 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
         report.candidateEvidence.push(result);
         try {
           const owner = path.resolve(workspace, candidate.owner ?? candidate.file);
-          if (!parsed.fileNames.includes(owner)) throw new Error('Candidate owner is not a root file of the declared config');
           result.fileHash = hash(await readFile(path.resolve(workspace, candidate.file)));
-          if (candidate.owner) await client.open(owner);
-          await client.open(path.resolve(workspace, candidate.file));
           const request = await location(workspace, candidate);
           result.request = request;
+          if (candidate.backend !== undefined && !['angular', 'angular-compiler'].includes(candidate.backend)) throw new Error(`Unsupported candidate backend: ${candidate.backend}`);
+          if (candidate.backend === 'angular-compiler') {
+            if (manifest.target.member !== undefined) throw new Error('Compiler candidate backend supports directive/component class associations only');
+            // This backend constructs the explicitly requested compiler program.
+            // Transitive owners are valid members even when they are not roots;
+            // LSP project selection is not evidence of compiler ownership.
+            compilerCandidate ??= await compilerCandidates(workspace, configFile);
+            result.definitionBackend = 'angular-compiler';
+            result.compilerEvidence = compilerCandidate(owner, request, targetFile, identifier.getStart(ast));
+            result.queryConfigEvidence = result.compilerEvidence.configEvidence;
+            result.resolvesToTarget = result.compilerEvidence.resolvesToTarget;
+            result.status = result.resolvesToTarget ? 'confirmed' : 'rejected';
+            result.presentInReferences = raw.some(r => r.uri === request.textDocument.uri && containsPosition(r.range, request.position));
+            continue;
+          }
+          if (!parsed.fileNames.includes(owner)) throw new Error('Candidate owner is not a root file of the declared config');
+          if (candidate.owner) await client.open(owner);
+          await client.open(path.resolve(workspace, candidate.file));
           const definitions = await client.request(DefinitionRequest.type, request);
           result.definitions = definitions;
           // The evidence must come from a uniquely owned query in this config,
@@ -210,17 +225,6 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
             candidateOwnership.set(ownershipKey, qualifiedCandidate);
           }
           result.queryConfigEvidence = qualifiedCandidate.evidence;
-          if (candidate.backend !== undefined && !['angular', 'angular-compiler'].includes(candidate.backend)) throw new Error(`Unsupported candidate backend: ${candidate.backend}`);
-          if (candidate.backend === 'angular-compiler') {
-            if (manifest.target.member !== undefined) throw new Error('Compiler candidate backend supports directive/component class associations only');
-            compilerCandidate ??= await compilerCandidates(workspace, configFile);
-            result.definitionBackend = 'angular-compiler';
-            result.compilerEvidence = compilerCandidate(owner, request, targetFile, identifier.getStart(ast));
-            result.resolvesToTarget = result.compilerEvidence.resolvesToTarget;
-            result.status = result.resolvesToTarget ? 'confirmed' : 'rejected';
-            result.presentInReferences = raw.some(r => r.uri === request.textDocument.uri && containsPosition(r.range, request.position));
-            continue;
-          }
           const targetDefinitions = Array.isArray(definitions) ? definitions.filter(d => matchesTarget([d], targetFile, targetStart)) : [];
           const exact = matchesTarget(definitions, targetFile, targetStart);
           // A selector that is also an input can return the class AND its own

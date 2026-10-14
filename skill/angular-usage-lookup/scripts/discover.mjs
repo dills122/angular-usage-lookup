@@ -1,5 +1,6 @@
 import { execFile } from 'node:child_process';
-import { readdir, realpath, access } from 'node:fs/promises';
+import { readdir, realpath, access, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { createRequire } from 'node:module';
 import { parseArgs, promisify } from 'node:util';
 import path from 'node:path';
@@ -28,15 +29,29 @@ try {
     const nx = requireWorkspace('nx/package.json');
     report.versions.nx = nx.version;
     const executable = path.resolve(path.dirname(packageFile), nx.bin.nx);
-    const query = async args => {
-      const { stdout } = await exec(process.execPath, [executable, ...args, '--json'], { cwd: workspace,
-        env: { ...process.env, NX_DAEMON: 'false', NX_ISOLATE_PLUGINS: 'false', NX_INTERACTIVE: 'false', FORCE_COLOR: '0' },
-        timeout: 30000, maxBuffer: 10 * 1024 * 1024 });
-      return JSON.parse(stdout);
-    };
-    const names = await query(['show', 'projects']);
-    projects = [];
-    for (const name of names.sort()) projects.push({ ...(await query(['show', 'project', name])), name });
+    // Even `nx show` writes graph/database caches by default. Keep all Nx
+    // scratch data outside the scanned workspace and remove it on failure too.
+    const temporaryRoot = await realpath(tmpdir());
+    if (temporaryRoot === workspace || temporaryRoot.startsWith(workspace + path.sep)) {
+      throw new Error('Configure an OS temporary directory outside the scanned workspace');
+    }
+    const scratch = await mkdtemp(path.join(temporaryRoot, 'angular-usage-discovery-'));
+    try {
+      const query = async args => {
+        const { stdout } = await exec(process.execPath, [executable, ...args, '--json'], { cwd: workspace,
+          env: { ...process.env, NX_DAEMON: 'false', NX_ISOLATE_PLUGINS: 'false', NX_INTERACTIVE: 'false', FORCE_COLOR: '0',
+            TMPDIR: scratch, TMP: scratch, TEMP: scratch,
+            NX_CACHE_DIRECTORY: path.join(scratch, 'cache'), NX_WORKSPACE_DATA_DIRECTORY: path.join(scratch, 'workspace-data'),
+            NX_NATIVE_FILE_CACHE_DIRECTORY: path.join(scratch, 'native'), NODE_COMPILE_CACHE: path.join(scratch, 'node-compile') },
+          timeout: 30000, maxBuffer: 10 * 1024 * 1024 });
+        return JSON.parse(stdout);
+      };
+      const names = await query(['show', 'projects']);
+      projects = [];
+      for (const name of names.sort()) projects.push({ ...(await query(['show', 'project', name])), name });
+    } finally {
+      await rm(scratch, { recursive: true, force: true });
+    }
   } else {
     projects = Object.entries(readConfig(path.join(workspace, 'angular.json')).projects).map(([name, project]) => ({ ...project, name }));
   }

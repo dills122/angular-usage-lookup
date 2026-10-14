@@ -37,7 +37,8 @@
     "test:gauntlet": "node --test tests/gauntlet/qualification.test.mjs",
     "test:material": "node --test tests/material/qualification.test.mjs",
     "test:versions": "node --test tests/versions/qualification.test.mjs",
-    "test:scale:large": "LOOKUP_SCALE=large node --test tests/scale/qualification.test.mjs"
+    "test:scale:large": "LOOKUP_SCALE=large node --test tests/scale/qualification.test.mjs",
+    "test:blind": "node --test --test-concurrency=1 tests/blind/*.test.mjs"
   },
   "dependencies": {
     "@angular/language-server": "21.2.25",

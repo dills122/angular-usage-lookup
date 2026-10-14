@@ -130,6 +130,8 @@ lazy routes, 48 nested views, recursive/unused templates, portals and dynamic
 Material openers. They do not prove arbitrary runtime registry choices, all
 package/test/story configurations or production accuracy. A fresh-context agent also completed a ZIP-only component/dialog trial; see the
 [agent evaluation](docs/agent-evaluation-results.md) for exact results and limits.
+The [paired blind discovery trials](docs/blind-discovery-results.md) additionally
+exercise independent discovery across renamed and relocated fixtures.
 The generated workload does **not** establish a universal 95% score. See [known limits](docs/known-limits.md)
 and the [qualification evidence](docs/research/README.md).
 
@@ -144,9 +146,11 @@ npm run check
 The complete gate runs metadata/docs/syntax validation, packaging regressions,
 ordinary regressions, the rendering gauntlet, 54- and 102-library Nx fixtures,
 the complete pinned Material component/directive matrix, isolated Angular 20/22
-profiles and an extracted bundle installation test. Allow several minutes per
+profiles, paired discovery-fixture transformations and an extracted bundle
+installation test. Allow several minutes per
 large suite. Run `npm test`, `npm run test:gauntlet`, `npm run test:scale`,
-`npm run test:scale:large`, `npm run test:material` or `npm run test:versions`
+`npm run test:scale:large`, `npm run test:material`, `npm run test:versions` or
+`npm run test:blind`
 individually during development.
 
 `npm run build` creates a deterministic skill ZIP, SHA-256 checksum and file

@@ -1,0 +1,322 @@
+{
+  "date": "2026-10-14",
+  "scope": "Paired static template discovery: generic custom component, Material MatOption and MatTreeNodePadding; four projects/eight leaf configs per input.",
+  "blinding": "Fresh context and instruction-level access restrictions, not OS isolation.",
+  "versions": {
+    "angular": "21.2.25",
+    "material": "21.2.14",
+    "typescript": "5.9.3",
+    "nx": "23.3.0"
+  },
+  "runs": [
+    {
+      "trial": "baseline-r1",
+      "bundleSha256": "d912588ad53eb0b324f1f533f5095d2692dd9c0f829d779c26707330e31bd787",
+      "oracleSha256": "4b9e2f6aefe955c0513b7fb8067539225faab30576cc3ac35ea5fbeb1eb501f0",
+      "inventorySha256": "9e7f61bca9fad64e015065b1be0748829def7f65c73830e52e502ad540d1869c",
+      "reportSha256": "a380b8d896019d5581d35f8d008a6a7bade25d9b4bd5a25b3643b678c23256cf",
+      "targets": {
+        "card": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "option": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "padding": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        }
+      },
+      "scopeIssues": [],
+      "nativeEvidencePassed": true,
+      "nativeEvidenceIssueCount": 0,
+      "readOnlySources": {
+        "checkedFiles": 30,
+        "changed": [],
+        "added": [],
+        "passed": true
+      },
+      "installedBundleChangedFiles": [],
+      "mechanicalPass": true
+    },
+    {
+      "trial": "transformed-r1",
+      "bundleSha256": "d912588ad53eb0b324f1f533f5095d2692dd9c0f829d779c26707330e31bd787",
+      "oracleSha256": "44cb2633d983413230f9b3e2d0d6149deccfd0b8e5901caf62d5d894c0194ff1",
+      "inventorySha256": "43d90d52c72913e3be1b36bdb405166548bae47221634bd1cb1a48c55cbc4fc5",
+      "reportSha256": "d65d34a687d9f6ca6b5420de7c1549fb7794fed119e7e42740d7f324f188e98f",
+      "targets": {
+        "card": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "option": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "padding": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        }
+      },
+      "scopeIssues": [
+        "Leaf config coverage is unverified",
+        "Leaf config coverage is unverified"
+      ],
+      "nativeEvidencePassed": false,
+      "nativeEvidenceIssueCount": 62,
+      "readOnlySources": {
+        "checkedFiles": 33,
+        "changed": [],
+        "added": [],
+        "passed": true
+      },
+      "installedBundleChangedFiles": [],
+      "mechanicalPass": false
+    },
+    {
+      "trial": "baseline-r2",
+      "bundleSha256": "3c250ae774e2fa2add9303aff2a3d373d4bd9a1de6430ab51a49117fac8c43b8",
+      "oracleSha256": "4b9e2f6aefe955c0513b7fb8067539225faab30576cc3ac35ea5fbeb1eb501f0",
+      "inventorySha256": "00610be3b89c417850e4e5800233a47d6c00fd431064a1d6fbe8f0bd287cf03a",
+      "reportSha256": "d1893a6367b6e40931838192b734e6a19fdc80639b13fe7a7346958fc6a18d06",
+      "targets": {
+        "card": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "option": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "padding": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        }
+      },
+      "scopeIssues": [],
+      "nativeEvidencePassed": true,
+      "nativeEvidenceIssueCount": 0,
+      "readOnlySources": {
+        "checkedFiles": 30,
+        "changed": [],
+        "added": [],
+        "passed": true
+      },
+      "installedBundleChangedFiles": [],
+      "mechanicalPass": true
+    },
+    {
+      "trial": "transformed-r2",
+      "bundleSha256": "3c250ae774e2fa2add9303aff2a3d373d4bd9a1de6430ab51a49117fac8c43b8",
+      "oracleSha256": "44cb2633d983413230f9b3e2d0d6149deccfd0b8e5901caf62d5d894c0194ff1",
+      "inventorySha256": "798b86c1e3a21da4015b698da13eb1b6ce1910d828b91426df70dc42f80d2fd3",
+      "reportSha256": "ef83d7782fec3c63826c4cde55fdc390aabb844f48456156e0492d61b750db3e",
+      "targets": {
+        "card": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "option": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "padding": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        }
+      },
+      "scopeIssues": [
+        "Leaf config coverage is unverified"
+      ],
+      "nativeEvidencePassed": false,
+      "nativeEvidenceIssueCount": 86,
+      "readOnlySources": {
+        "checkedFiles": 33,
+        "changed": [],
+        "added": [],
+        "passed": true
+      },
+      "installedBundleChangedFiles": [],
+      "mechanicalPass": false
+    },
+    {
+      "trial": "transformed-r4",
+      "bundleSha256": "a052fa514a3852b1650d2af059593adac1da9c2f6f5212e1dc39f9839ec65d51",
+      "oracleSha256": "44cb2633d983413230f9b3e2d0d6149deccfd0b8e5901caf62d5d894c0194ff1",
+      "requestSha256": "41f8fab8814cda2702b74be737c7058cff6d785111b32bbcb67b915d8b2cfc2a",
+      "inventorySha256": "8c5c7a630c80f756369d7edbf3d1e7ba1c668c955911578a52e18c507fa7919d",
+      "reportSha256": "ff1c59d2e13975473b82897da17b62faa905be16425d81ef61207d86fef6dc23",
+      "targets": {
+        "card": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "option": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        },
+        "padding": {
+          "expectedLocations": 12,
+          "actualLocations": 12,
+          "expectedContextPairs": 28,
+          "actualContextPairs": 28,
+          "missing": [],
+          "extra": [],
+          "missingContextPairs": [],
+          "extraContextPairs": [],
+          "passed": true
+        }
+      },
+      "scopeIssues": [],
+      "nativeEvidencePassed": true,
+      "nativeEvidenceIssueCount": 0,
+      "readOnlySources": {
+        "checkedFiles": 33,
+        "changed": [],
+        "added": [],
+        "passed": true
+      },
+      "installedBundleChangedFiles": [],
+      "workspaceNxCacheCreated": false,
+      "mechanicalPass": true
+    }
+  ],
+  "limitations": [
+    "Positive site accuracy and evidence/coverage scores are separate.",
+    "Transformed-r1 read existing Nx caches; baseline-r2 disclosed discovery-created Nx caches. Application source/config hashes and shipped helper bytes remained unchanged.",
+    "First submissions retained; no oracle cases removed.",
+    "Temporary local evidence is not a durable hosted artifact."
+  ],
+  "interruptedAttempts": [
+    {
+      "trial": "transformed-r3-final",
+      "scored": false,
+      "reason": "Stopped before submission when final review found inherited temporary roots could point inside workspace. Preserved partial outputs; final guard receives a fresh rebuilt-ZIP trial."
+    }
+  ],
+  "validation": {
+    "ordinaryTests": 64,
+    "blindFixtureAndGraderTests": 57,
+    "preparationTests": 6,
+    "packagingTests": 10,
+    "materialChecks": 183,
+    "gauntlet": "passed",
+    "scaleLibraries": [
+      54,
+      102
+    ],
+    "scale": "passed",
+    "angularVersionProfiles": [
+      "20.3.33",
+      "22.2.2"
+    ],
+    "versionProfiles": "passed",
+    "repositoryValidation": "passed",
+    "extractedBundleSmoke": "passed",
+    "review": "closed; inherited in-workspace temporary root finding fixed with regressions",
+    "hostedCI": "not run for these uncommitted changes"
+  },
+  "finalCandidateBundleSha256": "a052fa514a3852b1650d2af059593adac1da9c2f6f5212e1dc39f9839ec65d51",
+  "completedBlindRuns": 5
+}

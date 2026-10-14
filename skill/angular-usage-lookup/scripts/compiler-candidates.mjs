@@ -1,6 +1,8 @@
 import { createRequire } from 'node:module';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 
 // This adapter asks Angular for directive associations. It does not implement
 // selector matching, infer template ownership, emit code, or invent references.
@@ -20,6 +22,9 @@ export async function compilerCandidates(workspace, configFile) {
   options._enableTemplateTypeChecker = true;
   const program = new NgtscProgram(rootNames, options, createCompilerHost({ options }));
   await program.loadNgStructureAsync();
+  const configEvidence = { backend: 'angular-compiler', configFile,
+    configHash: createHash('sha256').update(await readFile(configFile)).digest('hex'),
+    rootFiles: rootNames, programFiles: program.getTsProgram().getSourceFiles().map(source => source.fileName) };
   const checker = program.compiler.getTemplateTypeChecker();
   const owners = new Map();
   const span = value => ({ file: value.start.file.url, start: { offset: value.start.offset, line: value.start.line, character: value.start.col },
@@ -60,7 +65,7 @@ export async function compilerCandidates(workspace, configFile) {
     if (!Array.isArray(symbol?.directives)) throw new Error('Compiler returned no directive association evidence');
     const directives = symbol.directives.map(d => ({ ref: d.ref, matchSource: d.matchSource, selector: d.selector,
       isComponent: d.isComponent, isInScope: d.isInScope }));
-    return { version: core, owner, component: component.name?.text, sourceSpan: span(sourceSpan), directives,
+    return { version: core, owner, configEvidence, component: component.name?.text, sourceSpan: span(sourceSpan), directives,
       resolvesToTarget: directives.some(d => d.matchSource === 0 && d.ref.filePath === targetFile && d.ref.position === targetOffset) };
   };
 }

@@ -1,5 +1,8 @@
 # v0.1.0 fresh-agent ZIP trial
 
+For subsequent independent discovery and transformation trials, see
+[paired blind discovery qualification](blind-discovery-results.md).
+
 **Passed on 2026-10-13** (finished 2026-10-14 UTC). A fresh-context agent used the
 actual release ZIP to produce a classified component and MatDialog inventory in
 a generated Nx workspace with 54 libraries, three apps and 63 leaf configs.

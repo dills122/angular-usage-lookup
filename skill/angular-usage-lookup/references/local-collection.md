@@ -2,6 +2,10 @@
 
 Angular owns references, template scopes and source mapping. TypeScript handles TS-only references and checks query-file membership in loaded programs. Local helpers own configuration inventory, backend lifecycle, query qualification and evidence serialization. Microsoft `vscode-jsonrpc` and `vscode-languageserver-protocol` handle protocol transport/types. Reference collection does not use a custom compiler analyzer. The separate optional [Material catalog generator](material-catalog.md) uses a pinned Angular internal metadata reader for package identities and family configs.
 
+Nx discovery redirects graph/database and native caches into an isolated OS
+temporary directory and removes it after success or failure. Existing workspace
+cache files remain untouched; discovery does not populate `.nx` in the application.
+
 ## Reproduce the fixtures
 
 From this skill's root directory, with Node 22.12+ in the 22.x line (tested: 22.23.3) and npm:
@@ -83,7 +87,8 @@ manifest project and run collection again. They use the same anchor format:
 This is an optional, bounded list supplied by the skill, not an automatic text
 scan. Use selector attribute tokens for attribute directives; a native tag such
 as `input` may resolve to DOM declarations. Candidates require the Angular
-backend, root-file ownership and a uniquely owned query in the declared config.
+backend; the default definition backend requires root-file ownership and a
+uniquely owned Language Service query in the declared config.
 `candidateEvidence` retains native definitions, source origins and config proof:
 
 - `confirmed`: definitions identify the exact target and have source origins
@@ -111,6 +116,16 @@ requires workspace `@angular/compiler` and `@angular/compiler-cli` **21.2.25**.
 It uses `NgtscProgram` and Angular's template type checker, with the internal
 `_enableTemplateTypeChecker` option covered by exact-version regression tests.
 It performs no emit or application edits.
+
+The explicit compiler backend also accepts owners imported transitively by the
+declared config, including app components included through spec/story roots.
+It verifies membership in that exact compiler program and the component's native
+template source span. `queryConfigEvidence` records the backend, config path/hash,
+root files and program files; these are independent of Language Service project
+selection. An owner outside the program or an incorrect external-template owner
+stays unresolved. The manifest's anchor and identity probes still qualify the
+separate reference query. Do not replace a failed default query with invented
+Language Service ownership evidence.
 
 `compilerEvidence` retains the component owner, native opening-node source span
 and Angular's directive references/match sources. Confirmation requires the

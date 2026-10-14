@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Add paired blind discovery fixtures with independent authored expectations,
+  renamed/re-exported symbols, moved external templates, CRLF/UTF-16 ranges and
+  transitive app/test/story contexts. Grade native evidence and coverage separately
+  from exact location/context matches; retain failed attempts and scope limits.
+- Fix explicit compiler candidate verification for transitively imported template
+  owners. Preserve exact program/source/declaration evidence and reject foreign
+  owners without changing raw Language Service references.
+- Keep Nx discovery caches outside scanned workspaces and remove temporary data
+  after success or failure. Preserve pre-existing workspace caches untouched.
+
 - Strengthen extracted-bundle tests to isolate production language tools from
   checkout dependencies and verify actual loaded service paths.
 

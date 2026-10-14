@@ -34,7 +34,8 @@ The build allowlist is in `tools/build_bundle.py`. Add a runtime asset there onl
 when the skill needs it. Do not ship test dependencies or machine-specific context.
 
 CI uses independent jobs for validation/bundling, normal tests, gauntlet, both
-scale sizes, Material and modern version profiles. `npm run test:scale:large`
+scale sizes, Material, modern version profiles and paired fixture transformations.
+`npm run test:scale:large`
 doubles the generated dependency-chain length: 102 libraries, three apps,
 111 nonempty configs. It retains independent exact location/context oracles.
 Artifacts preserve failures and bundle smoke evidence. Require the CI aggregate
@@ -45,4 +46,7 @@ Use the [fresh-agent evaluation](agent-evaluation.md) when changing skill workfl
 or release behavior. It exercises the installed ZIP with a fresh context and
 private expectations; it is separate from scripted collector qualification.
 The preparation/scoring helpers are development-only. Their regression tests run
-with `npm run test:packaging`; the agent itself is not invoked in CI.
+with `npm run test:packaging` and `npm run test:blind`; the agent itself is not
+invoked in CI. The latter verifies authored transformation invariants, compiles
+both layouts through Nx, checks native Angular associations and exercises grading
+false-pass controls. This deterministic suite is not a blind agent run.
