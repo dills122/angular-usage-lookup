@@ -5,7 +5,7 @@ Extract the release ZIP. Its top-level folder is `angular-usage-lookup` and cont
 agent directly at `SKILL.md`. Preserve its relative layout.
 
 The instructions can be read without installation. To use the local helper
-scripts, use Node 22.12+ in the 22.x line (qualified: 22.23.3), or Node 24, and run
+scripts, use Node 22.23.3+ in the 22.x line, or Node 24.15+, and run
 inside the extracted folder:
 
 ```sh
@@ -14,7 +14,13 @@ npm ci --omit=dev
 
 This installs the pinned Angular Language Server and protocol dependencies in the
 skill folder. The **scanned workspace** must already supply the qualified Angular
-21.2.25/TypeScript 5.9.x dependencies. The Material catalog has its own stricter
+dependencies for an exact qualified profile: Angular 20.3.33 / TypeScript 5.9.3,
+Angular 21.2.25 / TypeScript 5.9.3, or Angular 22.2.2 / TypeScript 6.0.3.
+For Angular 20 or 22, the workspace must also already supply language-server
+20.3.0 or 22.2.2 respectively and language-service matching Angular core exactly.
+The helper-installed server/service provide the Angular 21 default.
+The optional compiler candidate backend requires workspace compiler/compiler-cli
+21.2.25. The Material catalog has its own stricter
 installed-version profile. Do not install or upgrade packages in a scanned
 application as a side effect of lookup.
 

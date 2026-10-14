@@ -8,6 +8,19 @@ The executable helper emits `stage: semantic-reference-collection`, with `refere
 
 Each reference retains `isDeclaration`, a generic `kind: semantic-reference`, merged project/config contexts and evidence IDs. A confirmed semantic reference is not yet a rendered component instance. The skill converts these into the occurrence records below, adds owners and categories from source, excludes the declaration from consumer counts, records scope/discovery/checkout state and reconciles additional candidates. Do not present the collection output as the finished report contract or infer a successful zero-use inventory from it.
 
+Optional `candidateEvidence` is separate from `references`. An explicit
+`definitionBackend: angular-compiler` record additionally retains native
+`compilerEvidence` (owner, opening-node source span, exact directive references
+and match sources). Its confirmation means direct selector association on the
+node, not member binding, host impact or runtime rendering. Each explicit
+candidate retains its file hash, query, native definition/source-origin ranges,
+project/config ownership and `confirmed`, `rejected` or `unresolved` status.
+Confirmed candidates absent from references have `presentInReferences: false`:
+record these as recovered misses with definition evidence. Do not replace native
+reference spans with definition origins or count both as separate instances.
+Unresolved candidates add gaps even when raw collection succeeds. The overall
+report remains partial until the skill reconciles scope and every relevant gap.
+
 ## Run and target
 
 - `schemaVersion`: `angular-usage-lookup/v1`.

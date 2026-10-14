@@ -1,5 +1,4 @@
 import { readFile, writeFile, realpath, lstat } from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { parseArgs } from 'node:util';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -8,8 +7,9 @@ import { DefinitionRequest, ReferencesRequest } from 'vscode-languageserver-prot
 import { startAngular } from './lsp.mjs';
 import { startTypeScript } from './typescript.mjs';
 import { qualifyQuery } from './angular-context.mjs';
+import { compilerCandidates } from './compiler-candidates.mjs';
+import { qualifiedToolchain } from './qualified-toolchain.mjs';
 
-const helperRequire = createRequire(import.meta.url);
 const hash = data => createHash('sha256').update(data).digest('hex');
 const normalized = range => ({ start: { line: range.start.line + 1, column: range.start.character + 1 },
   end: { line: range.end.line + 1, column: range.end.character + 1 } });
@@ -41,18 +41,14 @@ function matchesTarget(definitions, targetFile, targetStart) {
   });
 }
 
+function containsPosition(range, point) {
+  return (range.start.line < point.line || (range.start.line === point.line && range.start.character <= point.character)) &&
+    (range.end.line > point.line || (range.end.line === point.line && range.end.character > point.character));
+}
+
 export async function collect(workspace, manifest, timeoutMs = 15000) {
   if (!Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 300000) throw new Error('Timeout must be an integer from 1 to 300000 milliseconds');
-  const requireWorkspace = createRequire(path.join(workspace, 'package.json'));
-  const ts = requireWorkspace('typescript');
-  const core = requireWorkspace('@angular/core/package.json');
-  const serverFile = helperRequire.resolve('@angular/language-server/package.json');
-  const server = helperRequire('@angular/language-server/package.json');
-  const serviceFile = helperRequire.resolve('@angular/language-service/package.json');
-  const service = helperRequire('@angular/language-service/package.json');
-  if (!core.version.startsWith('21.') || !ts.version.startsWith('5.9.') || service.version !== core.version) {
-    throw new Error(`Pilot requires Angular ${service.version} and TypeScript 5.9.x; workspace resolves ${core.version} / ${ts.version}`);
-  }
+  const { requireWorkspace, ts, core, serverFile, server, serviceFile, service } = qualifiedToolchain(workspace);
   const targetFile = path.resolve(workspace, manifest.target.file);
   const source = await readFile(targetFile, 'utf8');
   const ast = ts.createSourceFile(targetFile, source, ts.ScriptTarget.Latest, true);
@@ -66,6 +62,8 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
   }
   const targetStart = position(source, identifier.getStart(ast));
   const targetEnd = position(source, identifier.getEnd());
+  const declaredMemberStarts = manifest.target.member === undefined
+    ? declarations[0].members.filter(m => m.name && ts.isIdentifier(m.name)).map(m => position(source, m.name.getStart(ast))) : [];
   const targetRequest = { textDocument: { uri: pathToFileURL(targetFile).href }, position: targetStart };
   if (!Array.isArray(manifest.projects) || !manifest.projects.length) throw new Error('At least one explicit project is required');
   const report = {
@@ -76,13 +74,13 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
     scope: { projects: manifest.projects.map(p => ({ name: p.name, tsconfig: p.tsconfig })),
       exclusions: manifest.exclusions ?? [],
       boundary: 'Explicit manifest configurations only; candidate reconciliation and dynamic flow are not collected.' },
-    references: [], coverage: [], evidence: [], gaps: [{ code: 'reconciliation-required', message: 'The skill must reconcile candidates and scope before making a completeness claim.' }],
+    references: [], candidateEvidence: [], coverage: [], evidence: [], gaps: [{ code: 'reconciliation-required', message: 'The skill must reconcile candidates and scope before making a completeness claim.' }],
   };
   const refs = new Map();
   for (const project of manifest.projects) {
     const row = { project: project.name, tsconfig: project.tsconfig, result: 'failed', probes: [] };
     report.coverage.push(row);
-    let client, tsClient;
+    let client, tsClient, identityClient, compilerCandidate;
     try {
       const configFile = path.resolve(workspace, project.tsconfig);
       const parsed = ts.getParsedCommandLineOfConfigFile(configFile, {}, { ...ts.sys,
@@ -118,15 +116,39 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
         if (client) await client.open(path.resolve(workspace, probe.file));
         const request = await location(workspace, probe);
         const response = tsClient ? tsClient.definition(request) : await client.request(DefinitionRequest.type, request);
-        const definitions = tsClient ? response.locations : response;
+        let definitions = tsClient ? response.locations : response;
+        // Angular's server can return no TS definition for a package import
+        // while its reference request still includes the package's templates.
+        // Resolve only absent TS definitions with the same config's official TS
+        // service. Never replace a nonempty (possibly ambiguous) Angular result.
+        let identity;
+        if (client && (!definitions || (Array.isArray(definitions) && !definitions.length)) && /\.[cm]?tsx?$/.test(probe.file)) {
+          identityClient ??= startTypeScript(ts, workspace, parsed);
+          identity = identityClient.definition(request);
+          definitions = identity.locations;
+        }
         const result = { file: probe.file, request: tsClient ? response.query : request,
           definitions: tsClient ? response.raw : definitions, resolvesToTarget: matchesTarget(definitions, targetFile, targetStart) };
         if (tsClient) result.definitionChain = response.chain;
+        if (identity) {
+          result.angularDefinitions = response;
+          result.definitionBackend = 'typescript';
+          result.definitions = identity.raw;
+          result.definitionChain = identity.chain;
+        }
         row.probes.push(result);
         if (!result.resolvesToTarget) throw new Error(`Known reference does not resolve to target: ${probe.file} (ambiguous or wrong identity)`);
         referenceQueries.push(request);
       }
       const qualified = client && await qualifyQuery({ ts, client, configFile, parsed, probes: row.probes, workspace });
+      if (client) {
+        const logs = client.messages.filter(m => m.method === 'window/logMessage').map(m => m.params?.message);
+        row.toolchainEvidence = logs.filter(message => message?.startsWith('Imported typescript/lib/tsserverlibrary is version ') || message?.startsWith('Using @angular/language-service v'));
+        if (!logs.includes(`Imported typescript/lib/tsserverlibrary is version ${ts.version}.`) ||
+            !logs.some(message => message?.startsWith(`Using @angular/language-service v${service.version} from `))) {
+          throw new Error('Angular server did not confirm the qualified TypeScript and language-service versions');
+        }
+      }
       const response = tsClient ? tsClient.references(referenceQueries) : await client.request(ReferencesRequest.type, { ...qualified.request, context: { includeDeclaration: true } });
       if (client) {
         // Requests may load another project. Recheck before assigning contexts.
@@ -160,6 +182,73 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
         if (!value.evidence.includes(evidenceId)) value.evidence.push(evidenceId);
         refs.set(key, value);
       }
+      if (project.candidates !== undefined && !Array.isArray(project.candidates)) throw new Error('Candidates must be an array of explicit source anchors');
+      if (project.candidates?.length && !client) throw new Error('Template candidate verification requires the Angular backend');
+      const candidateOwnership = new Map();
+      for (const candidate of project.candidates ?? []) {
+        const result = { project: project.name, tsconfig: project.tsconfig, file: candidate.file, status: 'unresolved' };
+        report.candidateEvidence.push(result);
+        try {
+          const owner = path.resolve(workspace, candidate.owner ?? candidate.file);
+          if (!parsed.fileNames.includes(owner)) throw new Error('Candidate owner is not a root file of the declared config');
+          result.fileHash = hash(await readFile(path.resolve(workspace, candidate.file)));
+          if (candidate.owner) await client.open(owner);
+          await client.open(path.resolve(workspace, candidate.file));
+          const request = await location(workspace, candidate);
+          result.request = request;
+          const definitions = await client.request(DefinitionRequest.type, request);
+          result.definitions = definitions;
+          // The evidence must come from a uniquely owned query in this config,
+          // just like reference collection. Opening the file can load a config.
+          // Definition requests can enable additional configs. Reuse expensive
+          // TS membership only while that snapshot and the query file agree.
+          const configSnapshot = client.messages.filter(m => m.method === 'window/logMessage' && m.params?.message?.startsWith('Enabling language service for ')).map(m => m.params.message);
+          const ownershipKey = JSON.stringify([request.textDocument.uri, configSnapshot]);
+          let qualifiedCandidate = candidateOwnership.get(ownershipKey);
+          if (!qualifiedCandidate) {
+            qualifiedCandidate = await qualifyQuery({ ts, client, configFile, parsed, probes: [{ file: candidate.file, request }], workspace });
+            candidateOwnership.set(ownershipKey, qualifiedCandidate);
+          }
+          result.queryConfigEvidence = qualifiedCandidate.evidence;
+          if (candidate.backend !== undefined && !['angular', 'angular-compiler'].includes(candidate.backend)) throw new Error(`Unsupported candidate backend: ${candidate.backend}`);
+          if (candidate.backend === 'angular-compiler') {
+            if (manifest.target.member !== undefined) throw new Error('Compiler candidate backend supports directive/component class associations only');
+            compilerCandidate ??= await compilerCandidates(workspace, configFile);
+            result.definitionBackend = 'angular-compiler';
+            result.compilerEvidence = compilerCandidate(owner, request, targetFile, identifier.getStart(ast));
+            result.resolvesToTarget = result.compilerEvidence.resolvesToTarget;
+            result.status = result.resolvesToTarget ? 'confirmed' : 'rejected';
+            result.presentInReferences = raw.some(r => r.uri === request.textDocument.uri && containsPosition(r.range, request.position));
+            continue;
+          }
+          const targetDefinitions = Array.isArray(definitions) ? definitions.filter(d => matchesTarget([d], targetFile, targetStart)) : [];
+          const exact = matchesTarget(definitions, targetFile, targetStart);
+          // A selector that is also an input can return the class AND its own
+          // declared setter/property. Require the class itself and prove every
+          // other destination by exact AST identifier position. Inherited or
+          // foreign APIs, and member-target queries, do not get this rule.
+          const ownedMembers = !exact && targetDefinitions.length > 0 && declaredMemberStarts.length > 0 &&
+            definitions.every(d => matchesTarget([d], targetFile, targetStart) || declaredMemberStarts.some(start => matchesTarget([d], targetFile, start)));
+          result.resolvesToTarget = exact || ownedMembers;
+          if (result.resolvesToTarget) result.definitionIdentity = exact ? 'exact-target' : 'target-and-declared-members';
+          if (result.resolvesToTarget) {
+            // Keep native definition origins; they may describe an attribute or
+            // a whole element, and must not be fabricated into reference spans.
+            if (!definitions.every(d => d.originSelectionRange && containsPosition(d.originSelectionRange, request.position))) {
+              throw new Error('Candidate definition has no source origin containing its anchor');
+            }
+            result.status = 'confirmed';
+            result.presentInReferences = raw.some(r => r.uri === request.textDocument.uri && containsPosition(r.range, request.position));
+          } else if (Array.isArray(definitions) && definitions.length && !targetDefinitions.length) {
+            result.status = 'rejected';
+          } else {
+            throw new Error('Candidate has absent or ambiguous definitions; identity remains unresolved');
+          }
+        } catch (error) {
+          result.error = error.message;
+          report.gaps.push({ code: 'candidate-unresolved', project: project.name, file: candidate.file, message: error.message });
+        }
+      }
       row.result = 'verified';
     } catch (error) {
       report.collectionStatus = 'failed';
@@ -168,6 +257,7 @@ export async function collect(workspace, manifest, timeoutMs = 15000) {
       report.gaps.push({ code: 'project-analysis-failed', project: project.name, message: error.message });
     } finally {
       tsClient?.dispose();
+      identityClient?.dispose();
       if (client) { row.messages = client.messages; row.process = await client.close(); }
     }
   }

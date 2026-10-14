@@ -49,7 +49,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [test, 'test:gauntlet', 'test:scale']
+        suite: [test, 'test:gauntlet', 'test:scale', 'test:scale:large', 'test:material', 'test:versions']
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -60,6 +60,8 @@ jobs:
           cache: npm
           cache-dependency-path: skill/angular-usage-lookup/package-lock.json
       - run: npm run setup
+      - run: npm run setup:versions
+        if: matrix.suite == 'test:versions'
       - run: npm run "${SUITE}"
         env:
           SUITE: ${{ matrix.suite }}

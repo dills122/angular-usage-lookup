@@ -40,8 +40,15 @@ From the isolated skill directory after authorized dependency setup:
 ```sh
 npm test
 npm run test:scale
+npm run test:scale:large
 ```
 
 The scale command generates its workspace under ignored `test-output/scale/workspace`, freezes source hashes and an independent location/context oracle, invokes Nx discovery and Angular compilation, then collects two targets. Reports and measurements are outside the scanned workspace in `test-output/scale`. The generator is test infrastructure, not a production manifest generator. No application packages/configs are upgraded during lookup.
+
+The normal profile has 54 libraries, three apps and 63 nonempty configs.
+The large profile doubles each of three dependency chains to 32 features, for
+102 libraries, three apps and 111 nonempty configs; its independent artifacts
+are under `test-output/scale-large`. Both retain eight auxiliary templates per
+feature, negative same-selector scopes and overlapping app/spec/story configs.
 
 The generated apps are source/typecheck fixtures. Their test/story configs exercise overlapping Angular programs; they are not browser, Jest or Storybook runtime qualifications. Include those real integrations in a supplied-workspace trial before claiming them covered.

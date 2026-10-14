@@ -1,12 +1,21 @@
 # Known limits
 
-- The collector is pinned to Angular 21.2.25 / TypeScript 5.9.x; the catalog uses
-  an exact compiler/Material profile and a private Angular metadata reader.
+- The collector accepts three exact Angular/TypeScript profiles: 20.3.33/5.9.3,
+  21.2.25/5.9.3 and 22.2.2/6.0.3. Other patch versions remain unqualified.
+  The full Material matrix/catalog and compiler candidate fallback use Angular
+  21.2.25 / Material 21.2.14; their private/internal Angular APIs remain guarded.
 - Config manifests and known identity probes are explicit. A loaded server or
   zero references do not establish whole-workspace coverage.
 - Raw references require skill reconciliation. Renamed lazy locals need verified
   source relationships and separate queries. Non-bindable descendants can appear
   in Angular's reference results even though they are inactive.
+- Angular 21 reference results can omit generic component/directive templates.
+  The explicit candidate-definition workflow can recover exact identities while
+  keeping the raw omission visible. Absent/ambiguous definitions and shared
+  ownership remain unresolved by the default backend. An explicit Angular 21
+  compiler fallback verifies direct component/directive associations using native
+  source spans and exact declaration references. It does not cover member APIs,
+  pipes or indirect host applications. Candidate text alone is never confirmation.
 - Runtime registry keys, conditional route choices, remote/federated consumers
   and arbitrary reflection/dataflow are not generally decidable statically.
 - Built package/source identity, shared-template per-owner routing, actual

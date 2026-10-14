@@ -1,5 +1,29 @@
 # Changelog
 
+## Unreleased
+
+- Strengthen extracted-bundle tests to isolate production language tools from
+  checkout dependencies and verify actual loaded service paths.
+
+- Qualify exact Angular 20.3.33/TS 5.9.3 and Angular 22.2.2/TS 6.0.3 profiles
+  with isolated locks, real Nx typechecks, selector/host/pipe and signal API tests.
+  Verify actual server startup versions and prefer matching workspace tools.
+- Add a 102-library/three-app, 111-config Nx workload with independent exact
+  location/context oracles alongside the existing 54-library gate.
+- Add explicit, Angular 21.2.25-guarded compiler candidate evidence for static
+  directive associations when language-service definitions are absent or mixed.
+  Preserve native source mapping, declaration identity and indirect host matches.
+
+- Add exact TypeScript identity fallback for package imports whose Angular
+  definition response is empty, preserving the original response and alias chain.
+- Add explicit template candidate verification with separate native definition
+  evidence, config ownership checks and unresolved gaps. Reproduce Angular 21's
+  generic component/directive reference omission and recover known candidates
+  without rewriting raw reference results.
+- Expand Material qualification to a frozen inventory of all 182 public
+  component/directive classes and their selector alternatives, including abstract
+  TypeScript-only exports, inline/external templates and modern control flow.
+
 ## 0.1.0 — 2026-10-14
 
 - Validate the actual skill ZIP with a fresh-context agent on a transformed

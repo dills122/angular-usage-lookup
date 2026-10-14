@@ -6,7 +6,7 @@ import { createRequire } from 'node:module';
 import { readFile, writeFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
-import { generate, hashes, root, output, workspace } from './workspace.mjs';
+import { generate, hashes, root, output, workspace, large } from './workspace.mjs';
 
 const exec = promisify(execFile);
 const require = createRequire(import.meta.url);
@@ -35,13 +35,13 @@ export function compare(actual, expected) {
     actualContextPairs: actual.reduce((n, r) => n + r.contexts.length, 0), missing, extra, contextErrors, categories };
 }
 
-test('54 Angular libraries, three apps: exact locations and config ownership at scale', { timeout: 900000 }, async t => {
+test(`${large ? 102 : 54} Angular libraries, three apps: exact locations and config ownership at scale`, { timeout: 1200000 }, async t => {
   const oracle = await generate();
   const before = await hashes();
   const metrics = { generatedAt: new Date().toISOString(), node: process.version, platform: process.platform,
     blueprint: oracle.blueprint, sourceAndConfigFiles: Object.keys(before).length, commands: {}, targets: {} };
   await writeFile(path.join(output, 'metrics.json'), JSON.stringify(metrics, null, 2));
-  const run = async (name, args, cwd = root, timeout = 360000) => {
+  const run = async (name, args, cwd = root, timeout = 720000) => {
     t.diagnostic(`Starting ${name}`);
     const start = performance.now();
     let result;
@@ -56,9 +56,9 @@ test('54 Angular libraries, three apps: exact locations and config ownership at 
   const discovery = await run('discovery', [path.join(root, 'scripts/discover.mjs'), '--workspace', workspace]);
   assert.equal(discovery.code ?? 0, 0, discovery.stderr);
   const inventory = JSON.parse(discovery.stdout);
-  assert.equal(inventory.projects.length, 57);
-  assert.equal(inventory.projects.filter(p => p.root.startsWith('libs/')).length, 54);
-  assert.equal(inventory.projects.flatMap(p => p.configs).filter(c => c.rootFileCount > 0).length, 63);
+  assert.equal(inventory.projects.length, large ? 105 : 57);
+  assert.equal(inventory.projects.filter(p => p.root.startsWith('libs/')).length, large ? 102 : 54);
+  assert.equal(inventory.projects.flatMap(p => p.configs).filter(c => c.rootFileCount > 0).length, large ? 111 : 63);
   const nx = path.resolve(path.dirname(require.resolve('nx/package.json')), require('nx/package.json').bin.nx);
   const compilation = await run('typecheck', [nx, 'run-many', '-t', 'typecheck,typecheck-spec,typecheck-story', '--all', '--parallel=2', '--skip-nx-cache'], workspace);
   assert.equal(compilation.code ?? 0, 0, compilation.stdout + compilation.stderr);
