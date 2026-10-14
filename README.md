@@ -10,9 +10,9 @@ resolves the declaration, inventories the workspace, collects references, follow
 relevant aliases and rendering paths, and explains what remains unknown.
 
 **Status:** Angular 21 pilot, qualified on generated fixtures including **54
-libraries and three apps**. Version 0.1.0 is a local release candidate; GitHub
-links below identify the intended destination. Hosted CI and a published release
-are still pending the first push. It does not modify application code.
+libraries and three apps**. Version 0.1.0 is unreleased. Source and CI are hosted
+on GitHub; [repository rules](docs/github-settings.md) protect the default branch
+and tags. The skill does not modify application code.
 
 ## What you get
 
@@ -33,7 +33,7 @@ the collector alone does not produce the final migration report.
 
 ### 1. Get the skill
 
-Once hosted, clone [this repository](https://github.com/dills122/angular-usage-lookup),
+Clone [this repository](https://github.com/dills122/angular-usage-lookup),
 or download a ZIP from [Releases](https://github.com/dills122/angular-usage-lookup/releases)
 when a release is available. From an existing checkout, install only the helper's
 runtime dependencies:
@@ -73,8 +73,8 @@ to the skill. A gap is not evidence of zero usages.
 
 ## Try a working example
 
-From the repository root, use Node **22.23.3** and npm. This installs the isolated
-fixture dependencies and performs a real Angular lookup:
+From the repository root, use the Node version in `.nvmrc` and npm. This installs
+the isolated fixture dependencies and performs a real Angular lookup:
 
 ```sh
 npm run setup
@@ -112,9 +112,11 @@ the scanned workspace.
 | TypeScript | 5.9.3 |
 | Angular Material / CDK catalog | 21.2.14 |
 | Nx | 23.3.0 |
-| Node / npm | 22.23.3 / 10.9.9 |
+| Node / npm (original local qualification) | 22.23.3 / 10.9.9 |
 
-Node 24 is allowed by package metadata but has not been qualified. Python 3.11+
+The original local qualification used Node 22. The published `.nvmrc` selects
+Node 24 LTS for hosted CI; see [current CI results](https://github.com/dills122/angular-usage-lookup/actions/workflows/ci.yml)
+for the tested revision and runtime. Python 3.11+
 is needed for repository validation and packaging, not for normal skill use.
 The collector and catalog have different version guards; other profiles need
 requalification. Legacy `ngIf`/NgModules are tested on Angular 21, not old releases.
@@ -134,7 +136,7 @@ npm run check
 ```
 
 The complete gate runs metadata/docs/syntax validation, packaging regressions,
-31 ordinary tests, the rendering gauntlet, the large Nx fixture and an extracted
+33 ordinary tests, the rendering gauntlet, the large Nx fixture and an extracted
 bundle installation test. Allow several minutes. Run `npm test`,
 `npm run test:gauntlet` or `npm run test:scale` individually during development.
 

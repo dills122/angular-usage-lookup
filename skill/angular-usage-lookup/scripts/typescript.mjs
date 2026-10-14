@@ -4,6 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 export function startTypeScript(ts, workspace, parsed) {
   const host = {
     ...ts.sys,
+    useCaseSensitiveFileNames: () => ts.sys.useCaseSensitiveFileNames,
     getCompilationSettings: () => parsed.options,
     getScriptFileNames: () => parsed.fileNames,
     getScriptVersion: () => '0',

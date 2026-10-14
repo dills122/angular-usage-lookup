@@ -2,6 +2,10 @@
 
 ## 0.1.0 — unreleased
 
+- Fix the TypeScript language-service host contract on case-sensitive systems,
+  with exact-definition/reference regressions for both host modes. The initial
+  Linux CI run exposed a boolean passed where TypeScript requires a function.
+- Configure GitHub main/tag rules, repository metadata and squash-merge defaults.
 - Extract the tested Angular usage lookup skill and its Angular/TypeScript/Nx
   helpers from Research Depot.
 - Include Material family/catalog metadata, explicit scope/identity verification,
