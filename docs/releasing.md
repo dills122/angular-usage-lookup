@@ -19,6 +19,11 @@ node_modules, caches and AI Central are outside the allowlist.
 2. Record changes, qualification versions and limitations in `CHANGELOG.md`.
 3. Run `npm run setup` and `npm run check`.
 4. Review `dist/` and the bundle smoke evidence in `test-output/`.
+5. For the initial release and changes to the skill workflow, complete the
+   [fresh-agent trial](agent-evaluation.md) using the candidate ZIP. Record its
+   checksum, report review, recovered misses and remaining limitations. The
+   [0.1.0 trial](agent-evaluation-results.md) is the initial behavioral evidence;
+   CI does not automatically run an agent.
 
 No tag, commit or publication is part of a local build. Both packages are MIT
 licensed and retain `private: true` because the deliverable is a skill ZIP, not an

@@ -124,8 +124,9 @@ requalification. Legacy `ngIf`/NgModules are tested on Angular 21, not old relea
 The tests include standalone/NgModule mixtures, `*ngIf` and modern control flow,
 lazy routes, 48 nested views, recursive/unused templates, portals and dynamic
 Material openers. They do not prove arbitrary runtime registry choices, all
-package/test/story configurations or production accuracy. The generated workload
-does **not** establish a universal 95% score. See [known limits](docs/known-limits.md)
+package/test/story configurations or production accuracy. A fresh-context agent also completed a ZIP-only component/dialog trial; see the
+[agent evaluation](docs/agent-evaluation-results.md) for exact results and limits.
+The generated workload does **not** establish a universal 95% score. See [known limits](docs/known-limits.md)
 and the [qualification evidence](docs/research/README.md).
 
 ## Develop, test and build

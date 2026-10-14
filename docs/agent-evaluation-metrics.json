@@ -1,0 +1,274 @@
+{
+  "qualificationDate": "2026-10-13",
+  "finishedAt": "2026-10-14T01:55:08.206Z",
+  "result": "passed-for-generated-static-scope-with-explicit-unknowns",
+  "bundleSha256": "2a1c328cb7a81b20ed90d9b5cfc6cd5ca11ecff33e9b49a59227488434a983b8",
+  "sourceCommit": "ab5d95943c29970d19a99e74150e00bcbeacd417",
+  "agent": "Fresh-context Codex subagent; inherited chat model, exact model build not captured",
+  "isolation": "Instruction-level; no history/oracles/prepared manifests; dependencies physically copied; published skill contains historical examples",
+  "blueprint": {
+    "libraries": 54,
+    "apps": 3,
+    "features": 48,
+    "chains": 3,
+    "chainLength": 16,
+    "auxPerFeature": 8
+  },
+  "scope": {
+    "projects": 57,
+    "libraries": 54,
+    "apps": 3,
+    "leafConfigs": 63,
+    "sourceConfigFiles": 769
+  },
+  "oracleMatched": {
+    "card": {
+      "expectedLocations": 495,
+      "actualLocations": 495,
+      "precision": 1.0,
+      "recall": 1.0,
+      "missing": [],
+      "extra": [],
+      "expectedContextPairs": 8021,
+      "actualContextPairs": 8021,
+      "missingContextPairs": [],
+      "extraContextPairs": [],
+      "categories": {
+        "auxiliary-template": {
+          "expected": 384,
+          "matched": 384
+        },
+        "baseline-mixed-template": {
+          "expected": 16,
+          "matched": 16
+        },
+        "baseline-symbol": {
+          "expected": 10,
+          "matched": 10
+        },
+        "defer/module-external": {
+          "expected": 6,
+          "matched": 6
+        },
+        "held-out-spec-template": {
+          "expected": 6,
+          "matched": 6
+        },
+        "legacy-for/module-external": {
+          "expected": 6,
+          "matched": 6
+        },
+        "legacy-if/standalone-inline": {
+          "expected": 12,
+          "matched": 12
+        },
+        "legacy-switch/module-external": {
+          "expected": 12,
+          "matched": 12
+        },
+        "modern-control-flow/standalone-inline": {
+          "expected": 12,
+          "matched": 12
+        },
+        "projection/standalone-inline": {
+          "expected": 6,
+          "matched": 6
+        },
+        "spec-only": {
+          "expected": 3,
+          "matched": 3
+        },
+        "story-only": {
+          "expected": 3,
+          "matched": 3
+        },
+        "template-outlet/standalone-inline": {
+          "expected": 6,
+          "matched": 6
+        },
+        "third-app": {
+          "expected": 1,
+          "matched": 1
+        },
+        "utf16-crlf/module-external": {
+          "expected": 12,
+          "matched": 12
+        }
+      },
+      "passed": true,
+      "additionalSkillRecordsReviewed": []
+    },
+    "dialog": {
+      "expectedLocations": 115,
+      "actualLocations": 115,
+      "precision": 1.0,
+      "recall": 1.0,
+      "missing": [],
+      "extra": [],
+      "expectedContextPairs": 2206,
+      "actualContextPairs": 2206,
+      "missingContextPairs": [],
+      "extraContextPairs": [],
+      "categories": {
+        "baseline-symbol": {
+          "expected": 18,
+          "matched": 18
+        },
+        "dialog-import": {
+          "expected": 48,
+          "matched": 48
+        },
+        "direct-MatDialog-open": {
+          "expected": 48,
+          "matched": 48
+        },
+        "held-out-direct-MatDialog-open": {
+          "expected": 1,
+          "matched": 1
+        }
+      },
+      "passed": true,
+      "additionalSkillRecordsReviewed": [
+        {
+          "id": "occ-0609",
+          "file": "libs/dialogs/src/launcher.ts",
+          "range": {
+            "start": {
+              "line": 11,
+              "column": 24
+            },
+            "end": {
+              "line": 11,
+              "column": 83
+            }
+          },
+          "kind": "dynamic-construction"
+        },
+        {
+          "id": "occ-0611",
+          "file": "apps/admin/src/app.ts",
+          "range": {
+            "start": {
+              "line": 13,
+              "column": 29
+            },
+            "end": {
+              "line": 13,
+              "column": 59
+            }
+          },
+          "kind": "dynamic-construction"
+        },
+        {
+          "id": "occ-0612",
+          "file": "apps/storefront/src/app.ts",
+          "range": {
+            "start": {
+              "line": 17,
+              "column": 29
+            },
+            "end": {
+              "line": 17,
+              "column": 55
+            }
+          },
+          "kind": "dynamic-construction"
+        },
+        {
+          "id": "occ-0613",
+          "file": "libs/dialogs/src/index.ts",
+          "range": {
+            "start": {
+              "line": 5,
+              "column": 26
+            },
+            "end": {
+              "line": 5,
+              "column": 37
+            }
+          },
+          "kind": "import-export"
+        }
+      ]
+    }
+  },
+  "initialDialogMissingContextPairs": 58,
+  "finalInventory": {
+    "AuditCardComponent": {
+      "confirmed": 494,
+      "candidate": 3,
+      "files": 451,
+      "byKind": {
+        "template-instance": 485,
+        "import-export": 5,
+        "query-injection": 1,
+        "type-reference": 1,
+        "registration": 2,
+        "story-template": 3
+      },
+      "byClassification": {
+        "confirmed": 494,
+        "candidate": 3
+      },
+      "materialOpenSites": 0,
+      "wrapperEntrySites": 0
+    },
+    "AuditPanelComponent": {
+      "confirmed": 118,
+      "candidate": 1,
+      "files": 55,
+      "byKind": {
+        "import-export": 56,
+        "dynamic-construction": 59,
+        "type-reference": 1,
+        "registry": 3
+      },
+      "byClassification": {
+        "confirmed": 118,
+        "candidate": 1
+      },
+      "materialOpenSites": 56,
+      "wrapperEntrySites": 2
+    }
+  },
+  "peculiar": {
+    "investigated": 9,
+    "recoveredMiss": 3,
+    "explained": 2,
+    "alreadyAccountedFor": 1,
+    "unresolved": 3,
+    "pending": 0
+  },
+  "negativeControls": {
+    "unrelatedCardScopesRejected": 49,
+    "otherDialogCallsRejected": 2,
+    "sameNamedDialogRejected": 1
+  },
+  "cleanup": {
+    "checkedLanguageServerProcesses": 63,
+    "processErrors": [],
+    "installedSkillFilesChanged": []
+  },
+  "evidenceSha256": {
+    "report.md": "e1502427d8c0d6ed3d232aa498c760a89c7e281ee690ac564f3b84391a0ef486",
+    "inventory.json": "86d4247fb1c138b4673fb7b132c66a56a6f8b4f2f4a8f1b13b309c6871c0ae3f",
+    "coverage.md": "8814859b542b471b8fe2ea461c4439212e74b9b53cf4923623377f90099bc8b3",
+    "peculiar-review.md": "5b35be56a149b49c9672ebba5a8f4fc37704a2dee051f5151e965be5d87d71c9",
+    "validation.json": "7d016aa73466bdca6988bc1c8d2ba0221df174ea35e821dbfa4623fea6699372"
+  },
+  "privateEvidenceSha256": {
+    "oracle.json": "3b9a519eac4707d7fea13dd3c9b88f7c28a3c2efbe042a01186bba2ecfd4d3b3",
+    "source-hashes.json": "82f58ef472c784dce2a5b2418a6671e1d8b142003fd71e30061f88f144205765",
+    "raw-score.json": "4f5cbabd191f6d742b5dc9f993fc50f6bf3a50097111771b533cfbcf41922c02",
+    "reconciled-score.json": "108c2e1925ba277aacee43d84678864928f36cb7c6b545b17461ce8bfc782694",
+    "compile.log": "f3b21d4a2563b78162495790195809f78b01938e915469707b85415b698a6023"
+  },
+  "limitations": [
+    "One generated source/typecheck workspace, not production accuracy",
+    "Explicit skill invocation; automatic discovery and other hosts/models untested",
+    "Story strings and runtime registry choice remain candidates",
+    "Dialog template capability and ui/shared positive probes remain explicit gaps",
+    "No browser, navigation, real Storybook or Jest execution"
+  ],
+  "skillChangesRequired": false
+}
